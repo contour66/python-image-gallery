@@ -81,7 +81,6 @@ def main():
         print("Name: " + name)
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user,pw,name))
         #add_user(user, pw, name)
-        pw = input()
         print('User ' + name + 'added')
         print_names()
     else:
