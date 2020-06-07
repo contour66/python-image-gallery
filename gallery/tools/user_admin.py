@@ -63,8 +63,8 @@ def add_user(user, pw, name):
 def main():
     connect()
     ask_user()
-    choice = input()
-    if choice == 1:
+    choice = int(input())
+    if choice == int1:
         print_names()
     elif choice == 2:
         print('Enter username:' )
