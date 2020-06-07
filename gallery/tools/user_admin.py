@@ -108,25 +108,28 @@ def edit_user():
 
 
 def main():
-    connect()
+
     connection.set_session(autocommit=True)
-    while True:
-        ask_user()
-        choice = int(input())
-        if choice == 1:
-            print_names()
-        elif choice == 2:
-            add_user()
-        elif choice == 3:
-            edit_user()
-        elif choice == 4:
-            delete_user()
-        elif choice == 5:
-            print("\n Quitting program")
-            connection.close()
-            break
-        else:
-            print("Invalid")
+    try:
+        connect()
+        while True:
+            ask_user()
+            choice = int(input())
+            if choice == 1:
+                print_names()
+            elif choice == 2:
+                add_user()
+            elif choice == 3:
+                edit_user()
+            elif choice == 4:
+                delete_user()
+            elif choice == 5:
+                print("\n Quitting program")
+                break
+            else:
+                print("Invalid")
+    finally:
+        connection.close()
 
     # res = execute("update users set password=%s where username='fred'", ('banana',))
     # res = execute('select * from users;')
