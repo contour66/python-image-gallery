@@ -56,12 +56,15 @@ def print_names():
 
 # ADDS A USER TO THE TABLE ////////////
 
-def add_user(user, pw, name):
-    print("User: " + user)
-    print("PW: " + pw)
-    print("Name: " + name)
-    res = execute("insert into users values (user, pw, name)(%s, %s, %s);")
-
+def add_user():
+    print('Enter username:')
+    user = input()
+    print('Enter password:')
+    pw = input()
+    print('Enter name:')
+    name = input()
+    execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
+    print('\nUser ' + name + 'added\n')
 
 def main():
     connect()
@@ -70,18 +73,19 @@ def main():
     if choice == 1:
         print_names()
     elif choice == 2:
-        print('Enter username:')
-        user = input()
-        print('Enter password:')
-        pw = input()
-        print('Enter name:')
-        name = input()
-        print("User: " + user)
-        print("PW: " + pw)
-        print("Name: " + name)
-        execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user,pw,name))
+        add_user()
+        # print('Enter username:')
+        # user = input()
+        # print('Enter password:')
+        # pw = input()
+        # print('Enter name:')
+        # name = input()
+        # print("User: " + user)
+        # print("PW: " + pw)
+        # print("Name: " + name)
+        #execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user,pw,name))
         #add_user(user, pw, name)
-        print('User ' + name + 'added')
+
         print_names()
     else:
         print("Invalid")
