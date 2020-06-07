@@ -98,10 +98,10 @@ def edit_user():
         print('New full name (press enter to keep current):')
         name = input()
         if pw:
-            execute("update users set password=%s where username=%s", (user, pw,))
+            execute("update users set password=%s where username=%s", (pw, user,))
             print("\nPassword updated\n")
         if name:
-            execute("update users set name=%s where username=%s", (user, name,))
+            execute("update users set name=%s where username=%s", (name, user,))
             print("\nName updated\n")
     else:
         print("\nNo such user exists\n")
