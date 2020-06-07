@@ -76,7 +76,7 @@ def main():
         pw = input()
         print('Enter name:')
         name = input()
-        res = execute("insert into users values (user, pw, name)(%s, %s, %s);")
+        execute("insert into users values (user, pw, name)")
         #add_user(user, pw, name)
         pw = input()
         print('User ' + name + 'added')
