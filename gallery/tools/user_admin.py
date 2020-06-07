@@ -109,7 +109,7 @@ def edit_user():
 
 def main():
     connect()
-
+    connection.set_session(autocommit=True)
     while True:
         ask_user()
         choice = int(input())
@@ -123,6 +123,7 @@ def main():
             delete_user()
         elif choice == 5:
             print("\n Quitting program")
+            connection.close()
             break
         else:
             print("Invalid")
