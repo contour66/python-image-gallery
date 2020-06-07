@@ -56,7 +56,7 @@ def username_exists(username):
             where username = %s
         )'''
     execute(exists_query, (username,))
-    return cursor.fetchone()[0]
+    return fetchone()[0]
 # ADDS A USER TO THE TABLE ////////////
 
 def add_user():
