@@ -56,8 +56,12 @@ def add_user():
     pw = input()
     print('Enter name:')
     name = input()
-    execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
-    print('\nUser ' + name + 'added\n')
+    res = execute("""select exists (select 1 from users where username) valies(%s)""", user)
+    if res == 0:
+        execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
+        print('\nUser ' + name + ' added to table users\n')
+    else:
+        print("Username " + user + " already exists")
 
 def main():
     connect()
@@ -71,6 +75,7 @@ def main():
             add_user()
             print_names()
         elif choice == 5:
+            print("\n Quitting program")
             break
         else:
             print("Invalid")
