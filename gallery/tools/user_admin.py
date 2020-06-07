@@ -71,8 +71,18 @@ def add_user():
     if username_exists(user):
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
         print('\nUser ' + name + ' added to table users\n')
+        print_names()
     else:
-        print("Username " + user + " already exists")
+        print("\nError: user with username " + user + " already exists\n")
+
+def delete_user():
+    print('Enter username to delete:')
+    name = input()
+    print('Are you sure that you want to delete: ' + name + '?')
+    delete = input()
+    if delete == 'yes':
+        execute("""delete from users where username = %s,""", (name))
+        print("Deleted")
 
 def main():
     connect()
@@ -84,7 +94,8 @@ def main():
             print_names()
         elif choice == 2:
             add_user()
-            print_names()
+        elif choice == 4:
+            delete_user()
         elif choice == 5:
             print("\n Quitting program")
             break
