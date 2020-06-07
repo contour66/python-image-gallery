@@ -58,13 +58,13 @@ def print_names():
 # ADDS A USER TO THE TABLE ////////////
 
 def add_user(user, pw, name):
-    res = execute("insert into users values (user, pw, name)")
+    res = execute("insert into users values ('user', 'pw', 'name')")
 
 def main():
     connect()
     ask_user()
     choice = int(input())
-    if choice == int1:
+    if choice == 1:
         print_names()
     elif choice == 2:
         print('Enter username:' )
