@@ -78,13 +78,15 @@ def add_user():
 
 def delete_user():
     print('Enter username to delete:')
-    name = input()
-    print('Are you sure that you want to delete: ' + name + '?')
+    user = input()
+    print('Are you sure that you want to delete: ' + user + '?')
     delete = input()
-    if delete == 'yes':
-        execute("delete from users where username = %s", (name,))
-        print("Deleted")
-
+    if username_exists(user):
+        if delete == 'yes':
+            execute("delete from users where username = %s", (user,))
+            print("Deleted")
+    else:
+        print("No such user exists")
 def main():
     connect()
 
