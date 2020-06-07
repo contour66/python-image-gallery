@@ -58,25 +58,27 @@ def print_names():
 # ADDS A USER TO THE TABLE ////////////
 
 def add_user(user, pw, name):
-	res = execute("insert into users values (user, pw, name)")
-	
+    res = execute("insert into users values (user, pw, name)")
+
 def main():
     connect()
     ask_user()
     choice = input()
     if choice == 1:
         print_names()
-    if choice == 2:
+    elif choice == 2:
         print('Enter username:' )
         user = input()
         print('Enter password:' )
         pw = input()
         print('Enter name:' )
         name = input()
-	add_user(user, pw, name)
-	pw = input()
-	print('User ' + name + 'added')
-	print_names()
+        add_user(user, pw, name)
+        pw = input()
+        print('User ' + name + 'added')
+        print_names()
+    else:
+        print("Invalid")
     res = execute('select * from users;')
     for row in res:
         print(row)
@@ -87,4 +89,4 @@ def main():
 
 
 if __name__ == '__main__':
-   main()
+    main()
