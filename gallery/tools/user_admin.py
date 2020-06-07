@@ -53,7 +53,7 @@ def username_exists(username):
         select exists (
             select 1
             from users
-            where user_name = %s
+            where username = %s
         )'''
     execute(exists_query, (username,))
     return cursor.fetchone()[0]
