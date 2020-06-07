@@ -39,13 +39,6 @@ def ask_user():
         4) Delete user
         5) Quit ''')
 
-
-# def query_action(arg):
-#       switcher = {
-#       1: print_names()
-#        func = switcher.get(arg)
-#       return func()
-
 # PRINTS THE NAMES ////////////////////
 
 def print_names():
@@ -68,24 +61,22 @@ def add_user():
 
 def main():
     connect()
-    ask_user()
-    choice = int(input())
-    while choice !=5:
+
+    while True:
+        ask_user()
+        choice = int(input())
         if choice == 1:
             print_names()
         elif choice == 2:
             add_user()
             print_names()
+        elif choice == 5:
+            break
         else:
             print("Invalid")
-        ask_user()
-    # res = execute('select * from users;')
-    # for row in res:
-    #     print(row)
+
     # res = execute("update users set password=%s where username='fred'", ('banana',))
     # res = execute('select * from users;')
-    # for row in res:
-    #     print(row)
 
 
 if __name__ == '__main__':
