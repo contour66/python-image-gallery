@@ -109,9 +109,10 @@ def edit_user():
 
 def main():
 
-    connection.set_session(autocommit=True)
+
     try:
         connect()
+        connection.set_session(autocommit=True)
         while True:
             ask_user()
             choice = int(input())
