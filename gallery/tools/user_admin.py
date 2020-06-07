@@ -79,14 +79,34 @@ def add_user():
 def delete_user():
     print('Enter username to delete:')
     user = input()
-    print('Are you sure that you want to delete: ' + user + '?')
+    print('\nAre you sure that you want to delete [ ' + user + ' ]?')
     delete = input()
     if username_exists(user):
         if delete == 'yes':
             execute("delete from users where username = %s", (user,))
-            print("Deleted")
+            print("\nDeleted\n")
     else:
-        print("No such user exists")
+        print("\nNo such user exists\n")
+
+
+def edit_user():
+    print('Enter username to edit:')
+    user = input()
+    if username_exists(user):
+        print('New password (press enter to keep current):')
+        pw = input()
+        print('New full name (press enter to keep current):')
+        name = input()
+        if pw:
+            execute("update users set password=%s where username=%s", (pw,))
+            print("\nPassword updated\n")
+        if name:
+            execute("update users set name=%s where username=%s", (name,))
+            print("\nName updated\n")
+    else:
+        print("\nNo such user exists\n")
+
+
 def main():
     connect()
 
@@ -97,6 +117,8 @@ def main():
             print_names()
         elif choice == 2:
             add_user()
+        elif choice == 3:
+            edit_user()
         elif choice == 4:
             delete_user()
         elif choice == 5:
