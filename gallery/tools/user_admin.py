@@ -1,5 +1,3 @@
-
-
 import psycopg2
 
 db_host = "demo-databsae-2.cfxeylolmgaa.us-west-1.rds.amazonaws.com"
@@ -55,10 +53,15 @@ def print_names():
     for row in res:
         print(row)
 
+
 # ADDS A USER TO THE TABLE ////////////
 
 def add_user(user, pw, name):
-    res = execute("insert into users values ('user', 'pw', 'name')")
+    print("User: " + user)
+    print("PW: " + pw)
+    print("Name: " + name)
+    res = execute("insert into users values (user, pw, name)(%s, %s, %s);")
+
 
 def main():
     connect()
@@ -67,11 +70,11 @@ def main():
     if choice == 1:
         print_names()
     elif choice == 2:
-        print('Enter username:' )
+        print('Enter username:')
         user = input()
-        print('Enter password:' )
+        print('Enter password:')
         pw = input()
-        print('Enter name:' )
+        print('Enter name:')
         name = input()
         add_user(user, pw, name)
         pw = input()
@@ -79,13 +82,13 @@ def main():
         print_names()
     else:
         print("Invalid")
-    res = execute('select * from users;')
-    for row in res:
-        print(row)
-    res = execute("update users set password=%s where username='fred'", ('banana',))
-    res = execute('select * from users;')
-    for row in res:
-        print(row)
+    # res = execute('select * from users;')
+    # for row in res:
+    #     print(row)
+    # res = execute("update users set password=%s where username='fred'", ('banana',))
+    # res = execute('select * from users;')
+    # for row in res:
+    #     print(row)
 
 
 if __name__ == '__main__':
