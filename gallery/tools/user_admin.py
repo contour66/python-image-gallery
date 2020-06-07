@@ -52,8 +52,8 @@ def username_exists(username):
     exists_query = '''
         select exists (
             select 1
-            from tracks
-            where fma_track_id = %s
+            from users
+            where user_name = %s
         )'''
     execute(exists_query, (username,))
     return cursor.fetchone()[0]
