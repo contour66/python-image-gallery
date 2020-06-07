@@ -70,25 +70,15 @@ def main():
     connect()
     ask_user()
     choice = int(input())
-    if choice == 1:
-        print_names()
-    elif choice == 2:
-        add_user()
-        # print('Enter username:')
-        # user = input()
-        # print('Enter password:')
-        # pw = input()
-        # print('Enter name:')
-        # name = input()
-        # print("User: " + user)
-        # print("PW: " + pw)
-        # print("Name: " + name)
-        #execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user,pw,name))
-        #add_user(user, pw, name)
-
-        print_names()
-    else:
-        print("Invalid")
+    while choice !=5:
+        if choice == 1:
+            print_names()
+        elif choice == 2:
+            add_user()
+            print_names()
+        else:
+            print("Invalid")
+        ask_user()
     # res = execute('select * from users;')
     # for row in res:
     #     print(row)
