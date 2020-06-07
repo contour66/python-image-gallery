@@ -69,11 +69,12 @@ def add_user():
     name = input()
     # res = execute("""select exists (select 1 from users where username) valies(%s)""", user)
     if username_exists(user):
+        print("\nError: user with username " + user + " already exists\n")
+    else:
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
         print('\nUser ' + name + ' added to table users\n')
         print_names()
-    else:
-        print("\nError: user with username " + user + " already exists\n")
+
 
 def delete_user():
     print('Enter username to delete:')
