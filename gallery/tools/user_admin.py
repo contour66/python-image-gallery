@@ -82,7 +82,7 @@ def delete_user():
     print('Are you sure that you want to delete: ' + name + '?')
     delete = input()
     if delete == 'yes':
-        execute("""delete from users where username = %s,""", (name))
+        execute("delete from users where username = %s", (name,))
         print("Deleted")
 
 def main():
