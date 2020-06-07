@@ -48,10 +48,15 @@ def print_names():
 
 
 
-def username_exists(self, username):
-    #cur = self.conn.cursor()
-    execute("SELECT user_name FROM users WHERE user_name = %s", (username,))
-    return cur.fetchone() is not None
+def username_exists(username):
+    exists_query = '''
+        select exists (
+            select 1
+            from tracks
+            where fma_track_id = %s
+        )'''
+    execute(exists_query, (username,))
+    return cursor.fetchone()[0]
 # ADDS A USER TO THE TABLE ////////////
 
 def add_user():
@@ -62,7 +67,7 @@ def add_user():
     print('Enter name:')
     name = input()
     # res = execute("""select exists (select 1 from users where username) valies(%s)""", user)
-    if username_exists():
+    if username_exists(user):
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
         print('\nUser ' + name + ' added to table users\n')
     else:
