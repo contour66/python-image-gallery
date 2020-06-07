@@ -101,7 +101,7 @@ def edit_user():
             execute("update users set password=%s where username=%s", (pw, user,))
             print("\nPassword updated\n")
         if name:
-            execute("update users set name=%s where username=%s", (name, user,))
+            execute("update users set full_name=%s where username=%s", (name, user,))
             print("\nName updated\n")
     else:
         print("\nNo such user exists\n")
