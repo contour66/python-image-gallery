@@ -11,5 +11,5 @@ def admin():
     return 'admin'
 
 @app.route('/greet/<name>')
-def admin(name):
+def greet(name):
     return 'Nice to meet you ' + name
