@@ -39,7 +39,7 @@ def calculator(personsName):
 def delete():
     name = request.form['name']
     data = delete_user_ui(name)
-    return data
+    return adminPage()
 
 
 @app.route('/mult', methods=['POST'])
