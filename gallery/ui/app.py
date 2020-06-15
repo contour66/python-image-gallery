@@ -10,6 +10,6 @@ def hello_world():
 def admin():
     return 'admin'
 
-@app.route('/admin/<name>')
+@app.route('/greet/<name>')
 def admin(name):
     return 'Nice to meet you ' + name
