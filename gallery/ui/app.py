@@ -1,12 +1,13 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-
+from tools import user_admin.py
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello_world():
+    print_names()
     return "hello world!",
 
 
