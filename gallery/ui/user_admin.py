@@ -4,30 +4,35 @@ from secrets import get_secret_image_gallery
 
 connection = None
 
+
 def get_secret():
-	jsonString = get_secret_image_gallery()
-	return json.loads(jsonString)
+    jsonString = get_secret_image_gallery()
+    return json.loads(jsonString)
+
 
 def get_password(secret):
-	return secret['password']
+    return secret['password']
+
 
 def get_host(secret):
-	return secret['host']
+    return secret['host']
+
 
 def get_username(secret):
-	return secret['username']
+    return secret['username']
+
 
 def get_full_name(secret):
-	return secret['full_name']
+    return secret['full_name']
 
 def get_dbname(secret):
-	return secret['dbname']
+    return secret['dbname']
 
 def connect():
-	global connection
-	secret = get_secret()
-	connection = psycopg2.connect(host=get_host(secret), dbname=get_dbname(secret), user=get_username(secret), password=get_password(secret))
-
+    global connection
+    secret = get_secret()
+    connection = psycopg2.connect(host=get_host(secret), dbname=get_dbname(secret), user=get_username(secret),
+                                  password=get_password(secret))
 
 def execute(query, args=None):
     global connection
@@ -38,6 +43,7 @@ def execute(query, args=None):
         cursor.execute(query, args)
     return cursor
 
+
 # PRINTS MAIN MENU /////////////////////
 def ask_user():
     print('''
@@ -46,6 +52,7 @@ def ask_user():
         3) Edit user
         4) Delete user
         5) Quit ''')
+
 
 # PRINTS THE NAMES /////////////////////
 def print_names():
@@ -66,6 +73,7 @@ def username_exists(username):
     cursor.execute(exists_query, (username,))
     return cursor.fetchone()[0]
 
+
 # ADDS A USER TO THE TABLE ////////////
 def add_user():
     print('Enter username:')
@@ -81,6 +89,7 @@ def add_user():
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """, (user, pw, name))
         print('\nUser ' + name + ' added to table users\n')
         print_names()
+
 
 # DELETES USER IN TABLE /////////////
 def delete_user():
