@@ -24,11 +24,13 @@ def get_username(secret):
 def get_full_name(secret):
 	return secret['full_name']
 
+def get_db_name(secret):
+	return secret['database_name']
 
 def connect():
 	global connection
 	secret = get_secret()
-	connection = psycopg2.connect(host=get_host(secret), dbname=db_name, user=get_username(secret), password=get_password(secret))
+	connection = psycopg2.connect(host=get_host(secret), dbname=get_db_name(secret), user=get_username(secret), password=get_password(secret))
 
 def execute(query, args=None):
 	global connection	
