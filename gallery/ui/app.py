@@ -23,9 +23,9 @@ def greet(name):
 # def add(x, y):
 #     return 'The sum is ' + str(x + y)
 #
-@app.route('/calculator')
-def calculator():
-    return render_template('form.html')
+@app.route('/calculator/<personsName>')
+def calculator(personsName):
+    return render_template('form.html', name=personsName)
 
 @app.route('/mult')
 def mult():
