@@ -55,6 +55,22 @@ def print_names():
     print(res)
     return res
 
+def deleteUserUI(user):
+    execute("delete from users where username = %s", (user,))
+
+def delete_user():
+    print('Enter username to delete:')
+    user = input()
+    print('\nAre you sure that you want to delete [ ' + user + ' ]?')
+    delete = input()
+    if username_exists(user):
+        if delete == 'yes':
+            execute("delete from users where username = %s", (user,))
+            print("\nDeleted\n")
+    else:
+        print("\nNo such user exists\n")
+
+
 # 	row = cursor.fetchone()
 # print(row)
 

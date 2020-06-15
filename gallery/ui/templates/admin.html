@@ -9,13 +9,12 @@
 <body>
 <h1>Users</h1>
 <table style="width:10%">
-	 {% for item in results %}
+	 {% for name in results %}
 <!--        <li style="list-style: none; margin-top: 10px"><a href="{{ item.href }}" style="margin-right:20px;text-transform: capitalize ">{{item }}</a> -->
 <!--			<a href="" style="text-decoration:none;text-transform: capitalize; "><b>delete</b></a></li>-->
-
   			<tr>
-    			<td><a href="{{ item.href }}" style="margin-right:20px;text-transform: capitalize;font-size: 30px ">{{item }}</a> </td>
-    			<td><a href="" style="text-decoration:none;text-transform: capitalize;font-size: 30px "><b>delete</b></a></td>
+    			<td><a href="{{ name.href }}" style="margin-right:20px;text-transform: capitalize;font-size: 30px ">{{item }}</a> </td>
+    			<td><button type="submit" action="/admin/deleteUser" method="POST"  value="{{name}}" style="text-decoration:none;text-transform: capitalize;font-size: 30px "><b>delete</b></button></td>
 			</tr>
     {% endfor %}
 </table>

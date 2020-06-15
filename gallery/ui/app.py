@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from db import print_names
+from db import print_names, deleteUserUI
 
 app = Flask(__name__)
 
@@ -33,6 +33,10 @@ def greet(name):
 def calculator(personsName):
     return render_template('form.html', name=personsName)
 
+@app.route('/admin/<name>', methods=['Post'])
+def delete(name):
+    deleteUserUI(name)
+    adminPage()
 
 @app.route('/mult', methods=['POST'])
 def mult():
