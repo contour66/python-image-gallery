@@ -18,6 +18,11 @@ def greet(name):
     return 'Nice to meet you ' + name
 
 
+@app.route('add/<int:x>/<int:y>', methods=['GET'])
+def add(x, y):
+    return 'The sum is ' + str(x + y)
+
+
 @app.route('/mult')
 def mult():
     x = request.args['x']
@@ -37,8 +42,8 @@ def calculator():
 </head>
 <body>
 	<form action="/mult" method="GET">
-		x: <input value="0" name="x"/><br/>
-		y: <input value="0" name="y"/><br/>
+		x: <input  name="x" value="0"/><br/>
+		y: <input name="y" value="0" /><br/>
 		<input type="submit" value="Multiply"/>
 	</form>
 </body>
