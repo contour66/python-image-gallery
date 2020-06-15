@@ -16,7 +16,7 @@ def hello_world():
 
 @app.route('/admin')
 def adminPage():
-        data = list_users_again()
+        data = print_names()
         return render_template('admin.html', results=data)
 
 
