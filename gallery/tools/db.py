@@ -6,18 +6,29 @@ db_host = "image-gallery.cfxeylolmgaa.us-west-1.rds.amazonaws.com"
 db_name = "image_gallery"
 db_user = "image_gallery"
 
-password_file = "/home/ec2-user/.image_gallery_config"
 connection = None
 
 def get_secret():
-	f = open(password_file, "r")
-	result = f.readline()
-	f.close()
-	return result[:-2]
+	jsonString = get_secret_image_gallery()
+	return json.loads(jsonString)
+
+def get_password(secret):
+	return secret['password']
+
+def get_host(secret):
+	return secret['host']
+
+def get_username(secret):
+	return secret['host']
+
+def get_full_name(secret):
+	return secret['full_name']
+
 
 def connect():
 	global connection
-	connection = psycopg2.connect(host=db_host, dbname=db_name, user=db_user, password=get_password())
+	secret = get_secret()
+	connection = psycopg2.connect(host=get_host(secret), dbname=db_name, user=get_username(secret), password=get_password(secret))
 
 def execute(query, args=None):
 	global connection	
@@ -33,10 +44,6 @@ def main():
 	res = execute('select * from users;')
 	for row in res:
 		print(row)
-	res = execute("update users set password=%s where username='fred'",('banana',))
-	res = execute('select * from users;')
-	for row in res:
-                print(row)
 
 
 if __name__ =='__main__':
