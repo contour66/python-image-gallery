@@ -33,8 +33,9 @@ def greet(name):
 def calculator(personsName):
     return render_template('form.html', name=personsName)
 
-@app.route('/admin/<name>', methods=['POST'])
-def delete(name):
+@app.route('/admin/deleteUser', methods=['POST'])
+def delete():
+    name = request.form['name']
     deleteUserUI(name)
     adminPage()
 
