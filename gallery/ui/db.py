@@ -1,7 +1,7 @@
 import psycopg2
 import json
 from secrets import get_secret_image_gallery
-from db import
+
 
 connection = None
 
