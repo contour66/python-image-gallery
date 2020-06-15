@@ -16,8 +16,8 @@ def hello_world():
 
 @app.route('/admin')
 def adminPage():
-        data = print_names()
-        return render_template('admin.html', results=data)
+    data = print_names()
+    return render_template('admin.html', results=data)
 
 
 @app.route('/greet/<name>')
@@ -33,11 +33,11 @@ def greet(name):
 def calculator(personsName):
     return render_template('form.html', name=personsName)
 
+
 @app.route('/admin/deleteUser', methods=['POST'])
 def delete():
     name = request.form['name']
-    return delete_user_ui(name)
-
+    return delete_user_ui(str(name))
 
 
 @app.route('/mult', methods=['POST'])
