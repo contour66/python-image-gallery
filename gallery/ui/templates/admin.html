@@ -28,7 +28,8 @@
     			<td>
 					<form action="/admin/deleteUser/{{ username[0] }}" method="POST">
 						<input name="username"  value="{{ username[0] }}" type="hidden" /><br/>
-						<input id="delete" value="DELETE " style="text-decoration:none;text-transform: capitalize;font-size: 30px; padding: 10px; border: sold black 2px; background: gray; border-radius:5px;text-align: center">
+						<button type='button' name='button-name' id='delete'>DELETE</button>
+
 						<button type="submit" id="confirm" value="ARE YOU SURE?" style="text-decoration:none;text-transform: capitalize;font-size: 30px; display: none; "></button>
 
 					</form>
