@@ -3,8 +3,6 @@ import json
 from secrets import get_secret_image_gallery
 
 
-db_name = "image_gallery"
-
 
 connection = None
 
