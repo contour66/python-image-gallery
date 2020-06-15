@@ -48,13 +48,13 @@ def execute(query, args=None):
 
 
 def print_names():
-	conect()
+    conect()
     global connection
     cursor = connection.cursor()
-    res = cursor.execute('select * from users;')
-    for row in res:
-        print(row)
-
+    cursor.execute('select * from users;')
+    res = cursor.fetchall()
+    print(res)
+    return res
 
 # 	row = cursor.fetchone()
 # print(row)
