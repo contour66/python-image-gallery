@@ -58,7 +58,7 @@ def print_names():
 
 def delete_user_ui(username):
 
-    try:
+    try:x
         connect()
         cursor = connection.cursor()
         connection.set_session(autocommit=True)
