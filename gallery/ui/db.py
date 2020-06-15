@@ -40,7 +40,7 @@ def connect():
 def execute(query, args=None):
     global connection
     cursor = connection.cursor()
-    if not args:X
+    if not args:
         cursor.execute(query)
     else:
         cursor.execute(query, args)
@@ -53,11 +53,10 @@ def print_names():
     cursor.execute('select username from users;')
     res = cursor.fetchall()
     print(res)
-
     return res
 
 
-def delete_user_ui(user):\
+def delete_user_ui(user):
     connect()
     cursor = connection.cursor()
     cursor.execute("delete from users where username = %s", (user,))
