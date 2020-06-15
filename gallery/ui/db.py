@@ -58,7 +58,7 @@ def print_names():
 def delete_user_ui(user):
     connect()
     cursor = connection.cursor()
-    cursor.execute("delete from users where username = %s", (user,))
+    cursor.execute('delete from users where username = %s', (user,))
     cursor.execute('select username from users;')
     res = cursor.fetchall()
     print(res)
