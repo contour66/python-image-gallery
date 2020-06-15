@@ -53,6 +53,8 @@ def print_names():
     cursor.execute('select username from users;')
     res = cursor.fetchall()
     print(res)
+    for row in res:
+        s[2:-2]
     return res
 
 def deleteUserUI(user):
