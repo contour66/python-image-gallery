@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-
+from flask import render_template
 app = Flask(__name__)
 
 
@@ -23,6 +23,9 @@ def greet(name):
 # def add(x, y):
 #     return 'The sum is ' + str(x + y)
 #
+@app.route('/calculator')
+def calculator():
+    return render_template('form.html')
 
 @app.route('/mult')
 def mult():
@@ -31,22 +34,22 @@ def mult():
     return 'The product is ' + str(int(x) * int(y))
 
 
-@app.route('/calculator')
-def calculator():
-    return """
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Caluclator</title>
-	
-</head>
-<body>
-	<form action="/mult" method="GET">
-		x: <input  name="x" value="0"/><br/>
-		y: <input name="y" value="0" /><br/>
-		<input type="submit" value="Multiply"/>
-	</form>
-</body>
-</html>
-"""
+# @app.route('/calculator')
+# def calculator():
+#     return """
+# <!DOCTYPE html>
+# <html>
+# <head>
+# 	<meta charset="utf-8">
+# 	<title>Caluclator</title>
+#
+# </head>
+# <body>
+# 	<form action="/mult" method="GET">
+# 		x: <input  name="x" value="0"/><br/>
+# 		y: <input name="y" value="0" /><br/>
+# 		<input type="submit" value="Multiply"/>
+# 	</form>
+# </body>
+# </html>
+# """
