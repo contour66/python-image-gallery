@@ -18,7 +18,7 @@ def greet(name):
 def mult():
     x = request.args['x']
     y = request.args['y']
-    return 'The product is ' + str([int(x)*int(y))
+    return 'The product is ' + str(int(x)*int(y))
 
 @app.route('/calculator')
 def calculator():
