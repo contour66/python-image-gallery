@@ -27,15 +27,5 @@
     {% endfor %}
 </table>
 </body>
-{% block scripts %}
-    {{ super() }}
 
-    <script>
-        	$(document).ready(function() {
-    		$("#delete").click(function(){
-  					$("#confirm").show();
-			});
-		});
-    </script>
-{% endblock %}
 </html>
