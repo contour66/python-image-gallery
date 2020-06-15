@@ -12,8 +12,8 @@
 	 {% for name in results %}
 
   			<tr>
-    			<td><a href="{{ name[0] }}" style="margin-right:20px;text-transform: capitalize;font-size: 30px ">{{name}}</a> </td>
-    			<td><button type="submit" action="/admin/deleteUser" method="POST"  value="{{name}}" style="text-decoration:none;text-transform: capitalize;font-size: 30px ">delete</button></td>
+    			<td><a href="{{ name[0] }}" style="margin-right:20px;text-transform: capitalize;font-size: 30px ">{{name[0]}}</a> </td>
+    			<td><button type="submit" action="/admin/deleteUser" method="POST"  value="{{name[0]}}" style="text-decoration:none;text-transform: capitalize;font-size: 30px ">delete</button></td>
 			</tr>
     {% endfor %}
 </table>
