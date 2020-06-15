@@ -1,6 +1,6 @@
 import psycopg2
 
-db_host = "demo-databsae-2.cfxeylolmgaa.us-west-1.rds.amazonaws.com"
+db_host = "image-gallery.cfxeylolmgaa.us-west-1.rds.amazonaws.com"
 db_name = "image_gallery"
 db_user = "image_gallery"
 
@@ -30,7 +30,7 @@ def execute(query, args=None):
         cursor.execute(query, args)
     return cursor
 
-
+# PRINTS MAIN MENU /////////////////////
 def ask_user():
     print('''
         1) List users
@@ -39,15 +39,14 @@ def ask_user():
         4) Delete user
         5) Quit ''')
 
-# PRINTS THE NAMES ////////////////////
-
+# PRINTS THE NAMES /////////////////////
 def print_names():
     res = execute('select * from users;')
     for row in res:
         print(row)
 
 
-
+# CHECKS IF USER EXISTS IN TABLE //////
 def username_exists(username):
     exists_query = '''
         select exists (
@@ -58,8 +57,8 @@ def username_exists(username):
     cursor = connection.cursor()
     cursor.execute(exists_query, (username,))
     return cursor.fetchone()[0]
-# ADDS A USER TO THE TABLE ////////////
 
+# ADDS A USER TO THE TABLE ////////////
 def add_user():
     print('Enter username:')
     user = input()
@@ -75,7 +74,7 @@ def add_user():
         print('\nUser ' + name + ' added to table users\n')
         print_names()
 
-
+# DELETES USER IN TABLE /////////////
 def delete_user():
     print('Enter username to delete:')
     user = input()
@@ -89,6 +88,7 @@ def delete_user():
         print("\nNo such user exists\n")
 
 
+# EDITS USER IN TABLE ////////////
 def edit_user():
     print('Enter username to edit:')
     user = input()
@@ -108,8 +108,6 @@ def edit_user():
 
 
 def main():
-
-
     try:
         connect()
         connection.set_session(autocommit=True)
