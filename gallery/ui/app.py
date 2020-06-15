@@ -31,7 +31,7 @@ def calculator():
 	
 </head>
 <body>
-	<form>
+	<form action="/mult" method="GET">
 		x: <input value="0" name="x"/><br>
 		y: <input value="o" name="y"><br>
 		<input type="submit" value="Multiply"/>
