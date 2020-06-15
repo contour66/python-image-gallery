@@ -1,7 +1,6 @@
 import psycopg2
 import json
 from secrets import get_secret_image_gallery
-
 connection = None
 
 
@@ -63,6 +62,7 @@ def delete_user_ui(user):
     cursor.execute('select username from users;')
     res = cursor.fetchall()
     print(res)
+    return res
 
 
 def delete_user():
