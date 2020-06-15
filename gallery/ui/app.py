@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import request
 
 app = Flask(__name__)
 
@@ -18,10 +19,10 @@ def greet(name):
     return 'Nice to meet you ' + name
 
 
-@app.route('/add/<int:x>/<int:y>', methods=['GET'])
-def add(x, y):
-    return 'The sum is ' + str(x + y)
-
+# @app.route('/add/<int:x>/<int:y>', methods=['GET'])
+# def add(x, y):
+#     return 'The sum is ' + str(x + y)
+#
 
 @app.route('/mult')
 def mult():
