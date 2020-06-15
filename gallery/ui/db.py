@@ -52,7 +52,7 @@ def print_names():
     cursor = connection.cursor()
     cursor.execute('select username from users;')
     res = cursor.fetchall()
-    print(res)
+    # print(res)
     for row in res:
         row[2:-2]
     return res
