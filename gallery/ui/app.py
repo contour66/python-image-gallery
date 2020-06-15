@@ -29,8 +29,8 @@ def calculator(personsName):
 
 @app.route('/mult', methods=['POST'])
 def mult():
-    x = request.args['x']
-    y = request.args['y']
+    x = request.form['x']
+    y = request.form['y']
     return 'The product is ' + str(int(x) * int(y))
 
 
