@@ -35,11 +35,11 @@ def calculator(personsName):
     return render_template('form.html', name=personsName)
 
 
-@app.route('/admin/deleteUser', methods=['POST'])
-def delete():
+@app.route('/admin/deleteUser/<name>', methods=['POST'])
+def delete(name):
     name = request.form['name']
     delete_user_ui(name)
-    return adminPage()
+    admin-page()
 
 
 @app.route('/mult', methods=['POST'])
