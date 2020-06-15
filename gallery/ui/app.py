@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+
 app = Flask(__name__)
 
 
@@ -27,12 +28,12 @@ def greet(name):
 def calculator(personsName):
     return render_template('form.html', name=personsName)
 
+
 @app.route('/mult', methods=['POST'])
 def mult():
     x = request.form['x']
     y = request.form['y']
     return 'The product is ' + str(int(x) * int(y))
-
 
 # @app.route('/calculator')
 # def calculator():
