@@ -52,7 +52,7 @@ def print_names():
     # for row in res:
     #     print(row)
 	row = cursor.fetchone()
-	print(row)
+		print(row)
 
 def main():
     connect()
