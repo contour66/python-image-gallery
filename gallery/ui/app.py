@@ -1,28 +1,33 @@
-
 from flask import Flask
+
 app = Flask(__name__)
+
 
 @app.route('/')
 def hello_world():
     return "hello world!",
 
+
 @app.route('/admin')
 def admin():
     return 'admin'
+
 
 @app.route('/greet/<name>')
 def greet(name):
     return 'Nice to meet you ' + name
 
+
 @app.route('/mult')
 def mult():
     x = request.args['x']
     y = request.args['y']
-    return 'The product is ' + str(int(x)*int(y))
+    return 'The product is ' + str(int(x) * int(y))
+
 
 @app.route('/calculator')
 def calculator():
-        return """
+    return """
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +37,8 @@ def calculator():
 </head>
 <body>
 	<form action="/mult" method="GET">
-		x: <input value="0" name="x"/><br>
-		y: <input value="0" name="y"><br>
+		x: <input value="0" name="x"/><br/>
+		y: <input value="0" name="y"/><br/>
 		<input type="submit" value="Multiply"/>
 	</form>
 </body>
