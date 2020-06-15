@@ -9,7 +9,7 @@
 <body>
 <h1>Users</h1>
 	 {% for item in results %}
-        <li><a href="{{ item.href }}">{{item }}</a> <a href="">delete</a></li>
+        <li style="list-style: none; margin-top: 10px"><a href="{{ item.href }}" style="margin-right:20px;text-transform: capitalize ">{{item }}</a> <a href="" style="text-decoration:none;text-transform: capitalize; "><b>delete</b></a></li>
     {% endfor %}
 
 </body>
