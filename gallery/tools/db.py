@@ -19,7 +19,7 @@ def get_host(secret):
 	return secret['host']
 
 def get_username(secret):
-	return secret['host']
+	return secret['username']
 
 def get_full_name(secret):
 	return secret['full_name']
