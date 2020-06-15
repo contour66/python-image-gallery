@@ -60,6 +60,7 @@ def delete_user_ui(name):
     connect()
     cursor = connection.cursor()
     cursor.execute('delete from users where username = %s', (name,))
+    print_names()
 
 
 def delete_user():
