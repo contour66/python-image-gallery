@@ -2,13 +2,16 @@ from flask import Flask
 from flask import request
 from flask import render_template
 from db import print_names
+
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def hello_world():
-     return print_names()
-    # return "hello world!"
+    return print_names()
+
+
+# return "hello world!"
 
 
 @app.route('/admin')
