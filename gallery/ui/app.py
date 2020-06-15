@@ -15,8 +15,9 @@ def hello_world():
 
 
 @app.route('/admin')
-def admin():
-    return 'admin'
+def adminPage():
+        data = list_users_again()
+        return render_template('admin.html', results=data)
 
 
 @app.route('/greet/<name>')
