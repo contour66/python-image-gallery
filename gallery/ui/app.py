@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from tools.user_admin import print_names()
+from user_admin import print_names
 app = Flask(__name__)
 
 
@@ -55,3 +55,8 @@ def mult():
 # </body>
 # </html>
 # """
+
+# List users, as links, without password information.
+# Each user should have a "delete" link next to them which deletes the selected user after a confirmation.
+# Clicking on a "user" links should bring you to a "modify user" page which lets you either edit the user.
+# The admin page should also have a link/button to create users.
