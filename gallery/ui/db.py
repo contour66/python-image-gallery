@@ -50,7 +50,7 @@ def execute(query, args=None):
 def print_names():
     connect()
     cursor = connection.cursor()
-    cursor.execute('select * from users;')
+    cursor.execute('select username from users;')
     res = cursor.fetchall()
     print(res)
     return res
