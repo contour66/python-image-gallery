@@ -3,16 +3,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Caluclator</title>
+	<title>Users</title>
 
 </head>
 <body>
-<h1>Calculator {{name}}!</h1>
-	<form action="/mult" method="POST">
-		x: <input  name="x" value="0"/><br/>
-		y: <input name="y" value="0" /><br/>
-		<input type="submit" value="Multiply"/>
-	</form>
+<h1>Users</h1>
+	 {% for item in results %}
+        <li><a href="{{ item.href }}">{{item }}</a> <a href="">delete</a></li>
+    {% endfor %}
 
 </body>
 </html>
