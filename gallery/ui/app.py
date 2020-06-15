@@ -27,7 +27,7 @@ def greet(name):
 def calculator(personsName):
     return render_template('form.html', name=personsName)
 
-@app.route('/mult')
+@app.route('/mult', methods=['POST'])
 def mult():
     x = request.args['x']
     y = request.args['y']
