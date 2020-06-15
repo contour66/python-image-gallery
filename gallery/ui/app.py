@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    # return print_names
-    return "hello world!"
+     return print_names()
+    # return "hello world!"
 
 
 @app.route('/admin')
