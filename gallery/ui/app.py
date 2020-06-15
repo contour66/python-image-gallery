@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from tools import user_admin.py
+from tools.user_admin.py import print_names()
 app = Flask(__name__)
 
 
