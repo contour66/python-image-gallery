@@ -4,13 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Users</title>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js">
-		$(document).ready(function() {
-    		$("#delete").click(function(){
-  					$("#confirm").show();
-			});
-		});
-	</script>
+
 
 </head>
 <body>
@@ -23,9 +17,9 @@
     			<td>
 					<form action="/admin/deleteUser/{{ username[0] }}" method="POST">
 						<input name="username"  value="{{ username[0] }}" type="hidden" /><br/>
-						<button type='button' name='button-name' id='delete'>DELETE</button>
 
-						<button type="submit" id="confirm" value="ARE YOU SURE?" style="text-decoration:none;text-transform: capitalize;font-size: 30px; display: none; "></button>
+
+						<button type="submit" id="confirm" value="ARE YOU SURE?" style="text-decoration:none;text-transform: capitalize;font-size: 30px; "></button>
 
 					</form>
 				</td>
@@ -33,4 +27,15 @@
     {% endfor %}
 </table>
 </body>
+{% block scripts %}
+    {{ super() }}
+
+    <script>
+        	$(document).ready(function() {
+    		$("#delete").click(function(){
+  					$("#confirm").show();
+			});
+		});
+    </script>
+{% endblock %}
 </html>
