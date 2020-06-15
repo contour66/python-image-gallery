@@ -48,6 +48,7 @@ def execute(query, args=None):
 
 
 def print_names():
+	conect()
     global connection
     cursor = connection.cursor()
     res = cursor.execute('select * from users;')
