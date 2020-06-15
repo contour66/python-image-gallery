@@ -1,6 +1,7 @@
 import psycopg2
 import json
 from secrets import get_secret_image_gallery
+from db import
 
 connection = None
 
@@ -56,7 +57,7 @@ def print_names():
 
     return res
 
-def deleteUserUI(user):
+def delete_user_ui(user):
     execute("delete from users where username = %s", (user,))
     connect()
     cursor = connection.cursor()
