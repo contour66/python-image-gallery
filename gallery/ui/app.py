@@ -57,8 +57,9 @@ def add_user():
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
 def delete_user(username):
     delete_user_ui(username)
-    data = adminPage()
-    return data
+
+    return '<h1>User ' + username + 'deleted. <a href="/admin">HOME</a></h1> '
+
 
 
 @app.route('/admin/edituser/<username>')
