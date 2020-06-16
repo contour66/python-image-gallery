@@ -57,13 +57,27 @@ def print_names():
 
 
 def delete_user_ui(username):
-
     try:
         connect()
         cursor = connection.cursor()
         connection.set_session(autocommit=True)
         cursor.execute('delete from users where username = %s', (username,))
         print("\nDeleted\n" + username)
+    finally:
+        connection.close()
+
+
+def add_user_ui(username, password, fullname):
+    try:
+        connect()
+        cursor = connection.cursor()
+        connection.set_session(autocommit=True)
+        execute("""insert into users (username, password, full_name) values(%s, %s, %s); """,
+                (username, password, fullname))
+        print('\nUser: ' + name + + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
+    # res = execute("""select exists (select 1 from users where username) valies(%s)""", user)
+    #     if username_exists(user):
+    #     print("\nError: user with username " + user + " already exists\n")
     finally:
         connection.close()
 
