@@ -68,6 +68,7 @@ def edit_user():
     password = request.form['password']
     fullname = request.form['fullname']
     edit_user_ui(username, password, fullname)
+    data = adminPage()
     return data
 
 
