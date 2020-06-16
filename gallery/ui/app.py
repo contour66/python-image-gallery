@@ -47,8 +47,8 @@ def delete_user(username):
     return data
 
 
-@app.route('/admin/adduser<username>', methods=['POST'])
-def add_user(username):
+@app.route('/admin/adduser/<username>', methods=['POST'])
+def add_user():
     username = request.form['username']
     password = request.form['password']
     fullname = request.form['fullname']
