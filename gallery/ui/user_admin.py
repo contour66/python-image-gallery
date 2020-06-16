@@ -61,6 +61,8 @@ def print_names():
         print(row)
 
 
+
+
 # CHECKS IF USER EXISTS IN TABLE //////
 def username_exists(username):
     exists_query = '''

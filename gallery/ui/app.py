@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from db import print_names, delete_user_ui, add_user_ui
+from db import print_names, delete_user_ui, add_user_ui, edit_user_ui
 from markupsafe import escape
 
 app = Flask(__name__)
@@ -54,6 +54,14 @@ def add_user():
     fullname = request.form['fullname']
     add_user_ui(username, password, fullname)
     data = adminPage()
+    return data
+
+@app.route('/admin/useredited', methods=['POST'])
+def edit_user():
+    username = request.form['username']
+    password = request.form['password']
+    fullname = request.form['fullname']
+    edit_user_ui(username, password, fullname)
     return data
 
 

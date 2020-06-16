@@ -74,37 +74,31 @@ def add_user_ui(username, password, fullname):
         connection.set_session(autocommit=True)
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """,
                 (username, password, fullname))
-        print('\nUser: ' + username  + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
-    # res = execute("""select exists (select 1 from users where username) valies(%s)""", user)
-    #     if username_exists(user):
-    #     print("\nError: user with username " + user + " already exists\n")
+        print('\nUser: ' + username + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
+
     finally:
         connection.close()
 
 
-def delete_user():
-    print('Enter username to delete:')
-    user = input()
-    print('\nAre you sure that you want to delete [ ' + user + ' ]?')
-    delete = input()
-    if username_exists(user):
-        if delete == 'yes':
-            execute("delete from users where username = %s", (user,))
-            print("\nDeleted\n")
-    else:
-        print("\nNo such user exists\n")
-
-
-# 	row = cursor.fetchone()
-# print(row)
-
-
-def main():
-    connect()
-    res = execute('select * from users;')
-    for row in res:
-        print(row)
+# EDITS USER IN TABLE ////////////
+def edit_user_ui(username, password, fullname):
+    try:
+        connect()
+        cursor = connection.cursor()
+        connection.set_session(autocommit=True)
+        if password:
+            execute("update users set password=%s where username=%s", (password, user,))
+            print("\nPassword updated\n")
+        if fullname:
+            execute("update users set full_name=%s where username=%s", (full_name, username,))
+            print("\nName updated\n")
+    finally:
+        connection.close()
 
 
 if __name__ == '__main__':
     main()
+# def get_name(username):
+#     res = execute('select from users where username;')
+#     for row in res:
+#         print(row)
