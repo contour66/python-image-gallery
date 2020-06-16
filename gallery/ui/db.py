@@ -87,10 +87,10 @@ def edit_user_ui(username, password, fullname):
         cursor = connection.cursor()
         connection.set_session(autocommit=True)
         if password:
-            execute("update users set password=%s where username=%s", (password, user,))
+            execute("update users set password=%s where username=%s", (password, username,))
             print("\nPassword updated\n")
         if fullname:
-            execute("update users set full_name=%s where username=%s", (full_name, username,))
+            execute("update users set full_name=%s where username=%s", (fullname, username,))
             print("\nName updated\n")
     finally:
         connection.close()
