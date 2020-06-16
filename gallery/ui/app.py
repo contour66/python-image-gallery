@@ -57,9 +57,9 @@ def delete_user(username):
     return data
 
 
-@app.route('/admin/edituser')
-def edit_form():
-    return render_template('edituser.html')
+@app.route('/admin/edituser/<username>')
+def edit_form(username):
+    return render_template('edituser.html', name=username)
 
 
 @app.route('/admin/useredited', methods=['POST'])
