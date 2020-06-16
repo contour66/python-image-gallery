@@ -58,7 +58,7 @@ def delete_user(username):
 
 
 @app.route('/admin/edituser')
-def user_form():
+def edit_form():
     return render_template('edituser.html')
 
 
