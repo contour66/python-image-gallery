@@ -25,16 +25,16 @@ def add_user():
     password = request.form['password']
     fullname = request.form['fullname']
     if username_exists(username):
-        return '<h1>USER ALREADY EXISTS.  <a href="/admin/adduser">TRY A DIFFERENT NAME</a></h1>'
+        return '<h1>USER ' + username + ' ALREADY EXISTS.  <a href="/admin/adduser">TRY A DIFFERENT NAME</a></h1>'
     else:
         add_user_ui(username, password, fullname)
-        return '<h1>User ' + username + 'has been added. <a href="/admin"> HOME</a></h1> '
+        return '<h1>User ' + username + ' has been added. <a href="/admin"> HOME</a></h1> '
 
 
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
 def delete_user(username):
     delete_user_ui(username)
-    return '<h1>User ' + username + 'has been deleted. <a href="/admin"> HOME</a></h1> '
+    return '<h1>User ' + username + ' has been deleted. <a href="/admin"> HOME</a></h1> '
 
 
 @app.route('/admin/edituser/<username>')
@@ -48,7 +48,7 @@ def edit_user():
     password = request.form['password']
     fullname = request.form['fullname']
     edit_user_ui(username, password, fullname)
-    return '<h1>User ' + username + 'has been edited. <a href="/admin"> HOME</a></h1> '
+    return '<h1>User ' + username + ' has been edited. <a href="/admin"> HOME</a></h1> '
 
 
 
