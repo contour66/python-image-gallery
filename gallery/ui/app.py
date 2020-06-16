@@ -47,7 +47,7 @@ def add_user():
     password = request.form['password']
     fullname = request.form['fullname']
     if username_exists(username):
-        return 'USER ALREADY EXISTS'
+        return '<h1>USER ALREADY EXISTS.  TRY A DIFFERENT NAME</h1>'
     else:
         add_user_ui(username, password, fullname)
         data = adminPage()
