@@ -41,7 +41,7 @@ def user_form():
 
 
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
-def delete_user():
+def delete_user(username):
     delete_user_ui(username)
     data = adminPage()
     return data
