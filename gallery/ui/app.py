@@ -42,17 +42,16 @@ def user_form():
 
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
 def delete_user(username):
-    # name = request.form['username']
     delete_user_ui(username)
     data = adminPage()
     return data
 
 
 @app.route('/admin/adduser', methods=['POST'])
-def add_user(username, password, fullname):
-    user_name = request.form['username']
-    pw = request.form['password']
-    full_name = request.form['fullname']
+def add_user():
+    username = request.form['username']
+    password = request.form['password']
+    fullname = request.form['fullname']
     add_user_ui(username, password, fullname)
     data = adminPage()
     return data
