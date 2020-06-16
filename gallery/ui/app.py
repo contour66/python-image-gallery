@@ -50,7 +50,6 @@ def delete_user(username):
 @app.route('/admin/adduser/<username>', methods=['POST'])
 def add_user():
     username = request.form['username']
-    print(username)
     password = request.form['password']
     fullname = request.form['fullname']
     add_user_ui(username, password, fullname)
