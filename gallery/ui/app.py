@@ -39,6 +39,7 @@ def calculator(personsName):
 def user_form():
     return render_template('adduser.html')
 
+
 @app.route('/admin/useradded', methods=['POST'])
 def add_user():
     username = request.form['username']
@@ -55,9 +56,10 @@ def delete_user(username):
     data = adminPage()
     return data
 
-@app.route('/admin/edituser/<username>')
-def user_form(username):
-    return render_template('edituser.html', name=username)
+
+@app.route('/admin/edituser')
+def user_form():
+    return render_template('edituser.html')
 
 
 @app.route('/admin/useredited', methods=['POST'])
