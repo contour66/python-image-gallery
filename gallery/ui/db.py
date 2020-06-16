@@ -67,6 +67,21 @@ def delete_user_ui(username):
         connection.close()
 
 
+def username_exists(username):
+    try:
+        exists_query = '''
+        select exists (
+            select 1
+            from users
+            where username = %s
+        )'''
+        connect()
+        cursor = connection.cursor()
+        cursor.execute(exists_query, (username,))
+        return cursor.fetchone()[0]
+    finally:
+        connection.close()
+
 
 def add_user_ui(username, password, fullname):
     try:
