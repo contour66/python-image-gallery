@@ -35,6 +35,11 @@ def calculator(personsName):
     return render_template('form.html', name=personsName)
 
 
+@app.route('/admin/adduser')
+def user_form():
+    return render_template('adduser.html')
+
+
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
 def delete_user(username):
     name = request.form['username']
@@ -42,7 +47,8 @@ def delete_user(username):
     data = adminPage()
     return data
 
-@app.route('/admin/addUser/<username>', methods=['POST'])
+
+@app.route('/admin/adduser/<username>', methods=['POST'])
 def add_user(username, password, fullname):
     username = request.form['username']
     password = request.form['password']
@@ -50,6 +56,7 @@ def add_user(username, password, fullname):
     add_user_ui(username, password, fullname)
     data = adminPage()
     return data
+
 
 @app.route('/mult', methods=['POST'])
 def mult():
