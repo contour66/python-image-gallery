@@ -13,13 +13,13 @@
 	 {% for username in results %}
 
   			<tr>
-    			<td><a href="/admin/modifyUser/{{ username[0] }}" style="margin-right:20px;text-transform: capitalize;font-size: 30px ">{{username[0]}}</a> </td>
+    			<td><a href="/admin/modifyUser/{{ username[0] }}" style="margin-right:20px;text-transform: capitalize;font-size:15px;text-decoration: none;margin-bottom: 50px; ">{{username[0]}}</a> </td>
     			<td>
 					<form action="/admin/deleteUser/{{ username[0] }}" method="POST">
 						<input name="username"  value="{{ username[0] }}" type="hidden" /><br/>
 
 
-						<button type="submit" id="confirm" value="ARE YOU SURE?" style="text-decoration:none;text-transform: capitalize;font-size: 30px; ">DELETE</button>
+						<button type="submit" id="confirm" value="ARE YOU SURE?" style="text-decoration:none;text-transform: capitalize;font-size: 25px; ">DELETE</button>
 
 					</form>
 				</td>
@@ -30,7 +30,7 @@
 </table>
 
 
-	<a href="/admin/adduser" type="submit" id="" value="" style="text-decoration:none;text-transform: capitalize;font-size: 30px; background: gray;color: black;padding: 10px; border: 2px solid black;border-radius: 5px;margin-top: 100px">ADD USER</a>
+	<a href="/admin/adduser" type="submit" id="" value="" style="text-decoration:none;text-transform: capitalize;font-size: 30px; background: gray;color: black;padding: 10px; border: 2px solid black;border-radius: 5px;">ADD USER</a>
 
 </body>
 
