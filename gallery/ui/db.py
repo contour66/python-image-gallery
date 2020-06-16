@@ -67,6 +67,7 @@ def delete_user_ui(username):
         connection.close()
 
 
+
 def add_user_ui(username, password, fullname):
     try:
         connect()

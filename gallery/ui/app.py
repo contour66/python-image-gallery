@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from db import print_names, delete_user_ui, add_user_ui, edit_user_ui
+from db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists
+from user_admin import username_exists
 from markupsafe import escape
 
 app = Flask(__name__)
@@ -42,12 +43,16 @@ def user_form():
 
 @app.route('/admin/useradded', methods=['POST'])
 def add_user():
+
     username = request.form['username']
     password = request.form['password']
     fullname = request.form['fullname']
-    add_user_ui(username, password, fullname)
-    data = adminPage()
-    return data
+    if username_exists(username):
+        return 'USER ALREADY EXISTS'
+    else:
+        add_user_ui(username, password, fullname)
+        data = adminPage()
+        return data
 
 
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
@@ -78,27 +83,5 @@ def mult():
     y = request.form['y']
     return 'The product is ' + str(int(x) * int(y))
 
-# @app.route('/calculator')
-# def calculator():
-#     return """
-# <!DOCTYPE html>
-# <html>
-# <head>
-# 	<meta charset="utf-8">
-# 	<title>Caluclator</title>
-#
-# </head>
-# <body>
-# 	<form action="/mult" method="GET">
-# 		x: <input  name="x" value="0"/><br/>
-# 		y: <input name="y" value="0" /><br/>
-# 		<input type="submit" value="Multiply"/>
-# 	</form>
-# </body>
-# </html>
-# """
 
-# List users, as links, without password information.
-# Each user should have a "delete" link next to them which deletes the selected user after a confirmation.
-# Clicking on a "user" links should bring you to a "modify user" page which lets you either edit the user.
-# The admin page should also have a link/button to create users.
+
