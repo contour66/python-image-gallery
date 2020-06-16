@@ -74,7 +74,7 @@ def add_user_ui(username, password, fullname):
         connection.set_session(autocommit=True)
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """,
                 (username, password, fullname))
-        print('\nUser: ' + name + + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
+        print('\nUser: ' + username + + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
     # res = execute("""select exists (select 1 from users where username) valies(%s)""", user)
     #     if username_exists(user):
     #     print("\nError: user with username " + user + " already exists\n")
