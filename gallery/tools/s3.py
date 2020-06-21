@@ -48,8 +48,8 @@ def put_object(bucket_name, key, value):
     return True
 
 def main():
-	#create_bucket('au.zt.image-gallery', 'us-west-1')
-	#put_object('au.zt.image-gallery', 'banana', 'yellow')
+#	create_bucket('au.zt.image-gallery', 'us-west-1')
+	put_object('au.zt.image-gallery', 'banana', 'red')
 	print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
 
 if __name__ == '__main__':
