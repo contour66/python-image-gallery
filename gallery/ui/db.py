@@ -1,6 +1,6 @@
 import psycopg2
 import json
-from secrets import get_secret_image_gallery
+from gallery.ui.secrets import get_secret_image_gallery
 
 connection = None
 
@@ -111,6 +111,8 @@ def edit_user_ui(username, password, fullname):
     finally:
         connection.close()
 
+def main():
+    print("name")
 
 if __name__ == '__main__':
     main()
