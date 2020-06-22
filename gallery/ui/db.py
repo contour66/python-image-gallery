@@ -48,13 +48,15 @@ def execute(query, args=None):
 
 
 def print_names():
-    connect()
-    cursor = connection.cursor()
-    cursor.execute('select username from users;')
-    res = cursor.fetchall()
-    print(res)
-    return res
-
+    try:
+        connect()
+        cursor = connection.cursor()
+        cursor.execute('select username from users;')
+        res = cursor.fetchall()
+        print(res)
+        return res
+    finally:
+        connection.close()
 
 def delete_user_ui(username):
     try:
