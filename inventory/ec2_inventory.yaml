@@ -1,0 +1,7 @@
+---
+all:
+  hosts:
+    ec2-54.219.247.82.us-west-1.compute.amazonaws.com:
+      ansible_user: ec2-user
+    ec2-54.215.76.165.us-west-1.compute.amazonaws.com:
+      ansible_user: ec2-user
