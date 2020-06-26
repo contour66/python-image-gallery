@@ -6,10 +6,7 @@
   tasks:
     - name: Install boto
       pip:
-        name:
-          - boto
-          - botocore
-          - boto3
+        name: boto˚
         state: present
         executbale: pip3
     - name: Provision Zums EC2 Instance
