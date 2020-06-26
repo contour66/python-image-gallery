@@ -22,9 +22,9 @@
         state: present
         update_cache: yes
     - name: Install pip3
-        package:
-          name: pip3
-          state: present
+      package:
+        name: pip3
+        state: present
     - name: Install boto
       package:
         name: boto
