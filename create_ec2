@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    ami_id: ""
+  tasks:
+    - name: Provision Zums EC2 Instance
+      ec2:
+        key_name: zum
+        group: Moodule5-developer-sg
+        instance_type: t2.micro
+        image: "{{ ami_id }}"
+        instance_tags:
+          Name: Module5 Zum
+          Module: 5
+        wait: yes
+        vpc_subnet_id: ""
+        exact_count: 1
+        count_tag:
+          Name: Module5 Zum
