@@ -1,15 +1,7 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Install yum
-      package:
-        name: yum
-        state: present
-    - name: Install emacs-nox
-      package:
-        name: emacs-nox
-        state: present
-        update_cache: yes
+
     - name: Install python3
       package:
         name: python3
@@ -25,6 +17,15 @@
         name: python-pip
         state: present
         update_cache: yes
+    - name: Install yum
+      package:
+        name: yum
+        state: present
+    - name: Install emacs-nox
+      package:
+        name: emacs-nox
+        state: present
+        update_cache:
     - name: Install boto
       pip:
         name: boto
