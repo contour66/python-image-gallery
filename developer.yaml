@@ -1,0 +1,36 @@
+---
+- hosts: al2
+  become: yes
+  vars:
+    index_file: developer/var/www/html/index.html
+    apache_user: apache
+    apache_group: apache
+  tasks:
+    - name: Install emacs-nox
+      package:
+        name: emacs-nox
+        state: present
+        update_cache: yes
+    - name: Install nano
+      package:
+        name: nano
+        state: present
+    - name: Install apache
+      package:
+        name: httpd
+        state: present
+    - name: Copy index.html
+      copy:
+        src: "{{ index_file }}"
+        dest: /var/www/html/index.html
+        owner: "{{ apache_user }}"
+        group: "{{ apache_group }}"
+    - name: Start apache
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+
+
+

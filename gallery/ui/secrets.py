@@ -22,7 +22,7 @@ def get_secret_image_gallery():
     # In this sample we only handle the specific exceptions for the 'GetSecretValue' API.
     # See https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
     # We rethrow the exception by default.
-	secret = None
+    secret = None
     try:
         get_secret_value_response = client.get_secret_value(
             SecretId=secret_name
