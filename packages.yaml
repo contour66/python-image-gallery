@@ -1,10 +1,5 @@
 ---
 - hosts: localhost
-  become: yes
-  vars:
-    index_file: developer/var/www/html/index.html
-    apache_user: apache
-    apache_group: apache
   tasks:
     - name: Install yum
       package:
