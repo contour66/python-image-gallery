@@ -23,7 +23,7 @@
         update_cache: yes
     - name: Install boto3
       package:
-        name: boto3
+        name: pip3 install boto3
         state: present
     - name: Install nano
       package:
