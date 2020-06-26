@@ -4,11 +4,6 @@
   vars:
     ami_id: ""
   tasks:
-    - name: Install boto
-      pip:
-        name: boto˚
-        state: present
-        executbale: pip3
     - name: Provision Zums EC2 Instance
       ec2:
         key_name: zum
