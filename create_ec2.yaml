@@ -4,21 +4,6 @@
   vars:
     ami_id: ""
   tasks:
-    - name: Install python3
-      package:
-        name: python3
-        state: present
-        update_cache: yes
-    - name: Install python3-devel
-      package:
-        name: python3-devel
-        state: present
-        update_cache: yes
-    - name: Install python-pip
-      package:
-        name: python-pip
-        state: present
-        update_cache: yes
     - name: Install boto
       pip:
         name: boto
