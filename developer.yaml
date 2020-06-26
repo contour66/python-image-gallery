@@ -21,9 +21,9 @@
         name: python3-devel
         state: present
         update_cache: yes
-    - name: Install pip
+    - name: Install python-pip
       package:
-        name: pip
+        name: python-pip
         state: present
     - name: Install boto
       package:
