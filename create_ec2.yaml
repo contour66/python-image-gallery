@@ -3,6 +3,8 @@
   gather_facts: no
   vars:
     ami_id: ""
+  module_defaults:
+    region: "us-west-1"
   tasks:
     - name: Provision Zums EC2 Instance
       ec2:
