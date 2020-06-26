@@ -29,10 +29,10 @@
       package:
         name: boto
         state: present
-     - name: Install boto3
-       package:
-         name: boto3
-         state: present
+    - name: Install boto3
+      package:
+        name: boto3
+        state: present
     - name: Install nano
       package:
         name: nano
