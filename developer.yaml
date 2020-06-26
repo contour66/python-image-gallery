@@ -30,7 +30,6 @@
       pip:
         name: boto
         state: present
-        update_cache: yes
     - name: Install boto3
       package:
         name: boto3
