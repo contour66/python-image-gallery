@@ -1,5 +1,5 @@
 ---
-- hosts: al2
+- hosts: all
   become: yes
   vars:
     index_file: developer/var/www/html/index.html
