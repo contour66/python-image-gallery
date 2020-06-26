@@ -4,14 +4,6 @@
   vars:
     ami_id: ""
   tasks:
-    - name: Install botocore
-      package:
-        name: botocore
-        state: present
-    - name: Install boto3
-      package:
-        name: boto3
-        state: present
     - name: Provision Zums EC2 Instance
       ec2:
         key_name: zum
