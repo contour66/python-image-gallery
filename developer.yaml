@@ -12,19 +12,19 @@
         state: present
         update_cache: yes
     - name: Install python3
-        package:
-          name: python3
-          state: present
-          update_cache: yes
+      package:
+        name: python3
+        state: present
+        update_cache: yes
     - name: Install python3-devel
-        package:
-          name: python3-devel
-          state: present
-          update_cache: yes
+      package:
+        name: python3-devel
+        state: present
+        update_cache: yes
     - name: Install botocore
-        package:
-          name: botocore
-          state: present
+      package:
+        name: botocore
+        state: present
     - name: Install boto3
       package:
         name: boto3
