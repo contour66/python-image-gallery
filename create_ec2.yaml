@@ -20,4 +20,4 @@
         vpc_subnet_id: "{{ public_subnet.subnet.id }}"
         exact_count: 1
         count_tag:
-        Name: Module5 Zum
+          Name: Module5 Zum
