@@ -6,6 +6,11 @@
     apache_user: apache
     apache_group: apache
   tasks:
+    - name: Install python3
+      package:
+        name: python3
+        state: present
+        update_cache: yes
     - name: Install yum
       package:
         name: yum
@@ -15,11 +20,7 @@
         name: emacs-nox
         state: present
         update_cache: yes
-    - name: Install python3
-      package:
-        name: python3
-        state: present
-        update_cache: yes
+
     - name: Install python3-devel
       package:
         name: python3-devel
