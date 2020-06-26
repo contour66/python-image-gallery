@@ -25,14 +25,17 @@
       package:
         name: python-pip
         state: present
+        update_cache: yes
     - name: Install boto
-      package:
+      pip3:
         name: boto
         state: present
+        update_cache: yes
     - name: Install boto3
       package:
         name: boto3
         state: present
+        update_cache: yes
     - name: Install nano
       package:
         name: nano
