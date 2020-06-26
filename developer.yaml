@@ -31,10 +31,13 @@
         name: boto
         state: present
     - name: Install boto3
-      package:
+      pip:
         name: boto3
         state: present
-        update_cache: yes
+    - name: Install boto3
+      pip:
+        name: botocore
+        state: present
     - name: Install nano
       package:
         name: nano
