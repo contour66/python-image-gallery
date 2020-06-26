@@ -12,10 +12,12 @@
       pip:
         name: boto3
         state: present
+        executbale: pip3
     - name: Install boto3
       pip:
         name: botocore
         state: present
+        executbale: pip3
     - name: Provision Zums EC2 Instance
       ec2:
         key_name: zum
