@@ -6,7 +6,7 @@
   tasks:
     - name: Install boto3
       package:
-        name: pip3 install boto3
+        name: boto3
         state: present
     - name: Provision Zums EC2 Instance
       ec2:
