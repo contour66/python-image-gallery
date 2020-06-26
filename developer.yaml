@@ -21,12 +21,6 @@
         name: python3-devel
         state: present
         update_cache: yes
-    - name: Install boto
-      package:
-        name: boto
-        state: present
-    - name: debug
-      debug: var=boto
     - name: Install nano
       package:
         name: nano
