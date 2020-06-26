@@ -11,6 +11,16 @@
         name: emacs-nox
         state: present
         update_cache: yes
+    - name: Install python3
+        package:
+          name: python3
+          state: present
+          update_cache: yes
+    - name: Install python3-devel
+        package:
+          name: python3-devel
+          state: present
+          update_cache: yes
     - name: Install botocore
         package:
           name: botocore
