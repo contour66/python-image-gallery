@@ -27,7 +27,7 @@
         state: present
         update_cache: yes
     - name: Install boto
-      yum:
+      pip:
         name: boto
         state: present
         update_cache: yes
