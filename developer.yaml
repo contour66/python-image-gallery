@@ -21,10 +21,6 @@
         name: python3-devel
         state: present
         update_cache: yes
-    - name: Install botocore
-      package:
-        name: botocore
-        state: present
     - name: Install boto3
       package:
         name: boto3
