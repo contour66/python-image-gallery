@@ -21,6 +21,18 @@
         name: python3-devel
         state: present
         update_cache: yes
+    - name: Install pip3
+        package:
+          name: pip3
+          state: present
+    - name: Install boto
+      package:
+        name: boto
+        state: present
+     - name: Install boto3
+     package:
+       name: boto3
+       state: present
     - name: Install nano
       package:
         name: nano
