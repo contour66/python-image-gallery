@@ -11,6 +11,10 @@
         name: emacs-nox
         state: present
         update_cache: yes
+    - name: Install boto3
+      package:
+        name: pip3 install boto3
+        state: present
     - name: Install nano
       package:
         name: nano
