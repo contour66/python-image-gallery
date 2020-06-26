@@ -4,6 +4,10 @@
   vars:
     ami_id: ""
   tasks:
+    - name: Install botocore
+      package:
+        name: botocore
+        state: present
     - name: Install boto3
       package:
         name: boto3
