@@ -1,20 +1,9 @@
 ---
 all:
   hosts:
-    ec2-54.219.182.122.us-west-1.compute.amazonaws.com:
+    ec2-54-219-182-122.us-west-1.compute.amazonaws.com:
       ansible_user: ec2-user
-    ec2-18.144.47.146.us-west-1.compute.amazonaws.com:
+      ansible_python_interpreter: /usr/bin/python
+    ec2-18-144-47-146.us-west-1.compute.amazonaws.com:
       ansible_user: ec2-user
-  children:
-    al2:
-      hosts:
-        ec2-54-219-182-122.compute.us-west-1.amazonaws.com:
-        ec2-18.144.47.146.us-west-1.compute.amazonaws.com:
-      vars:
-        ansible_user: ec2-user
-        ansible_python_interpreter: /usr/bin/python
-    unbuntu:
-      hosts:
-        ec2-54-67-81-10.us-west-1.compute.amazonaws.com:
-      vars:
-        ansible_user: unbuntu
+      ansible_python_interpreter: /usr/bin/python
