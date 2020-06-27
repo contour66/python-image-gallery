@@ -77,7 +77,7 @@
         #wait: yes
       register: nat
     - name: debug
-        debug: var=nat
+      debug: var=nat
 
 
     - name: Create public route table
