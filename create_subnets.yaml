@@ -8,7 +8,7 @@
           Name: ans-public-sn1
           Project: 5
         cidr: 10.0.1.0/24
-         az: "{{ aws_region + 'a'}}"
+        az: "{{ aws_region + 'a'}}"
         state: present
       register: public_subnet_1
 
@@ -19,7 +19,7 @@
           Name: ans-public-sn2
           Project: 5
         cidr: 10.0.2.0/24
-         az: "{{ aws_region + 'c'}}"
+        az: "{{ aws_region + 'c'}}"
         state: present
       register: public_subnet_2
 
@@ -30,7 +30,7 @@
           Name: ans-private-sn1
           Project: 5
         cidr: 10.0.3.0/24
-         az: "{{ aws_region + 'a'}}"
+        az: "{{ aws_region + 'a'}}"
         state: present
       register: private_subnet_1
 
@@ -41,7 +41,7 @@
           Name: ans-private-sn2
           Project: 5
         cidr: 10.0.4.0/24
-         az: "{{ aws_region + 'c'}}"
+        az: "{{ aws_region + 'c'}}"
         state: present
       register: private_subnet_2
 
