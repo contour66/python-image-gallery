@@ -94,6 +94,14 @@
             gateway_id: "{{ igw.gateway_id }}"
         state: present
 
+    - name: Create NAT gateway
+        ec2_vpc_nat_gateway:
+          subnet_id: "{{ public_subnet_1.subnet.id }}"
+          if_exist_do_not_create: yes
+          state: present
+          wait: yes
+        register: nat
+
     - name: Create private route table 1
       ec2_vpc_route_table:
         vpc_id: "{{vpc.vpc.id}}"
@@ -119,14 +127,6 @@
           - dest: 0.0.0.0/0
             instance_id: "{{ nat.gateway_id }}"
         state: present
-
-    - name: Create NAT gateway
-      ec2_vpc_nat_gateway:
-        subnet_id: "{{ public_subnet_1.subnet.id }}"
-        if_exist_do_not_create: yes
-        state: present
-        wait: yes
-      register: nat
 
     - name: Create secrets security group
       ec2_group:
