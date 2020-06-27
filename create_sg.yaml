@@ -1,0 +1,128 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+
+    - name: Create nginx servers security group
+      ec2_group:
+        name: ans-nginx-servers-sg
+        region: "{{ aws_region }}"
+        description: Nginx servers security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-nginx-servers-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports: 80
+            cidr_ip:
+              - 68.105.121.53/32
+              - 24.196.25.139/32
+            rule_desc: allow inbound ips on port 80
+          - proto: tcp
+            ports:
+              - 443
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all inbound to ports 22 and 443
+        state: present
+      register: nginx_sg
+
+    - name: Create development security group
+      ec2_group:
+        name: ans-development-sg
+        region: "{{ aws_region }}"
+        description: Development security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-development-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports:
+              - 80
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow inbound ips on port 80
+          - proto: tcp
+            ports:
+              - 5000
+            cidr_ip: 68.105.121.53/32
+            rule_desc: allow all inbound from personal ip to 5000
+        state: present
+      register: dev_sg
+
+
+    - name: Create secrets security group
+      ec2_group:
+        name: ans-secrets-sg
+        region: "{{ aws_region }}"
+        description: Secrets security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            group_name:
+              - ans-secrets-tag-sg
+              - ans-development-sg
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all from secrets and dev sg's
+        state: present
+      register: secrets_sg
+
+    - name: Create secrets tag security group
+      ec2_group:
+        name: ans-secrets-tag-sg
+        region: "{{ aws_region }}"
+        description: Secrets tag  security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-tag-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports: all
+            group_name: ans-development-sg
+            rule_desc: allow all from development
+        rules_egress:
+          - proto: tcp
+            ports: all
+            group_name: ans-secrets-sg
+        state: present
+      register: secrets_tag_sg
+
+    - name: Create postgres security group
+      ec2_group:
+        name: ans-postgres-sg
+        region: "{{ aws_region }}"
+        description: Postgres security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-postgres-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports: 5432
+            group_name: ans-postgres-tag-sg
+            rule_desc: allow all from postgres tag
+        state: present
+      register: postgres_sg
+
+    - name: Create postgres security group
+      ec2_group:
+        name: ans-postgres-tag-sg
+        region: "{{ aws_region }}"
+        description: Postgres tag security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-postgres-tag-sg
+          Project: 5
+        rules_egress:
+          - proto: tcp
+            ports: 5432
+            group_name: ans-postgres-tag-sg
+            rule_desc: allow to postgres
+        state: present
+      register: postgres_tag_sg
+

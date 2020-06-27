@@ -1,9 +1,15 @@
 - hosts: localhost
   gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+    module_defaults:
+      group/aws:
+        region: "{{ aws_region }}"
   tasks:
     - name: Create VPC
       ec2_vpc_net:
         name: Ansible-Project
+        region: "{{ aws_region }}"
         cidr_block: 10.0.0.0/16
         tags:
           Project: 5
