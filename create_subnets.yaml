@@ -103,7 +103,7 @@
           - dest: 0.0.0.0/0
             gateway_id: "{{ nat.nat_gateway_id }}"
         state: present
-      register: nat_route_table
+      register: private_nat_route_table_1
 
     - name: Create private route table 2
       ec2_vpc_route_table:
@@ -117,7 +117,7 @@
           - dest: 0.0.0.0/0
             gateway_id: "{{ nat.nat_gateway_id }}"
         state: present
-      register: nat_route_table
+      register: private_nat_route_table_2
 
     - name: Create secrets security group
       ec2_group:
