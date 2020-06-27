@@ -112,7 +112,7 @@
           - "{{ private_subnet_1.subnet.id}}"
         routes:
           - dest: 0.0.0.0/0
-            instance_id: "{{ nat.gateway_id }}"
+            instance_id: "{{ nat.instance_id }}"
         state: present
 
     - name: Create private route table 2
@@ -125,7 +125,7 @@
           - "{{ private_subnet_2.subnet.id}}"
         routes:
           - dest: 0.0.0.0/0
-            instance_id: "{{ nat.gateway_id }}"
+            instance_id: "{{ nat.instance_id }}"
         state: present
 
     - name: Create secrets security group
