@@ -2,9 +2,9 @@
   gather_facts: no
   vars:
     aws_region: "us-west-1"
-    module_defaults:
-      group/aws:
-        region: "{{ aws_region }}"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
   tasks:
     - name: Create VPC
       ec2_vpc_net:
