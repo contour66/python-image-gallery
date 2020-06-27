@@ -112,8 +112,9 @@
           - "{{ private_subnet_1.subnet.id}}"
         routes:
           - dest: 0.0.0.0/0
-            instance_id: "{{ nat.instance_id }}"
+            gateway_id: "{{ nat.nat_gateway_id }}"
         state: present
+      register: nat_route_table
 
     - name: Create private route table 2
       ec2_vpc_route_table:
@@ -125,8 +126,9 @@
           - "{{ private_subnet_2.subnet.id}}"
         routes:
           - dest: 0.0.0.0/0
-            instance_id: "{{ nat.instance_id }}"
+            gateway_id: "{{ nat.nat_gateway_id }}"
         state: present
+      register: nat_route_table
 
     - name: Create secrets security group
       ec2_group:
