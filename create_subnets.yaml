@@ -129,7 +129,7 @@
         state: present
       register: private_nat_route_table_2
     - name: debug
-      debug: var=private_nat_route_table_1
+      debug: var=private_nat_route_table_2
 
     - name: Create secrets security group
       ec2_group:
