@@ -23,14 +23,14 @@
       register: public_subnet_1
 
     - name: Create public subnet 2
-        ec2_vpc_subnet:
-          vpc_id: "{{ vpc.vpc.id }}"
-          tags:
-            Name: ans-public-sn2
-            Project: 5
-          cidr: 10.0.2.0/24
-          state: present
-        register: public_subnet_2
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-public-sn2
+          Project: 5
+        cidr: 10.0.2.0/24
+        state: present
+      register: public_subnet_2
 
     - name: Create private subnet 1
       ec2_vpc_subnet:
@@ -53,24 +53,24 @@
       register: private_subnet_2
 
     - name: Create secrets in subnet
-        ec2_vpc_subnet:
-          vpc_id: "{{ vpc.vpc.id }}"
-          tags:
-            Name: ans-secrets-in-sn
-            Project: 5
-          cidr: 10.0.5.0/24
-          state: present
-        register: secrets_in_subnet
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-secrets-in-sn
+          Project: 5
+        cidr: 10.0.5.0/24
+        state: present
+      register: secrets_in_subnet
 
     - name: Create secrets out subnet
-        ec2_vpc_subnet:
-          vpc_id: "{{ vpc.vpc.id }}"
-          tags:
-            Name: ans-secrets-out-sn
-            Project: 5
-          cidr: 10.0.6.0/24
-          state: present
-        register: secrets_out_subnet
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-secrets-out-sn
+          Project: 5
+        cidr: 10.0.6.0/24
+        state: present
+      register: secrets_out_subnet
 
     - name: Create internet gateway
       ec2_vpc_igw:
@@ -95,38 +95,38 @@
         state: present
 
     - name: Create private route table 1
-        ec2_vpc_route_table:
-          vpc_id: "{{vpc.vpc.id}}"
-          tags:
-            Name: Ansible-private-rt-1
-            Module: 5
-          subnets:
-            - "{{ private_subnet_1.subnet.id}}"
-          routes:
-            - dest: 0.0.0.0/0
-              gateway_id: "{{ igw.gateway_id }}"
-          state: present
+      ec2_vpc_route_table:
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: Ansible-private-rt-1
+          Module: 5
+        subnets:
+          - "{{ private_subnet_1.subnet.id}}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ igw.gateway_id }}"
+        state: present
 
     - name: Create private route table 2
-        ec2_vpc_route_table:
-          vpc_id: "{{vpc.vpc.id}}"
-          tags:
-            Name: Ansible-private-rt-2
-            Module: 5
-          subnets:
-            - "{{ private_subnet_2.subnet.id}}"
-          routes:
-            - dest: 0.0.0.0/0
-              gateway_id: "{{ igw.gateway_id }}"
-          state: present
+      ec2_vpc_route_table:
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: Ansible-private-rt-2
+          Module: 5
+        subnets:
+          - "{{ private_subnet_2.subnet.id}}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ igw.gateway_id }}"
+        state: present
 
     - name: Create NAT gateway
-        ec2_vpc_nat_gateway:
-          subnet_id: "{{ public_subnet_1.subnet.id }}"
-          if_exist_do_not_create: yes
-          state: present
-          wait: yes
-        register: nat
+      ec2_vpc_nat_gateway:
+        subnet_id: "{{ public_subnet_1.subnet.id }}"
+        if_exist_do_not_create: yes
+        state: present
+        wait: yes
+      register: nat
 
     - name: Create secrets security group
       ec2_group:
