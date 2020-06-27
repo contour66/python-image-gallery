@@ -1,4 +1,5 @@
 ---
 
 - import_playbook: create_vpc.yaml
+- import_playbook: create_subnets.yaml
 #- import_playbook: create_ec2.yaml

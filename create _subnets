@@ -1,0 +1,157 @@
+-
+
+    - name: Create public subnet 1
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-public-sn1
+          Project: 5
+        cidr: 10.0.1.0/24
+        state: present
+      register: public_subnet_1
+
+    - name: Create public subnet 2
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-public-sn2
+          Project: 5
+        cidr: 10.0.2.0/24
+        state: present
+      register: public_subnet_2
+
+    - name: Create private subnet 1
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-private-sn1
+          Project: 5
+        cidr: 10.0.3.0/24
+        state: present
+      register: private_subnet_1
+
+    - name: Create private subnet 2
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-private-sn2
+          Project: 5
+        cidr: 10.0.4.0/24
+        state: present
+      register: private_subnet_2
+
+    - name: Create secrets in subnet
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-secrets-in-sn
+          Project: 5
+        cidr: 10.0.5.0/24
+        state: present
+      register: secrets_in_subnet
+
+    - name: Create secrets out subnet
+      ec2_vpc_subnet:
+        vpc_id: "{{ vpc.vpc.id }}"
+        tags:
+          Name: ans-secrets-out-sn
+          Project: 5
+        cidr: 10.0.6.0/24
+        state: present
+      register: secrets_out_subnet
+
+    - name: Create internet gateway
+      ec2_vpc_igw:
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: Ansible Project5 gateway
+        state: present
+      register: igw
+
+    - name: Create public route table
+      ec2_vpc_route_table:
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: Ansible-public-rt
+          Module: 5
+        subnets:
+          - "{{ public_subnet_1.subnet.id}}"
+          - "{{ public_subnet_2.subnet.id}}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ igw.gateway_id }}"
+        state: present
+
+    - name: Create NAT gateway
+      ec2_vpc_nat_gateway:
+        subnet_id: "{{ public_subnet_1.subnet.id }}"
+        if_exist_do_not_create: yes
+        state: present
+        #wait: yes
+      register: nat
+
+    - name: Create private route table 1
+      ec2_vpc_route_table:
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: Ansible-private-rt-1
+          Module: 5
+        subnets:
+          - "{{ private_subnet_1.subnet.id}}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ nat.nat_gateway_id }}"
+        state: present
+      register: nat_route_table
+
+    - name: Create private route table 2
+      ec2_vpc_route_table:
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: Ansible-private-rt-2
+          Module: 5
+        subnets:
+          - "{{ private_subnet_2.subnet.id}}"
+        routes:
+          - dest: 0.0.0.0/0
+            gateway_id: "{{ nat.nat_gateway_id }}"
+        state: present
+      register: nat_route_table
+
+    - name: Create secrets security group
+      ec2_group:
+        name: ans-secrets-sg
+        description: Secrets security group
+        vpc_id: "{{vpc.vpc.id}}"
+        rules:
+          - proto: tcp
+            ports:
+              - 22
+              - 80
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all to ports 22 and 80
+        state: present
+
+    - name: Create nginx servers security group
+      ec2_group:
+        name: ans-nginx-servers-sg
+        description: Nginx servers security group
+        vpc_id: "{{vpc.vpc.id}}"
+        rules:
+          - proto: tcp
+            ports: 80
+            cidr_ip:
+              - 68.105.121.53/32
+              - 24.196.25.139/32
+            rule_desc: allow inbound ips on port 80
+          - proto: tcp
+            ports:
+              - 443
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all inbound to ports 22 and 443
+        state: present
+
+
+
+
