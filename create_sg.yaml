@@ -1,6 +1,6 @@
 - hosts: localhost
   gather_facts: no
- vars:
+  vars:
     aws_region: "us-west-1"
   module_defaults:
     group/aws:
