@@ -12,7 +12,7 @@
         vpc_id: "{{vpc.vpc.id}}"
         tags:
           Name: Ansible Project5 gateway
-          Project: 5
+          Project: "5"
         region: "{{ aws_region }}"
         state: present
       register: igw
@@ -23,7 +23,7 @@
         wait: yes
         tags:
           Name: Ansible-ng
-          Project: 5
+          Project: "5"
         region: "{{ aws_region }}"
         if_exist_do_not_create: yes
         state: present
