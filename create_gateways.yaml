@@ -23,7 +23,6 @@
         wait: yes
         tags:
           Name: Ansible-ng
-          Project: "5"
         region: "{{ aws_region }}"
         if_exist_do_not_create: yes
         state: present
