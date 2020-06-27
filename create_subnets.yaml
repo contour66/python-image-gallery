@@ -69,6 +69,17 @@
         state: present
       register: igw
 
+    - name: Create NAT gateway
+      ec2_vpc_nat_gateway:
+        subnet_id: "{{ public_subnet_1.subnet.id }}"
+        if_exist_do_not_create: yes
+        state: present
+        #wait: yes
+      register: nat
+    - name: debug
+        debug: var=nat
+
+
     - name: Create public route table
       ec2_vpc_route_table:
         vpc_id: "{{vpc.vpc.id}}"
@@ -86,13 +97,7 @@
     - name: debug
       debug: var=public_route_table
 
-    - name: Create NAT gateway
-      ec2_vpc_nat_gateway:
-        subnet_id: "{{ public_subnet_1.subnet.id }}"
-        if_exist_do_not_create: yes
-        state: present
-        #wait: yes
-      register: nat
+
 
     - name: Create private route table 1
       ec2_vpc_route_table:
