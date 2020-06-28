@@ -4,7 +4,7 @@
     aws_region: "us-west-1"
   module_defaults:
     group/aws:
-        egion: "{{ aws_region }}"
+        region: "{{ aws_region }}"
   tasks:
 
     - name: Create public route table
@@ -13,6 +13,7 @@
         region: "{{ aws_region }}"
         tags:
           Name: Ansible-public-rt
+          Project: 5
         subnets:
           - "{{ public_subnet_1.subnet.id}}"
           - "{{ public_subnet_2.subnet.id}}"
@@ -48,6 +49,7 @@
         region: "{{ aws_region }}"
         tags:
           Name: Ansible-private-rt-2
+          Project: 5
         subnets:
           - "{{ private_subnet_2.subnet.id}}"
         routes:
