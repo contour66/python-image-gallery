@@ -1,0 +1,29 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
+  tasks:
+    - name: Create nlb
+      elb_target_group:
+        name: ans-nlb
+        state: present
+        zones:
+          - us-west-1a
+          - us-east-1c
+        subnet_mappings:
+          - SubnetId: "{{public_subnet_1.id}}"
+            AllocationId: "{{nlb_ip_1}}"
+          - SubnetId: "{{public_subnet_1.id}}"
+            AllocationId: "{{nlb_ip_2}}"
+        listeners:
+          - protocol: TLS
+            Certificates:
+              CertificatiteArn:	"arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
+            Port: 443
+            DefaulatActions:
+              - Type: Forward
+                TargetGroupName: ans-tg
+        register: ans_nlb

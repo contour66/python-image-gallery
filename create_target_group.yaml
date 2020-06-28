@@ -6,7 +6,7 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - name: Create elb target group
+    - name: Create nlb target group
       elb_target_group:
         name: ans-tg
         protocol: tcp
