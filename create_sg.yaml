@@ -112,16 +112,16 @@
 
 
     - name: Create postgres tag security group
-        ec2_group:
-          name: ans-postgres-tag-sg
-          region: "{{ aws_region }}"
-          description: Postgres tag security group
-          vpc_id: "{{vpc.vpc.id}}"
-          tags:
-            Name: ans-postgres-tag-sg
-            Project: 5
-          state: present
-        register: postgres_tag_sg
+      ec2_group:
+        name: ans-postgres-tag-sg
+        region: "{{ aws_region }}"
+        description: Postgres tag security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-postgres-tag-sg
+          Project: 5
+        state: present
+      register: postgres_tag_sg
 
 
     - name: Create postgres security group
