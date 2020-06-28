@@ -15,8 +15,8 @@
           Project: 5
         state: present
       register: vpc
-    - name: debug
-      debug: var=vpc
+#    - name: debug
+#      debug: var=vpc
 
 #
 #    - name: Create public subnet 1

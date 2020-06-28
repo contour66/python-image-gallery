@@ -86,8 +86,8 @@
                 - "{{secrets_tag_sg.group_id}}"
         state: present
       register: secrets_sg
-    - name: debug
-      debug: var=secrets_sg
+#    - name: debug
+#      debug: var=secrets_sg
 #
     - name: Update secrets tag security group
       ec2_group:
@@ -136,9 +136,9 @@
           Project: 5
         rules:
           - proto: tcp
-            from_port: 5432
+            from_port:5432
             to_port: 5432
-            group_id: "{{postgres_tag_sg}}"
+            group_id: "{{postgres_tag_sg.group_id}}"
         state: present
       register: postgres_sg
 
@@ -155,7 +155,7 @@
           - proto: tcp
             from_port: 5432
             to_port: 5432
-            group_id: "{{postgres_sg}}"
+            group_id: "{{postgres_sg.group_id}}"
         state: present
       register: postgres_tag_sg
 
