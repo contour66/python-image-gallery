@@ -121,8 +121,8 @@
               - "{{secrets_tag_sg.group_id}}"
         state: present
       register: secrets_sg
-        - name: debug
-          debug: var=secrets_sg
+      - name: debug
+        debug: var=secrets_sg
 
 
     - name: Create postgres tag security group
