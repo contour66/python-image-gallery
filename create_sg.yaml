@@ -100,14 +100,29 @@
           Project: 5
         rules:
           - proto: tcp
-            ports: all
-            group_id: " {{ secrets_sg.group_id }} "
+            from_port: 1
+            to_port: 65535
+            group_id: "{{secrets_sg.group_id}}"
         rules_egress:
           - proto: tcp
             ports: all
-            group_id: " {{ dev_sg.group_id}} "
+            group_id: "{{dev_sg.group_id}}"
         state: present
       register: secrets_tag_sg
+
+
+    - name: Create postgres tag security group
+        ec2_group:
+          name: ans-postgres-tag-sg
+          region: "{{ aws_region }}"
+          description: Postgres tag security group
+          vpc_id: "{{vpc.vpc.id}}"
+          tags:
+            Name: ans-postgres-tag-sg
+            Project: 5
+          state: present
+        register: postgres_tag_sg
+
 
     - name: Create postgres security group
       ec2_group:
@@ -121,12 +136,12 @@
         rules:
           - proto: tcp
             ports: 5432
-#            group_name: ans-postgres-tag-sg
+            group_id: "{{postgres_tag_sg}}"
             rule_desc: allow all from postgres tag
         state: present
       register: postgres_sg
 
-    - name: Create postgres security group
+    - name: Update postgres tag security group
       ec2_group:
         name: ans-postgres-tag-sg
         region: "{{ aws_region }}"
@@ -138,8 +153,7 @@
         rules_egress:
           - proto: tcp
             ports: 5432
-#            group_name: ans-postgres-tag-sg
-            rule_desc: allow to postgres
+            group_id: "{{postgres_sg}}"
         state: present
       register: postgres_tag_sg
 
