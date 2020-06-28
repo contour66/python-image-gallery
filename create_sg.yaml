@@ -70,7 +70,7 @@
     - name: debug
       debug: var=secrets_tag_sg
 
-    - name: Update secrets security group
+    - name: Create secrets security group
       ec2_group:
         name: ans-secrets-sg
         region: "{{ aws_region }}"
@@ -84,7 +84,7 @@
             to_port: 65535
             group_id:
               - "{{dev_sg.group_id}}"
-              - "{{secrets_tag_sg.group_id}}"
+#              - "{{secrets_tag_sg.group_id}}"
         state: present
       register: secrets_sg
     - name: debug
