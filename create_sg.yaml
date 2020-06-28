@@ -68,8 +68,6 @@
           Project: 5
         rules:
           - proto: all
-#              - "{{ ans-secrets-tag-sg.
-#              - ans-development-sg
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all from secrets and dev sg's
         state: present
