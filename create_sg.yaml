@@ -56,21 +56,7 @@
         state: present
       register: dev_sg
 
-    - name: Create secrets tag security group
-      ec2_group:
-        name: ans-secrets-tag-sg
-        region: "{{ aws_region }}"
-        description: Secrets tag  security group
-        vpc_id: "{{vpc.vpc.id}}"
-        tags:
-          Name: ans-secrets-tag-sg
-        state: present
-      register: secrets_tag_sg
-
-    - name: debug
-      debug: var=secrets_tag_sg
-
-    - name: Create secrets security group
+ - name: Create secrets security group
       ec2_group:
         name: ans-secrets-sg
         region: "{{ aws_region }}"
@@ -87,6 +73,22 @@
       register: secrets_sg
     - name: debug
       debug: var=secrets_sg
+
+    - name: Create secrets tag security group
+      ec2_group:
+        name: ans-secrets-tag-sg
+        region: "{{ aws_region }}"
+        description: Secrets tag  security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-tag-sg
+        state: present
+      register: secrets_tag_sg
+
+    - name: debug
+      debug: var=secrets_tag_sg
+
+
 
 #
     - name: Update secrets tag security group
