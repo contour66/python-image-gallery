@@ -85,6 +85,8 @@
                 - " {{ secrets_tag_sg.group_id}}"
         state: present
       register: secrets_sg
+    - name: debug
+      debug: var=secrets_sg
 #
     - name: Update secrets tag security group
       ec2_group:

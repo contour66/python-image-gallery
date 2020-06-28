@@ -21,8 +21,8 @@
             gateway_id: "{{ igw.gateway_id }}"
         state: present
       register: public_route_table
-    - name: debug
-      debug: var=public_route_table
+#    - name: debug
+#      debug: var=public_route_table
 
 
 
@@ -39,8 +39,8 @@
             gateway_id: "{{ nat.nat_gateway_id }}"
         state: present
       register: private_nat_route_table_1
-    - name: debug
-      debug: var=private_nat_route_table_1
+#    - name: debug
+#      debug: var=private_nat_route_table_1
 
     - name: Create private route table 2
       ec2_vpc_route_table:
@@ -54,5 +54,5 @@
           - dest: 0.0.0.0/0
             gateway_id: "{{ nat.nat_gateway_id }}"
       register: private_nat_route_table_2
-    - name: debug
-      debug: var=private_nat_route_table_2
+#    - name: debug
+#      debug: var=private_nat_route_table_2
