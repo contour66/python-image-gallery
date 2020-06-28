@@ -1,5 +1,4 @@
 ---
-
 - import_playbook: create_vpc.yaml
 - import_playbook: create_subnets.yaml
 - import_playbook: create_gateways.yaml
@@ -11,5 +10,5 @@
 - import_playbook: create_target_group.yaml
 - import_playbook: create_eip.yaml
 - import_playbook: create_nlb.yaml
-
-#- import_playbook: create_ec2.yaml
+- import_playbook: destory_nlb.yaml
+- import_playbook: destroy_eip.yaml

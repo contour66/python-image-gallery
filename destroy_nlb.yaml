@@ -6,8 +6,8 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - s3_bucket:
-        name: ansible-bucket
-        state: present
-        tags:
-          Name: Ansible S3 bucket
+    name: Destroy the nlb
+    elb_network_lb:
+      name: "{{ans_nlb}}"
+      state: absent
+     register: nlb_destroy
