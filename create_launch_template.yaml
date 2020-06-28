@@ -17,8 +17,8 @@
           enabled: yes
         network_interfaces:
          - device_index: 0
-          associate_public_ip_address: yes
-          groups:
+         associate_public_ip_address: yes
+         groups:
             - "{{postgres_sg.group_id}}"
             - "{{dev_sg.group_id}}"
             - "{{nginx_sg.group_id}}"
