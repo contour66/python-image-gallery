@@ -6,6 +6,6 @@
 - import_playbook: create_route_tables.yaml
 - import_playbook: create_sg.yaml
 - import_playbook: create_nacl.yaml
-- import_playbook: create_s3bucket.yaml
+- import_playbook: create_db.yaml
 
 #- import_playbook: create_ec2.yaml

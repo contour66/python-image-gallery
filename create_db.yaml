@@ -8,7 +8,7 @@
     state: present
     engine: postgres
     storage_encrypted: True
-    db_instance_class: db.t2.medium
+    db_instance_class: db.t2.micrp
     username: "{{ username }}"
     password: "{{ password }}"
     allocated_storage: "{{ allocated_storage }}"
