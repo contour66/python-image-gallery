@@ -56,6 +56,17 @@
         state: present
       register: dev_sg
 
+    - name: Create secrets tag security group
+        ec2_group:
+          name: ans-secrets-tag-sg
+          region: "{{ aws_region }}"
+          description: Secrets tag  security group
+          vpc_id: "{{vpc.vpc.id}}"
+          tags:
+            Name: ans-secrets-tag-sg
+            Project: 5
+          state: present
+        register: secrets_tag_sg
 
     - name: Create secrets security group
       ec2_group:
@@ -66,31 +77,35 @@
         tags:
           Name: ans-secrets-sg
           Project: 5
-        rules_egress: "{{ dev_sg['rules'] }}"
-        rule_desc: allow all from secrets and dev sg's
+        rules_egress:
+            - proto: tcp
+              ports: all
+              group_id:
+                - " {{ dev_sg.group_id}} "
+                - " {{ secrets_tag_sg.group_id}}"
+        rule_desc: allow all ports from secrets and dev sg's
         state: present
       register: secrets_sg
 #
-#    - name: Create secrets tag security group
-#      ec2_group:
-#        name: ans-secrets-tag-sg
-#        region: "{{ aws_region }}"
-#        description: Secrets tag  security group
-#        vpc_id: "{{vpc.vpc.id}}"
-#        tags:
-#          Name: ans-secrets-tag-sg
-#          Project: 5
-#        rules:
-#          - proto: tcp
-#            ports: all
-#            group_id: "{{ ans-development-sg.group_id }}"
-#            rule_desc: allow all from development
-#        rules_egress:
-#          - proto: tcp
-#            ports: all
-##            group_name: ans-secrets-sg
-#        state: present
-#      register: secrets_tag_sg
+    - name: Update secrets tag security group
+      ec2_group:
+        name: ans-secrets-tag-sg
+        region: "{{ aws_region }}"
+        description: Secrets tag  security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-tag-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports: all
+            group_id: "{{ dev_sg.group_id }} "
+        rules_egress:
+          - proto: tcp
+            ports: all
+            group_id: " {{ dev_sg.group_id}} "
+        state: present
+      register: secrets_tag_sg
 
     - name: Create postgres security group
       ec2_group:
