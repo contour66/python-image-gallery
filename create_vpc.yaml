@@ -114,7 +114,6 @@
         region: "{{ aws_region }}"
         tags:
           Name: Ansible-public-rt
-          Project: 5
         subnets:
           - "{{ public_subnet_1.subnet.id}}"
           - "{{ public_subnet_2.subnet.id}}"
@@ -150,7 +149,6 @@
         region: "{{ aws_region }}"
         tags:
           Name: Ansible-private-rt-2
-          Project: 5
         subnets:
           - "{{ private_subnet_2.subnet.id}}"
         routes:
