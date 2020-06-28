@@ -24,4 +24,30 @@
       state: present
 
 
+  - name: Create ACl for public subnets
+    ec2_vpc_nacl:
+      vpc_id: "{{ vpc.vpc.id }}"
+      name: ans-public-acl
+      region: "us-west-1"
+      subnets:
+        - "{{ public_subnet_1.subnet.id }}"
+        - "{{ public_subnet_2.subnet.id }}"
+      tags:
+        Name: Ansible public ACL
+        Project: 5
+      ingress:
+          # rule no, protocol, allow/deny, cidr, icmp_type, icmp_code,
+          #                                             port from, port to
+          - [200, 'tcp', 'allow', '0.0.0.0/0', null, null, 22, 22]
+          - [100, 'tcp', 'allow', '68.105.121.53/32', null, null, 5000, 5000]
+          - [300, 'tcp', 'allow', '0.0.0.0/0', null, null, 1024, 65535]
+          - [400, 'tcp', 'allow', '0.0.0.0/0', null, null, 443, 443]
+          - [500, 'tcp', 'allow', '0.0.0.0/0, null, null, 80, 80]
+      egress:
+          - [200, 'tcp', 'allow', '0.0.0.0/0', null, null, 22, 22]
+          - [100, 'udp', 'allow', '0.0.0.0/0', null, null, 53, 53]
+          - [300, 'tcp', 'allow', '0.0.0.0/0', null, null, 1024, 65535]
+          - [400, 'tcp', 'allow', '0.0.0.0/0', null, null, 443, 443]
+          - [500, 'tcp', 'allow', '0.0.0.0/0, null, null, 80, 80]
+      state: present
 

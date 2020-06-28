@@ -69,8 +69,8 @@
         state: present
       register: secrets_tag_sg
 
-    - name: debug
-      debug: var=secrets_tag_sg
+#    - name: debug
+#      debug: var=secrets_tag_sg
 
     - name: Create secrets security group
       ec2_group:
@@ -94,8 +94,8 @@
             cidr_ip: 0.0.0.0/0
         state: present
       register: secrets_sg
-    - name: debug
-      debug: var=secrets_sg
+#    - name: debug
+#      debug: var=secrets_sg
 
 
     - name: Update secrets tag security group
