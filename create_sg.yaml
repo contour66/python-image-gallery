@@ -68,6 +68,7 @@
           Project: 5
         rules:
           - proto: tcp
+            ports: all
             group_name:
               - ans-secrets-tag-sg
               - ans-development-sg
