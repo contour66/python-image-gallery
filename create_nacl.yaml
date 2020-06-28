@@ -48,6 +48,6 @@
           - [100, 'udp', 'allow', '0.0.0.0/0', null, null, 53, 53]
           - [300, 'tcp', 'allow', '0.0.0.0/0', null, null, 1024, 65535]
           - [400, 'tcp', 'allow', '0.0.0.0/0', null, null, 443, 443]
-          - [500, 'tcp', 'allow', '0.0.0.0/0, null, null, 80, 80]
+          - [500, 'tcp', 'allow', '0.0.0.0/0', null, null, 80, 80]
       state: present
 
