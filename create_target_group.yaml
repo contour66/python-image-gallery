@@ -6,7 +6,8 @@
     group/aws:
       region: "{{ aws_region }}"
   tasks:
-    - elb_target_group:
+    - name: Create elb target group
+      elb_target_group:
         name: ans-tg
         protocol: tcp
         port: 80
