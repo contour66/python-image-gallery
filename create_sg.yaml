@@ -105,7 +105,8 @@
             group_id: "{{secrets_sg.group_id}}"
         rules_egress:
           - proto: tcp
-            ports: all
+            from_port: 1
+            to_port: 65535
             group_id: "{{dev_sg.group_id}}"
         state: present
       register: secrets_tag_sg
@@ -135,7 +136,8 @@
           Project: 5
         rules:
           - proto: tcp
-            ports: 5432
+            from_port: 5432
+            to_port: 5432
             group_id: "{{postgres_tag_sg}}"
             rule_desc: allow all from postgres tag
         state: present
@@ -152,7 +154,8 @@
           Project: 5
         rules_egress:
           - proto: tcp
-            ports: 5432
+            from_port: 5432
+            to_port: 5432
             group_id: "{{postgres_sg}}"
         state: present
       register: postgres_tag_sg
