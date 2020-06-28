@@ -67,7 +67,9 @@
           Name: ans-secrets-sg
           Project: 5
         rules:
-          - proto: all
+          - proto: tcp
+            - group_id: "{{ ans-development-sg.group_id }}"
+#              - ans-development-sg
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all from secrets and dev sg's
         state: present
