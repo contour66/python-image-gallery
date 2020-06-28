@@ -1,10 +1,10 @@
 - hosts: localhost
   gather_facts: no
-  vars:
-    aws_region: "us-west-1"
-  module_defaults:
-    group/aws:
-      region: "{{ aws_region }}"
+#  vars:
+#    aws_region: "us-west-1"
+#  module_defaults:
+#    group/aws:
+#      region: "{{ aws_region }}"
   tasks:
 
     - name: Create public subnet 1
