@@ -100,7 +100,7 @@
       ec2_vpc_nat_gateway:
         subnet_id: "{{ public_subnet_1.subnet.id }}"
         region: "{{ aws_region }}"
-        if_exist_do_not_create: yes
+        if_exist_do_not_create: true
         state: present
       register: nat
     - name: debug
