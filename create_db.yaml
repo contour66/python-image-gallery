@@ -1,0 +1,14 @@
+
+
+
+
+- name: Create a DB instance using the default AWS KMS encryption key
+  rds_instance:
+    id: ans-db
+    state: present
+    engine: postgres
+    storage_encrypted: True
+    db_instance_class: db.t2.micrp
+    username: "{{ username }}"
+    password: "{{ password }}"
+    allocated_storage: "{{ allocated_storage }}"

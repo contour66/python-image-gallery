@@ -1,0 +1,63 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    index_file: developer/var/www/html/index.html
+    apache_user: apache
+    apache_group: apache
+  tasks:
+    - name: Install emacs-nox
+      package:
+        name: emacs-nox
+        state: present
+        update_cache: yes
+    - name: Install python3
+      package:
+        name: python3
+        state: present
+        update_cache: yes
+    - name: Install python3-devel
+      package:
+        name: python3-devel
+        state: present
+        update_cache: yes
+    - name: Install python-pip
+      package:
+        name: python-pip
+        state: present
+        update_cache: yes
+    - name: Install boto
+      pip:
+        name: boto
+        state: present
+    - name: Install boto3
+      pip:
+        name: boto3
+        state: present
+    - name: Install boto3
+        pip:
+        name: botocore
+        state: present
+    - name: Install nano
+      package:
+        name: nano
+        state: present
+    - name: Install apache
+      package:
+        name: httpd
+        state: present
+    - name: Copy index.html
+      copy:
+        src: "{{ index_file }}"
+        dest: /var/www/html/index.html
+        owner: "{{ apache_user }}"
+        group: "{{ apache_group }}"
+    - name: Start apache
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+
+
+

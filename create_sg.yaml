@@ -1,0 +1,170 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
+  tasks:
+
+    - name: Create nginx servers security group
+      ec2_group:
+        name: ans-nginx-servers-sg
+        region: "{{ aws_region }}"
+        description: Nginx servers security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-nginx-servers-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports: 80
+            cidr_ip:
+              - 68.105.121.53/32
+              - 24.196.25.139/32
+            rule_desc: allow inbound ips on port 80
+          - proto: tcp
+            ports:
+              - 443
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all inbound to ports 22 and 443
+        state: present
+      register: nginx_sg
+
+    - name: Create development security group
+      ec2_group:
+        name: ans-development-sg
+        region: "{{ aws_region }}"
+        description: Development security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-development-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            ports:
+              - 80
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow inbound ips on port 80
+          - proto: tcp
+            ports:
+              - 5000
+            cidr_ip: 68.105.121.53/32
+            rule_desc: allow all inbound from personal ip to 5000
+        state: present
+      register: dev_sg
+
+
+
+    - name: Create secrets tag security group
+      ec2_group:
+        name: ans-secrets-tag-sg
+        region: "{{ aws_region }}"
+        description: Secrets tag  security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-tag-sg
+        state: present
+      register: secrets_tag_sg
+
+#    - name: debug
+#      debug: var=secrets_tag_sg
+
+    - name: Create secrets security group
+      ec2_group:
+        name: ans-secrets-sg
+        region: "{{ aws_region }}"
+        description: Secrets security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-sg
+        rules:
+          - proto: tcp
+            from_port: 1
+            to_port: 65535
+            group_id:
+              - "{{dev_sg.group_id}}"
+              - "{{secrets_tag_sg.group_id}}"
+        rules_egress:
+          - proto: tcp
+            from_port: 1
+            to_port: 65535
+            cidr_ip: 0.0.0.0/0
+        state: present
+      register: secrets_sg
+#    - name: debug
+#      debug: var=secrets_sg
+
+
+    - name: Update secrets tag security group
+      ec2_group:
+        name: ans-secrets-tag-sg
+        region: "{{ aws_region }}"
+        description: Secrets tag  security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-tag-sg
+        rules:
+          - proto: tcp
+            from_port: 1
+            to_port: 65535
+            group_id: "{{dev_sg.group_id}}"
+        rules_egress:
+          - proto: tcp
+            from_port: 1
+            to_port: 65535
+            group_id: "{{secrets_sg.group_id}}"
+        state: present
+      register: secrets_tag_sg
+
+
+
+    - name: Create postgres tag security group
+      ec2_group:
+        name: ans-postgres-tag-sg
+        region: "{{ aws_region }}"
+        description: Postgres tag security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-postgres-tag-sg
+          Project: 5
+        state: present
+      register: postgres_tag_sg
+
+
+    - name: Create postgres security group
+      ec2_group:
+        name: ans-postgres-sg
+        region: "{{ aws_region }}"
+        description: Postgres security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-postgres-sg
+          Project: 5
+        rules:
+          - proto: tcp
+            from_port: 5432
+            to_port: 5432
+            group_id: "{{postgres_tag_sg.group_id}}"
+        state: present
+      register: postgres_sg
+
+    - name: Update postgres tag security group
+      ec2_group:
+        name: ans-postgres-tag-sg
+        region: "{{ aws_region }}"
+        description: Postgres tag security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-postgres-tag-sg
+          Project: 5
+        rules_egress:
+          - proto: tcp
+            from_port: 5432
+            to_port: 5432
+            group_id: "{{postgres_sg.group_id}}"
+        state: present
+      register: postgres_tag_sg
+
