@@ -87,6 +87,10 @@
             group_id:
               - "{{dev_sg.group_id}}"
               - "{{secrets_tag_sg.group_id}}"
+        rules_egress:
+          - proto: tcp
+            from_port: 1
+            to_port: 65535
         state: present
       register: secrets_sg
     - name: debug
