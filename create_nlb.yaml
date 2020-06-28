@@ -21,7 +21,7 @@
         listeners:
           - protocol: TLS
             Certificates:
-              CertificatiteArn:	"arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
+             - CertificatiteArn:	"arn:aws:acm:us-west-1:384025033813:certificate/4a96a1ba-ce2f-4442-832a-0f788a02712f"
             Port: 443
             DefaulatActions:
               - Type: Forward
