@@ -20,7 +20,6 @@
     - name: Create NAT gateway
       ec2_vpc_nat_gateway:
         subnet_id: "{{ public_subnet_1.subnet.id }}"
-        wait: yes
         region: "{{ aws_region }}"
         if_exist_do_not_create: yes
         state: present
