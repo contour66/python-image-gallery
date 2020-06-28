@@ -79,7 +79,6 @@
           Project: 5
         rules_egress:
             - proto: tcp
-              ports: all
               group_id:
                 - " {{ dev_sg.group_id}} "
                 - " {{ secrets_tag_sg.group_id}}"
