@@ -74,43 +74,43 @@
     - name: debug
       debug: var=secrets_sg
 
-    - name: Create secrets tag security group
-      ec2_group:
-        name: ans-secrets-tag-sg
-        region: "{{ aws_region }}"
-        description: Secrets tag  security group
-        vpc_id: "{{vpc.vpc.id}}"
-        tags:
-          Name: ans-secrets-tag-sg
-        state: present
-      register: secrets_tag_sg
-
-    - name: debug
-      debug: var=secrets_tag_sg
-
-
-
+#    - name: Create secrets tag security group
+#      ec2_group:
+#        name: ans-secrets-tag-sg
+#        region: "{{ aws_region }}"
+#        description: Secrets tag  security group
+#        vpc_id: "{{vpc.vpc.id}}"
+#        tags:
+#          Name: ans-secrets-tag-sg
+#        state: present
+#      register: secrets_tag_sg
 #
-    - name: Update secrets tag security group
-      ec2_group:
-        name: ans-secrets-tag-sg
-        region: "{{ aws_region }}"
-        description: Secrets tag  security group
-        vpc_id: "{{vpc.vpc.id}}"
-        tags:
-          Name: ans-secrets-tag-sg
-        rules:
-          - proto: tcp
-            from_port: 1
-            to_port: 65535
-            group_id: "{{dev_sg.group_id}}"
-        rules_egress:
-          - proto: tcp
-            from_port: 1
-            to_port: 65535
-            group_id: "{{secrets_sg.group_id}}"
-        state: present
-      register: secrets_tag_sg
+#    - name: debug
+#      debug: var=secrets_tag_sg
+#
+#
+#
+##
+#    - name: Update secrets tag security group
+#      ec2_group:
+#        name: ans-secrets-tag-sg
+#        region: "{{ aws_region }}"
+#        description: Secrets tag  security group
+#        vpc_id: "{{vpc.vpc.id}}"
+#        tags:
+#          Name: ans-secrets-tag-sg
+#        rules:
+#          - proto: tcp
+#            from_port: 1
+#            to_port: 65535
+#            group_id: "{{dev_sg.group_id}}"
+#        rules_egress:
+#          - proto: tcp
+#            from_port: 1
+#            to_port: 65535
+#            group_id: "{{secrets_sg.group_id}}"
+#        state: present
+#      register: secrets_tag_sg
 
 
 
