@@ -15,9 +15,6 @@
         iam_instance_profile: image-gallery-server-role
         monitoring:
           enabled: yes
-        tags:
-          Name: Ansible Launch Template
-          Projet: 5
         network_interfaces:
             - device_index: 0
             - associate_public_ip_address: yes
