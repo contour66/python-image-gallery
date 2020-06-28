@@ -18,13 +18,13 @@
         tags:
           Name: Ansible Launch Template
           Projet: 5
-        network_interfaces:
-          device_index: 0
-          associate_public_ip_address: yes
-          groups:
-            - "{{postgres_sg.group_id}}"
-            - "{{dev_sg.group_id}}"
-            - "{{nginx_sg.group_id}}"
+        - network_interfaces:
+            device_index: 0
+            associate_public_ip_address: yes
+            groups:
+              - "{{postgres_sg.group_id}}"
+              - "{{dev_sg.group_id}}"
+              - "{{nginx_sg.group_id}}"
         user_data: "{{ lookup('file', './ec2-scripts/ec2-prod-bootstrap.sh') | b64encode }}"
         state: present
       register: ans_launch_template
