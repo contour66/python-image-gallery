@@ -139,7 +139,6 @@
             from_port: 5432
             to_port: 5432
             group_id: "{{postgres_tag_sg}}"
-            rule_desc: allow all from postgres tag
         state: present
       register: postgres_sg
 
