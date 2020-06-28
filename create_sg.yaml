@@ -67,8 +67,9 @@
           Project: 5
         state: present
       register: secrets_tag_sg
+
     - name: debug
-      debug: vars=secrets_tag_sg
+      debug: var=secrets_tag_sg
 
     - name: Create secrets security group
       ec2_group:
