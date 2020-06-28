@@ -105,24 +105,24 @@
       register: secrets_tag_sg
 
     - name: Update secrets security group
-        ec2_group:
-          name: ans-secrets-sg
-          region: "{{ aws_region }}"
-          description: Secrets security group
-          vpc_id: "{{vpc.vpc.id}}"
-          tags:
-            Name: ans-secrets-sg
-          rules_egress:
-            - proto: tcp
-              from_port: 1
-              to_port: 65535
-              group_id:
-                - "{{dev_sg.group_id}}"
-                - "{{secrets_tag_sg.group_id}}"
-          state: present
-        register: secrets_sg
-          - name: debug
-            debug: var=secrets_sg
+      ec2_group:
+        name: ans-secrets-sg
+        region: "{{ aws_region }}"
+        description: Secrets security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-sg
+        rules_egress:
+          - proto: tcp
+            from_port: 1
+            to_port: 65535
+            group_id:
+              - "{{dev_sg.group_id}}"
+              - "{{secrets_tag_sg.group_id}}"
+        state: present
+      register: secrets_sg
+        - name: debug
+          debug: var=secrets_sg
 
 
     - name: Create postgres tag security group
