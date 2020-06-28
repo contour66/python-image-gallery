@@ -82,8 +82,8 @@
               from_port: 1
               to_port: 65535
               group_id:
-                - " {{ dev_sg.group_id}} "
-                - " {{ secrets_tag_sg.group_id}}"
+                - " {{dev_sg.group_id}} "
+                - " {{secrets_tag_sg.group_id}}"
         state: present
       register: secrets_sg
     - name: debug
