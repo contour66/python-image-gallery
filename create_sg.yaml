@@ -64,7 +64,7 @@
         vpc_id: "{{vpc.vpc.id}}"
         tags:
           Name: ans-secrets-sg
-        rules_egress:
+        rules:
           - proto: tcp
             from_port: 1
             to_port: 65535
