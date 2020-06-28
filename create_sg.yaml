@@ -57,16 +57,16 @@
       register: dev_sg
 
     - name: Create secrets tag security group
-        ec2_group:
-          name: ans-secrets-tag-sg
-          region: "{{ aws_region }}"
-          description: Secrets tag  security group
-          vpc_id: "{{vpc.vpc.id}}"
-          tags:
-            Name: ans-secrets-tag-sg
-            Project: 5
-          state: present
-        register: secrets_tag_sg
+      ec2_group:
+        name: ans-secrets-tag-sg
+        region: "{{ aws_region }}"
+        description: Secrets tag  security group
+        vpc_id: "{{vpc.vpc.id}}"
+        tags:
+          Name: ans-secrets-tag-sg
+          Project: 5
+        state: present
+      register: secrets_tag_sg
 
     - name: Create secrets security group
       ec2_group:
