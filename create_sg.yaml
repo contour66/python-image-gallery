@@ -83,7 +83,6 @@
               group_id:
                 - " {{ dev_sg.group_id}} "
                 - " {{ secrets_tag_sg.group_id}}"
-        rule_desc: allow all ports from secrets and dev sg's
         state: present
       register: secrets_sg
 #
