@@ -13,7 +13,7 @@
       register: nlb_eip_1
 
     - name: Create eip 2 for load balancer
-        ec2_eip:
-          state: present
-          region: "{{ aws_region + 'c'}}"
-        register: nlb_eip_2
+      ec2_eip:
+        state: present
+        region: "{{ aws_region + 'c'}}"
+      register: nlb_eip_2
