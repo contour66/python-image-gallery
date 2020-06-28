@@ -64,7 +64,6 @@
         vpc_id: "{{vpc.vpc.id}}"
         tags:
           Name: ans-secrets-tag-sg
-          Project: 5
         state: present
       register: secrets_tag_sg
 
@@ -79,14 +78,13 @@
         vpc_id: "{{vpc.vpc.id}}"
         tags:
           Name: ans-secrets-sg
-          Project: 5
         rules_egress:
             - proto: tcp
               from_port: 1
               to_port: 65535
               group_id:
                 - "{{dev_sg.group_id}}"
-                - "{{secrets_tag_sg_id}}"
+                - "{{secrets_tag_sg_.group_id}}"
         state: present
       register: secrets_sg
 #    - name: debug
@@ -100,7 +98,6 @@
         vpc_id: "{{vpc.vpc.id}}"
         tags:
           Name: ans-secrets-tag-sg
-          Project: 5
         rules:
           - proto: tcp
             from_port: 1
