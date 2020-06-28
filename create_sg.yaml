@@ -69,8 +69,7 @@
         rules:
           - proto: tcp
             ports: all
-            group_name:
-              - ans-secrets-tag-sg
+              - "{{ ans-secrets-tag-sg.
               - ans-development-sg
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all from secrets and dev sg's
@@ -89,12 +88,12 @@
         rules:
           - proto: tcp
             ports: all
-            group_name: ans-development-sg
+            group_id: "{{ ans-development-sg.group_id }}"
             rule_desc: allow all from development
         rules_egress:
           - proto: tcp
             ports: all
-            group_name: ans-secrets-sg
+#            group_name: ans-secrets-sg
         state: present
       register: secrets_tag_sg
 
@@ -110,7 +109,7 @@
         rules:
           - proto: tcp
             ports: 5432
-            group_name: ans-postgres-tag-sg
+#            group_name: ans-postgres-tag-sg
             rule_desc: allow all from postgres tag
         state: present
       register: postgres_sg
@@ -127,7 +126,7 @@
         rules_egress:
           - proto: tcp
             ports: 5432
-            group_name: ans-postgres-tag-sg
+#            group_name: ans-postgres-tag-sg
             rule_desc: allow to postgres
         state: present
       register: postgres_tag_sg
