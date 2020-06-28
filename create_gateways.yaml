@@ -21,8 +21,6 @@
       ec2_vpc_nat_gateway:
         subnet_id: "{{ public_subnet_1.subnet.id }}"
         wait: yes
-        tags:
-          Name: Ansible-ng
         region: "{{ aws_region }}"
         if_exist_do_not_create: yes
         state: present
