@@ -1,0 +1,18 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    aws_region: "us-west-1"
+  module_defaults:
+    group/aws:
+      region: "{{ aws_region }}"
+  tasks:
+    - elb_target_group:
+        name: ans-tg
+        protocol: tcp
+        port: 80
+        vpc_id: "{{vpc.vpc.id}}"
+        target_type: instance
+        state: present
+        wait_timeout: 300
+        wait: True
+      register: ans_tg

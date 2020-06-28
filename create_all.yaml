@@ -8,5 +8,6 @@
 - import_playbook: create_nacl.yaml
 #- import_playbook: create_db.yaml
 - import_playbook: create_launch_template.yaml
+- import_playbook: create_target_group.yaml
 
 #- import_playbook: create_ec2.yaml
