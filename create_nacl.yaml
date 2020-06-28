@@ -1,0 +1,27 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Create ACl for private subnets
+    ec2_vpc_nacl:
+      vpc_id: "{{ vpc.vpc.id }}"
+      name: ans-private-acl
+      region: "us-west-1"
+      subnets:
+        - "{{ private_subnet_1.subnet.id }}"
+        - "{{ private_subnet_2.subnet.id }}"
+      tags:
+        Name: Ansible private ACL
+        Project: 5
+      ingress:
+          # rule no, protocol, allow/deny, cidr, icmp_type, icmp_code,
+          #                                             port from, port to
+          - [100, 'tcp', 'allow', '10.0.0.0/16', null, null, 5432, 5432]
+          - [200, 'tcp', 'allow', '10.0.0.0/16', null, null, 443, 443]
+          - [300, 'tcp', 'allow', '10.0.0.0/16', null, null, 1024, 65535]
+      egress:
+          - [200, 'tcp', 'allow', '10.0.0.0/16', null, null, 443, 443]
+          - [300, 'tcp', 'allow', '10.0.0.0/16', null, null, 1024, 65535]
+      state: present
+
+
+
