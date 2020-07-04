@@ -8,8 +8,7 @@ from botocore.exceptions import ClientError
 
 
 def get_secret_image_gallery():
-
-    secret_name = "sec-ig-project-user-ig"
+    secret_name = "sec-python-app-ig"
     region_name = "us-west-1"
 
     # Create a Secrets Manager client
@@ -55,7 +54,7 @@ def get_secret_image_gallery():
             secret = get_secret_value_response['SecretString']
         else:
             decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
-            
+
     if secret is None:
         return decoded_binary_secret
     else:
