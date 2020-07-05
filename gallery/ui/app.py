@@ -8,7 +8,7 @@ from flask import request
 from flask import render_template
 from functools import wraps
 from ..tools.s3 import upload_file
-from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
+from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw, get_session_name
 from .flask_secrets import get_secret_flask_session
 
 app = Flask(__name__)
@@ -69,6 +69,7 @@ def debugSession():
 def current_user():
     result = ""
     for key, value in session.items():
+        get_session_name(str(value))
         return str(value)
 
 

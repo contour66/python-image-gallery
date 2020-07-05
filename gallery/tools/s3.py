@@ -1,6 +1,7 @@
 import logging
 import boto3
 from botocore.exceptions import ClientError
+from app import curent_user
 
 
 def create_bucket(bucket_name, region=None):
@@ -50,10 +51,12 @@ def put_object(bucket_name, key, value):
     return True
 
 
-def upload_file(file_name, bucket_name, username):
+def upload_file(file_name, bucket_name):
     try:
         s3_client = boto3.client('s3')
-        s3_client.upload_file(file_name, Bucket=bucket_name, username)
+        # name = current_user()
+        s3_client.upload_file(file_name, Bucket=bucket_name)
+
     except ClientError as e:
         logging.error(e)
         return False
