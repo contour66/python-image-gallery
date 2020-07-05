@@ -77,7 +77,7 @@ def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
-    list = list_objects('au.zt.image-gallery', 'dog', 'dog')
+    list = list_objects('au.zt.image-gallery', 'dog')
     for v in list:
         print(v)
 
