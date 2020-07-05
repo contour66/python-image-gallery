@@ -140,7 +140,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-# def get_name(username):
+# def get_name(username):e
 #     res = execute('select from users where username;')
 #     for row in res:
 #         print(row)
