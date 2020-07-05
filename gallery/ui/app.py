@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, session, redirect, url_for, request
+
 from flask import request
 from flask import render_template
 from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists 
@@ -7,11 +8,29 @@ from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, usernam
 
 app = Flask(__name__)
 
+@app.route('/storeStuff')
+def storeStuff():
+    session['something'] = 22
+    session['other thing'] = 'bob'
+
+@app.route(/debugSession')
+def debugSession():
+    result = ""
+    for key,value in session.items():
+        result += key + "->" + str(value)+"<br/>"
+    return result
+
+@app.route('/login')
+def login():
+    # data = print_names()
+    return render_template('login.html', results=data)
+
 
 @app.route('/admin')
 def adminPage():
     data = print_names()
     return render_template('admin.html', results=data)
+
 
 
 @app.route('/admin/adduser')
