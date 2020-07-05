@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 BUCKET = "au.zt.image-gallery"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -43,7 +43,7 @@ def upload():
 
         f = request.files['file']
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-        upload_file(f"uploads/{f.filename}", BUCKET, current_user())
+        upload_file(f"./uploads/{f.filename}", BUCKET, current_user())
 
         #
         # filename = secure_filename(file.filename)
