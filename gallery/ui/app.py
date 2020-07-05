@@ -4,6 +4,7 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flask import render_template
+from functools import wraps
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
 from .flask_secrets import get_secret_flask_session
 
@@ -22,6 +23,13 @@ def debugSession():
 def check_admin():
     return 'username' in session and session['username'] == 'dog'
 
+def requires_admin(view):
+    @wraps(view)
+    def decorated(**kwargs):
+        if not check_admin():
+            return redirect('/login')
+        view(**kwargs)
+    return decorated
 
 @app.route('/admin/users')
 def users():
@@ -57,6 +65,7 @@ def login():
 
 
 @app.route('/admin')
+@requires_admin
 def adminPage():
     data = print_names()
     return render_template('admin.html', results=data)
