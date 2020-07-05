@@ -30,7 +30,6 @@ def requires_admin(view):
         if not check_admin():
             return redirect('/login')
         return view(**kwargs)
-
     return decorated
 
 
