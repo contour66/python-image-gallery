@@ -39,14 +39,15 @@ def storage():
 
 @app.route("/upload", methods=['POST'])
 def upload():
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        # return redirect(url_for('uploaded_file',
-        # f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-        upload_file(filename, BUCKET, current_user())
+    if request.method == 'POST':
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # return redirect(url_for('uploaded_file',
+            # f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+            upload_file({app.config['UPLOAD_FOLDER'],filename}, BUCKET, current_user())
 
-        return redirect("/storage")
+            return redirect("/storage")
 
 
 # @app.route("/download/<filename>", methods=['GET'])
