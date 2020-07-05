@@ -13,7 +13,7 @@ from .flask_secrets import get_secret_flask_session
 
 app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = ".uploads"
 BUCKET = "au.zt.image-gallery"
 
 
