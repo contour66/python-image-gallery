@@ -81,6 +81,7 @@ def username_exists(username):
         connect()
         cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
+        print(cursor.fetchone)
         return cursor.fetchone()
     finally:
         connection.close()
