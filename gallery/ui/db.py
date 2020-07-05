@@ -81,7 +81,10 @@ def username_exists(username):
         connect()
         cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
-        return cursor.fetchone()[0]
+        data = cursor.fetchall()
+        for r in data:
+            result.append(User(r[0], r[1], r[2])
+        return result
     finally:
         connection.close()
 
