@@ -4,7 +4,7 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flask import render_template
-from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists
+from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
 
 app = Flask(__name__)
 app.secret_key = b'sdfsfert344'
@@ -34,7 +34,7 @@ def invalidLogin():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = username_exists(request.form["username"])
+        user = get_user(request.form["username"])
         if user is None or user[1] != request.form['password']:
             return redirect('/invalidLogin')
         else:

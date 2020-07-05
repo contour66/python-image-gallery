@@ -89,20 +89,18 @@ def username_exists(username):
         connection.close()
 
 
-# def get_user(username):
-#     try:
-#         user_query = '''
-#             select (
-#                 username, password, full_name from users where username = %s")
-#         connect()
-#         cursor = connection.cursor()
-#         cursor.execute(user_query, (username,))
-#         if row is None:
-#             return None
-#         else:
-#             return User(row[0], row[1], row[2])
-#     finally:
-#         connection.close()
+def get_user(username):
+    try:
+        connect()
+        cursor = connection.cursor()
+        search = cursor.execute('select username, password, full_name from users where username = %s', (username,))
+        row = search.fetchone()
+        if row is None:
+            return None
+        else:
+            return User(row[0], row[1], row[2])
+    finally:
+        connection.close()
 
 
 def add_user_ui(username, password, fullname):
