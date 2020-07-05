@@ -74,47 +74,35 @@ def username_exists(username):
     try:
         exists_query = '''
         select exists (
-            select 1
+            select 1, 2, 3
             from users
             where username = %s
         )'''
         connect()
         cursor = connection.cursor()
-        users = ();
         cursor.execute(exists_query, (username,))
-        data = cursor.fetchall()
-        for r in data:
-            data.append(users(r[0], r[1], r[2]))
-        print(data)
-        return data
-    finally:
-        connection.close()
-
-
-def fetch_one():
-    try:
-        connect()
-        cursor = connection.cursor()
-        cursor.execute(user_query, (username,))
-        for t in cursor.fetachall():
-            result.append(User(t[0], t[1], t[2]))
-        return result
+        return cursor.fetchone()
     finally:
         connection.close()
 
 
 # def get_user(username):
 #     try:
-#         user_query = "select username, password, full_name from users where username = %s")
+#         user_query = '''
+#             select (
+#                 username, password, full_name from users where username = %s")
 #         connect()
 #         cursor = connection.cursor()
 #         cursor.execute(user_query, (username,))
 #         if row is None:
 #             return None
 #         else:
-#             return username_exists(username)
+#             return User(row[0], row[1], row[2])
 #     finally:
 #         connection.close()
+
+
+
 
 
 def add_user_ui(username, password, fullname):
@@ -148,7 +136,6 @@ def edit_user_ui(username, password, fullname):
 
 def main():
     print("name")
-
 
 if __name__ == '__main__':
     main()
