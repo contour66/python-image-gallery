@@ -81,7 +81,7 @@ def main():
     for v, info in list.items():
         print(v)
         for key in info:
-            print(key + ": " + info[key])
+            print(str(key + ": " + info[key]))
 
 
 if __name__ == '__main__':
