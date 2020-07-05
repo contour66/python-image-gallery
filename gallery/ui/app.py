@@ -12,16 +12,8 @@ app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
 
 
-@app.route('/debugSession')
-def debugSession():
-    result = ""
-    for key, value in session.items():
-        result += key + "->" + str(value) + "<br/>"
-    return result
-
-
 def check_admin():
-    return 'username' in session and session['username'] == 'ztauburn'
+    return 'username' in session and session['username'] == 'ztauburn', 'username' in session and session['username'] == 'dog'
 
 
 def requires_admin(view):
@@ -33,14 +25,25 @@ def requires_admin(view):
     return decorated
 
 
+@app.route('/debugSession')
+def debugSession():
+    result = ""
+    for key, value in session.items():
+        result += key + "->" + str(value) + "<br/>"
+    return result
+
+
+
 @app.route('/admin/users')
+@requires_admin
 def users():
-    if not check_admin():
-        return redirect('/login')
-    return render_template(adminPage())
+    data = print_names()
+    return render_template('admin.html', results=data)
+    # return render_template(adminPage())
 
 
 @app.route('/inc')
+@requires_admin
 def inc():
     if 'value' not in session:
         session['value'] = 0
@@ -74,11 +77,13 @@ def adminPage():
 
 
 @app.route('/admin/adduser')
+@requires_admin
 def user_form():
     return render_template('adduser.html')
 
 
 @app.route('/admin/useradded', methods=['POST'])
+@requires_admin
 def add_user():
     username = request.form['username']
     password = request.form['password']
@@ -91,17 +96,20 @@ def add_user():
 
 
 @app.route('/admin/deleteUser/<username>', methods=['POST'])
+@requires_admin
 def delete_user(username):
     delete_user_ui(username)
     return '<h1>User ' + username + ' has been deleted. <a href="/admin"> HOME</a></h1> '
 
 
 @app.route('/admin/edituser/<username>')
+@requires_admin
 def edit_form(username):
     return render_template('edituser.html', username=username)
 
 
 @app.route('/admin/useredited', methods=['POST'])
+@requires_admin
 def edit_user():
     username = request.form['username']
     password = request.form['password']
