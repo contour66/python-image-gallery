@@ -7,7 +7,7 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from functools import wraps
-from ..tools.s3 import upload_file, put_object
+from ..tools.s3 import upload_file, put_object, list_objects
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
 from werkzeug.utils import secure_filename
@@ -36,8 +36,11 @@ def storage():
     # contents = list_files("laskdrive")
     return render_template('upload.html')
 
+@app.route("/" + current_user() + "/my-images", methods=['GET'])
+def view_images():
+    list_objects(BUCKET_NAME, current_user())
 
-@app.route("/uploaded", methods=['POST', 'GET'])
+@app.route("/uploaded", methods=['POST'])
 def upload_image():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -56,7 +59,8 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
-            return redirect('/upload')
+            return redirect(view_images())
+
 
 
 # @app.route("/download/<filename>", methods=['GET'])
