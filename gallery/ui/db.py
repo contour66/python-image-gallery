@@ -95,7 +95,7 @@ def fetch_one():
     finally:
         connection.close()
 
-def get_user(self, username):
+def get_user(username):
     try:
         user_query = str("select username, password, full_name from users where username = %s")
         connect()

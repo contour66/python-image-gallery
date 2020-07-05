@@ -4,37 +4,37 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flask import render_template
-from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
-
-
+from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
 
 app = Flask(__name__)
 app.secret_key = b'sdfsfert344'
 
 
-
 @app.route('/debugSession')
 def debugSession():
     result = ""
-    for key,value in session.items():
-        result += key + "->" + str(value)+"<br/>"
+    for key, value in session.items():
+        result += key + "->" + str(value) + "<br/>"
     return result
+
 
 @app.route('/inc')
 def inc():
     if 'value' not in session:
         session['value'] = 0
     session['value'] = session['value'] + 1
-    return  "<h1>" + str(session['value']) + "</h1>"
+    return "<h1>" + str(session['value']) + "</h1>"
+
 
 @app.route('/invalidLogin')
 def invalidLogin():
     return "Invalid"
 
-@app.route('/login', methods=['GET','POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = get_user().get_user_by_username(request.form["username"])
+        user = get_user(request.form["username"])
         if user is None or user.password != request.form['password']:
             return redirect['/invalidLogin']
         else:
@@ -48,7 +48,6 @@ def login():
 def adminPage():
     data = print_names()
     return render_template('admin.html', results=data)
-
 
 
 @app.route('/admin/adduser')
@@ -86,6 +85,3 @@ def edit_user():
     fullname = request.form['fullname']
     edit_user_ui(username, password, fullname)
     return '<h1>User ' + username + ' has been edited. <a href="/admin"> HOME</a></h1> '
-
-
-
