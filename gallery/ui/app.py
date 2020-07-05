@@ -69,12 +69,13 @@ def login():
             return redirect('/invalidLogin')
         else:
             session['username'] = request.form["username"]
-            return main()
+            return redirect('/')
     else:
         return render_template('login.html')
-@app.route('/main')
+
+@app.route('/')
 def main():
-    render_template('main.html')
+    return render_template('main.html')
 
 @app.route('/admin')
 @requires_admin
