@@ -141,7 +141,7 @@ def main():
             elif choice == 3:
                 edit_user()
             elif choice == 6:
-                username_exists(dog)
+                username_exists("dog")
             elif choice == 4:
                 delete_user()
             elif choice == 5:
