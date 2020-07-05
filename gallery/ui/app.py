@@ -14,7 +14,7 @@ def storeStuff():
     session['other thing'] = 'bob'
     return ""
 
-@app.route(/debugSession')
+@app.route('/debugSession')
 def debugSession():
     result = ""
     for key,value in session.items():
