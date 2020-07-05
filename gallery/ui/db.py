@@ -5,6 +5,7 @@ from .secrets import get_secret_image_gallery
 connection = None
 connect()
 cursor = connection.cursor()
+connection.set_session(autocommit=True)
 
 def get_secret():
     jsonString = get_secret_image_gallery()
@@ -61,9 +62,8 @@ def print_names():
 
 def delete_user_ui(username):
     try:
-        connect()
-        cursor = connection.cursor()
-        connection.set_session(autocommit=True)
+
+        # connection.set_session(autocommit=True)
         cursor.execute('delete from users where username = %s', (username,))
         print("\nDeleted\n" + username)
     finally:
@@ -78,8 +78,8 @@ def username_exists(username):
             from users
             where username = %s
         )'''
-        connect()
-        cursor = connection.cursor()
+        # connect()
+        # cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
         return cursor.fetchone()[0]
     finally:
@@ -88,8 +88,8 @@ def username_exists(username):
 def get_user(self, username):
     try:
         user_query = str("select username, password, full_name from users where username = %s")
-        connect()
-        cursor = connection.cursor()
+        # connect()
+        # cursor = connection.cursor()
         cursor.execute(user_query, (username,))
         if row is None:
             return None
@@ -101,9 +101,9 @@ def get_user(self, username):
 
 def add_user_ui(username, password, fullname):
     try:
-        connect()
-        cursor = connection.cursor()
-        connection.set_session(autocommit=True)
+        # connect()
+        # cursor = connection.cursor()
+        # connection.set_session(autocommit=True)
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """,
                 (username, password, fullname))
         print('\nUser: ' + username + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
@@ -115,9 +115,9 @@ def add_user_ui(username, password, fullname):
 # EDITS USER IN TABLE ////////////
 def edit_user_ui(username, password, fullname):
     try:
-        connect()
-        cursor = connection.cursor()
-        connection.set_session(autocommit=True)
+        # connect()
+        # cursor = connection.cursor()
+        # connection.set_session(autocommit=True)
         if password:
             execute("update users set password=%s where username=%s", (password, username,))
             print("\nPassword updated\n")
