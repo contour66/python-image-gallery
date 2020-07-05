@@ -19,7 +19,7 @@ BUCKET = "au.zt.image-gallery"
 
 @app.route("/storage")
 def storage():
-    # contents = list_files("flaskdrive")
+    # contents = list_files("laskdrive")
     return render_template('storage.html')
 
 
