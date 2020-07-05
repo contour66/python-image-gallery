@@ -81,9 +81,6 @@ def username_exists(username):
         connect()
         cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
-        # row = cursor.fetchone()
-        # for t in row:
-        #     print(t[0], t[1], t[2])
         return cursor.fetchone()[0]
     finally:
         connection.close()

@@ -21,7 +21,8 @@ def debugSession():
 
 
 def check_admin():
-    return 'username' in session and session['username'] == 'dog'
+    return 'username' in session and session['username'] == 'ztauburn'
+
 
 def requires_admin(view):
     @wraps(view)
@@ -29,7 +30,9 @@ def requires_admin(view):
         if not check_admin():
             return redirect('/login')
         return view(**kwargs)
+
     return decorated
+
 
 @app.route('/admin/users')
 def users():
