@@ -43,7 +43,7 @@ def upload():
         i
             f = request.files['file']
             f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-            upload_file(f"uploads/{f.filename}", BUCKET)
+            upload_file(f"uploads/{f.filename}", BUCKET, current_user())
 
             #
             # filename = secure_filename(file.filename)
