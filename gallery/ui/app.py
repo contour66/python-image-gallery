@@ -56,7 +56,7 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename)
-            return redirect(url_for('uploaded_file', filename=filename))
+            return redirect(url_for('uploaded', filename=filename))
 
 
 # @app.route("/download/<filename>", methods=['GET'])
