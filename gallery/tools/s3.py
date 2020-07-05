@@ -70,8 +70,8 @@ def list_objects(bucket_name, name):
         # list = list_objects('au.zt.image-gallery', 'dog')['Contents']
         list = result['Contents']
         images = []
-        for e in list:
-            images.append(e['Key'])
+        for i in list:
+            images.append(i['Key'])
     except ClientError as e:
         logging.error(e)
         return None
