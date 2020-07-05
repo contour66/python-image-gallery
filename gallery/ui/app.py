@@ -31,7 +31,7 @@ def inc():
 def invalidLogin():
     return "Invalid"
 
-@app.route('/login', methods=['GET'], ['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
         user = get_user().get_user_by_username(request.form["username"])
