@@ -74,7 +74,7 @@ def username_exists(username):
     try:
         exists_query = '''
         select exists (
-            select 1, 2, 3
+            select 0, 1, 2
             from users
             where username = %s
         )'''
