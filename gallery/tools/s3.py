@@ -79,8 +79,7 @@ def main():
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
     list = list_objects('au.zt.image-gallery', 'dog')
     for v in list:
-        for key in v:
-            print(key)
+        print(v)
 
 
 if __name__ == '__main__':
