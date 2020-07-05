@@ -40,7 +40,7 @@ def storage():
     # contents = list_files("laskdrive")
     return render_template('upload.html')
 
-@app.route("/" + current_user() + "/my-images", methods=['GET'])
+@app.route("/" + current_user() + "/my-images")
 def view_images():
     data = list_objects(BUCKET_NAME, current_user())
     return render_template('images.html', images=data)
