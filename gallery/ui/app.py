@@ -34,9 +34,9 @@ def invalidLogin():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = get_user(request.form["username"])
+        user: None = get_user(request.form["username"])
         if user is None or user.password != request.form['password']:
-            return redirect('/invalidLogin')
+            return redirect('/invalidLogin', str(user.password))
         else:
             session['username'] = request.form["username"]
             return redirect("/admin")
