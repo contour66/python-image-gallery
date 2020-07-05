@@ -93,7 +93,6 @@ def User(username, password, full_name):
     username = username
     password = password
     full_name = full_name
-    return username, password, full_name
 
 
 def get_user(username):
@@ -105,7 +104,7 @@ def get_user(username):
         if row is None:
             return None
         else:
-            return User(row[0], row[1], row[2])
+            return row[1]
     finally:
         connection.close()
 
