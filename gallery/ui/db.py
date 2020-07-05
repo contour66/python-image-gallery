@@ -3,7 +3,7 @@ import json
 from .secrets import get_secret_image_gallery
 
 connection = None
-connect()
+
 cursor = connection.cursor()
 connection.set_session(autocommit=True)
 
