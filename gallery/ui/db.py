@@ -80,7 +80,7 @@ def username_exists(username):
         )'''
         connect()
         cursor = connection.cursor()
-        users = []
+        users = ();
         cursor.execute(exists_query, (username,))
         data = cursor.fetchall()
         for r in data:
