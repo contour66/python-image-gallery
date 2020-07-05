@@ -64,7 +64,7 @@ def login():
             return redirect('/invalidLogin')
         else:
             session['username'] = request.form["username"]
-            return redirect("/main.html")
+            return redirect('main.html')
     else:
         return render_template('login.html')
 
