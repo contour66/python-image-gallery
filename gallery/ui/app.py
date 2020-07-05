@@ -51,8 +51,8 @@ def upload_image():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = str(secure_filename(file.filename))
-            directory = str((current_user() + "/" + filename))
+            filename = secure_filename(file.filename)
+            directory = (current_user() + "/" + filename)
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename)
