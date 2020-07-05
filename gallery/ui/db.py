@@ -74,14 +74,16 @@ def username_exists(username):
     try:
         exists_query = '''
         select exists (
-            select 0, 1, 2
+            select 1,
             from users
             where username = %s
         )'''
         connect()
         cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
-        print(cursor.fetchone)
+        row = cursor.fetchone()
+        for t in row:
+            print(t[0, t[1], t[2])
         return cursor.fetchone()
     finally:
         connection.close()
