@@ -41,11 +41,16 @@ def storage():
 def upload():
     if request.method == 'POST':
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # return redirect(url_for('uploaded_file',
-            # f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-            upload_file({app.config['UPLOAD_FOLDER'],filename}, BUCKET, current_user())
+            f = request.files['file']
+            f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+            upload_file(f"uploads/{f.filename}", BUCKET)
+
+            #
+            # filename = secure_filename(file.filename)
+            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # # return redirect(url_for('uploaded_file',
+            # # f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+            # upload_file(filename=filename, BUCKET, current_user())
 
             return redirect("/storage")
 
