@@ -51,16 +51,24 @@ def put_object(bucket_name, key, value):
     return True
 
 
-def upload_file(bucket_name, key, value, user):
+def upload_file(bucket_name, directory, filename, user):
     try:
         s3_client = boto3.client('s3')
-        s3_client.put_object(Bucket=bucket_name, Key=key, Body=value, Metadata={user:user})
+        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename, Metadata={user:user})
 
     except ClientError as e:
         logging.error(e)
         return False
     return True
 
+def list_objects(bucket_name, username):
+    try:
+        s3_client = boto3.client('s3')
+        result = s3_client.get_object(Bucket=bucket_name, Key=username)
+    except ClientError as e:
+        logging.error(e)
+        return None
+    return resul
 
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
