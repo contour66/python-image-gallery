@@ -1,4 +1,7 @@
-from flask import Flask session, redirect, url_for, request
+from flask import Flask
+from flask import session
+from flask import redirect
+from flask import url_for
 from flask import request
 from flask import render_template
 from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists 
