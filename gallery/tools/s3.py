@@ -61,9 +61,10 @@ def upload_file(bucket_name, directory, filename, user):
         return False
     return True
 
-def list_objects(bucket_name, username):
+def list_objects(bucket_name, name):
     try:
         s3_client = boto3.client('s3')
+        username = "x-amz-meta-" + name
         result = s3_client.get_object(Bucket=bucket_name, Key=username)
     except ClientError as e:
         logging.error(e)
