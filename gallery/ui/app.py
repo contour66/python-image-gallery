@@ -30,6 +30,10 @@ def allowed_file(filename):
 #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 #     return redirect(url_for('uploaded_file',filename=filename))
 
+def current_user():
+    result = ""
+    for key, value in session.items():
+        return str(value)
 
 @app.route("/upload")
 def storage():
@@ -100,10 +104,6 @@ def debugSession():
     return result
 
 
-def current_user():
-    result = ""
-    for key, value in session.items():
-        return str(value)
 
 
 @app.route('/admin/users')
