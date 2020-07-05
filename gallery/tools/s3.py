@@ -79,7 +79,7 @@ def main():
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
 
     # list_objects('au.zt.image-gallery', 'dog')
-    print(list_objects('au.zt.image-gallery', 'dog')['Contents']['Key'])
+    print(list_objects('au.zt.image-gallery', 'dog')['Contents'][0])
 
 
 if __name__ == '__main__':
