@@ -80,7 +80,7 @@ def main():
     list = list_objects('au.zt.image-gallery', 'dog')['Contents']
     # list_objects('au.zt.image-gallery', 'dog')
     for e in list:
-        print(e[0])
+        print(e['Key'])
 
 
 if __name__ == '__main__':
