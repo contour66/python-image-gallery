@@ -59,7 +59,7 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
-            return redirect("uploaded/" + directory)
+            return redirect("/uploaded/" + directory)
 
 
 
