@@ -78,9 +78,9 @@ def main():
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
     list = list_objects('au.zt.image-gallery', 'dog')
+    content = list[3]
 
-
-    for e in list[3]:
+    for e in content:
         print(e)
 
 
