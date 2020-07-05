@@ -28,7 +28,7 @@ def requires_admin(view):
     def decorated(**kwargs):
         if not check_admin():
             return redirect('/login')
-        view(**kwargs)
+        return view(**kwargs)
     return decorated
 
 @app.route('/admin/users')
