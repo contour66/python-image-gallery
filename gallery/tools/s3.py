@@ -69,7 +69,7 @@ def list_objects(bucket_name, name):
     except ClientError as e:
         logging.error(e)
         return None
-    return result
+    return result.json()
 
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
