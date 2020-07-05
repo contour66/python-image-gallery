@@ -65,7 +65,7 @@ def list_objects(bucket_name, name):
     try:
         s3_client = boto3.client('s3')
         username = "x-amz-meta-" + name
-        result = s3_client.get_object(Bucket=bucket_name, Key=name)
+        result = s3_client.list_object(Bucket=bucket_name, Key=name)
     except ClientError as e:
         logging.error(e)
         return None
