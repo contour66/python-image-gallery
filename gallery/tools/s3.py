@@ -4,7 +4,6 @@ import json
 from botocore.exceptions import ClientError
 
 
-
 def create_bucket(bucket_name, region=None):
     """Create an S3 bucket in a specified region
 
@@ -55,12 +54,13 @@ def put_object(bucket_name, key, value):
 def upload_file(bucket_name, directory, filename, user):
     try:
         s3_client = boto3.client('s3')
-        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename, Metadata={user:user})
+        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename, Metadata={user: user})
 
     except ClientError as e:
         logging.error(e)
         return False
     return True
+
 
 def list_objects(bucket_name, name):
     try:
@@ -72,13 +72,14 @@ def list_objects(bucket_name, name):
         return None
     return result
 
+
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
     list = list_objects('au.zt.image-gallery', 'dog')
-    print(list.json())
-
+    for e in list:
+        print(e)
 
 
 if __name__ == '__main__':
