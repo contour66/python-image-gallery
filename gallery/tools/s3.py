@@ -54,7 +54,7 @@ def put_object(bucket_name, key, value):
 def upload_file(bucket_name, key, value):
     try:
         s3_client = boto3.client('s3')
-        s3_client.put_object(Bucket=bucket_name, Key=key, Value=value)
+        s3_client.put_object(Bucket=bucket_name, Key=key, Body=value)
 
     except ClientError as e:
         logging.error(e)
