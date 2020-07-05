@@ -10,12 +10,25 @@ from functools import wraps
 from ..tools.s3 import upload_file
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
-UPLOAD_FOLDER = "./uploads"
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = { 'png', 'jpg', 'jpeg', 'gif'}
 BUCKET = "au.zt.image-gallery"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+  if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
 
 @app.route("/storage")
 def storage():
@@ -25,10 +38,12 @@ def storage():
 
 @app.route("/upload", methods=['POST'])
 def upload():
-    if request.method == "POST":
-        f = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # return redirect(url_for('uploaded_file',
         # f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-        upload_file({f.filename}, BUCKET, current_user())
+        upload_file(filename, BUCKET, current_user())
 
         return redirect("/storage")
 
