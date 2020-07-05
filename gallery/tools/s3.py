@@ -1,5 +1,6 @@
 import logging
 import boto3
+import json
 from botocore.exceptions import ClientError
 
 
@@ -69,13 +70,16 @@ def list_objects(bucket_name, name):
     except ClientError as e:
         logging.error(e)
         return None
-    return result.json()
+    return result
 
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
-    print(list_objects('au.zt.image-gallery', 'dog'))
+    list = list_objects('au.zt.image-gallery', 'dog')
+    parsed = json.loads(list)
+    print(json.dumps(parsed, indent=4, sort_keys=True))
+
 
 
 if __name__ == '__main__':
