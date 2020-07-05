@@ -75,7 +75,7 @@ def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
-    print(list_objects('au.zt.image-gallery', 'dog'))
+    print(list_objects('au.zt.image-gallery', 'x-amz-meta-dog'))
 
 
 if __name__ == '__main__':
