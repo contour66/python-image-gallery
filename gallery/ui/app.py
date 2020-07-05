@@ -5,9 +5,10 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
+from .flask_secrets import get_secret_flask_session
 
 app = Flask(__name__)
-app.secret_key = b'sdfsfert344'
+app.secret_key = get_secret_flask_session()
 
 
 @app.route('/debugSession')
