@@ -71,7 +71,7 @@ def list_objects(bucket_name, name):
         list = result['Contents']
         images = []
         for e in list:
-         images.append([e['Key'])
+            images.append([e['Key'])
     except ClientError as e:
         logging.error(e)
         return None
