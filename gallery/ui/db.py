@@ -88,6 +88,10 @@ def username_exists(username):
     finally:
         connection.close()
 
+def User(username, password, full_name):
+    username = username
+    password = password
+    full_name = full_name
 
 def get_user(username):
     try:
