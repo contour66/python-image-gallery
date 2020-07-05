@@ -93,8 +93,8 @@ def get_user(username):
     try:
         connect()
         cursor = connection.cursor()
-        search = cursor.execute('select username, password, full_name from users where username = %s', (username,))
-        row = search.fetchone()
+        cursor.execute('select username, password, full_name from users where username = %s', (username,))
+        row = cursor.fetchone()
         if row is None:
             return None
         else:
