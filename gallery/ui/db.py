@@ -4,9 +4,6 @@ from .secrets import get_secret_image_gallery
 
 connection = None
 
-cursor = connection.cursor()
-connection.set_session(autocommit=True)
-
 
 def get_secret():
     jsonString = get_secret_image_gallery()
@@ -53,6 +50,7 @@ def execute(query, args=None):
 def print_names():
     try:
         connect()
+        cursor = connection.cursor()
         cursor.execute('select username from users;')
         res = cursor.fetchall()
         print(res)
@@ -60,9 +58,11 @@ def print_names():
     finally:
         connection.close()
 
-
 def delete_user_ui(username):
     try:
+        connect()
+        cursor = connection.cursor()
+        connection.set_session(autocommit=True)
         cursor.execute('delete from users where username = %s', (username,))
         print("\nDeleted\n" + username)
     finally:
@@ -77,15 +77,18 @@ def username_exists(username):
             from users
             where username = %s
         )'''
+        connect()
+        cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
         return cursor.fetchone()[0]
     finally:
         connection.close()
 
-
 def get_user(self, username):
     try:
         user_query = str("select username, password, full_name from users where username = %s")
+        connect()
+        cursor = connection.cursor()
         cursor.execute(user_query, (username,))
         if row is None:
             return None
@@ -97,9 +100,13 @@ def get_user(self, username):
 
 def add_user_ui(username, password, fullname):
     try:
+        connect()
+        cursor = connection.cursor()
+        connection.set_session(autocommit=True)
         execute("""insert into users (username, password, full_name) values(%s, %s, %s); """,
                 (username, password, fullname))
         print('\nUser: ' + username + '\nPassword: ' + password + '\nFull name: ' + ' added to table users\n')
+
     finally:
         connection.close()
 
@@ -107,6 +114,9 @@ def add_user_ui(username, password, fullname):
 # EDITS USER IN TABLE ////////////
 def edit_user_ui(username, password, fullname):
     try:
+        connect()
+        cursor = connection.cursor()
+        connection.set_session(autocommit=True)
         if password:
             execute("update users set password=%s where username=%s", (password, username,))
             print("\nPassword updated\n")
@@ -120,6 +130,9 @@ def edit_user_ui(username, password, fullname):
 def main():
     print("name")
 
-
 if __name__ == '__main__':
     main()
+# def get_name(username):
+#     res = execute('select from users where username;')
+#     for row in res:
+#         print(row)
