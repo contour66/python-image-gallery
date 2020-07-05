@@ -92,7 +92,7 @@ def User(username, password, full_name):
     full_name = full_name
 
 
-def get_user(username):
+def get_user_pw(username):
     try:
         connect()
         cursor = connection.cursor()

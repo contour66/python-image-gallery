@@ -5,7 +5,7 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from functools import wraps
-from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
+from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
 
 app = Flask(__name__)
@@ -56,8 +56,8 @@ def invalidLogin():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = get_user(request.form["username"])
-        if user is None or user != request.form['password']:
+        user_pw = get_user_pw(request.form["username"])
+        if user is None or user_pw != request.form['password']:
             return redirect('/invalidLogin')
         else:
             session['username'] = request.form["username"]
