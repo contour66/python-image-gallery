@@ -24,6 +24,13 @@ def debugSession():
         result += key + "->" + str(value)+"<br/>"
     return result
 
+@app.route('/inc')
+def inc():
+    if 'value' not in session:
+        session['value'] = 0
+    session['value'] = session['value'] + 1
+    return  "<h1>" + str(session['value']) + "</h1>"
+
 @app.route('/login')
 def login():
     # data = print_names()
