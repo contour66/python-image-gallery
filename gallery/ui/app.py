@@ -11,11 +11,7 @@ from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, usernam
 app = Flask(__name__)
 app.secret_key = b'sdfsfert344'
 
-@app.route('/storeStuff')
-def storeStuff():
-    session['something'] = 22
-    session['other thing'] = 'bob'
-    return ""
+
 
 @app.route('/debugSession')
 def debugSession():
