@@ -18,11 +18,13 @@ def debugSession():
         result += key + "->" + str(value) + "<br/>"
     return result
 
+
 def check_admin():
     return 'username' in session and session['username'] == 'dog'
 
+
 @app.route('/admin/users')
-def users:
+def users():
     if not check_admin():
         return redirect('/login')
     return render_template(adminPage())
