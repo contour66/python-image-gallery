@@ -64,16 +64,17 @@ def upload_file(bucket_name, directory, filename, user):
 def list_objects(bucket_name, username):
     try:
         s3_client = boto3.client('s3')
-        result = s3_client.get_object(Bucket=bucket_name, Key=username)
+        result = s3_client.get_object(Bucket=bucket_name, Prefix=username)
     except ClientError as e:
         logging.error(e)
         return None
-    return resul
+    return result
 
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
+    print(list_objects('au.zt.image-gallery', 'dog'))
 
 
 if __name__ == '__main__':
