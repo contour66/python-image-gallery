@@ -86,31 +86,30 @@ def username_exists(username):
         connection.close()
 
 
-def fetch_one():
-    try:
-        connect()
-        cursor = connection.cursor()
-        cursor.execute(user_query, (username,))
-        for t in cursor.fetachall():
-            result.append(User(t[0], t[1], t[2]))
-        return result
-    finally:
-        connection.close()
+# def fetch_one():
+#     try:
+#         connect()
+#         cursor = connection.cursor()
+#         cursor.execute(user_query, (username,))
+#         for t in cursor.fetachall():
+#             result.append(User(t[0], t[1], t[2]))
+#         return result
+#     finally:
+#         connection.close()
 
 
-def get_user(username):
-    try:
-        user_query = str("select username, password, full_name from users where username = %s")
-        connect()
-        cursor = connection.cursor()
-        cursor.execute(user_query, (username,))
-        row = cursor.fetchone()
-        if row is None:
-            return None
-        else:
-            return username_exists(username)
-    finally:
-        connection.close()
+# def get_user(username):
+#     try:
+#         user_query = "select username, password, full_name from users where username = %s")
+#         connect()
+#         cursor = connection.cursor()
+#         cursor.execute(user_query, (username,))
+#         if row is None:
+#             return None
+#         else:
+#             return username_exists(username)
+#     finally:
+#         connection.close()
 
 
 def add_user_ui(username, password, fullname):
