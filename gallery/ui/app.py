@@ -27,12 +27,21 @@ def inc():
     session['value'] = session['value'] + 1
     return  "<h1>" + str(session['value']) + "</h1>"
 
-# @app.route('/login', methods=['GET'], ['POST'])
-# def login():
-#     if request.method = 'POST':
-#         user = get_user().get_user_by_username(request.form["username"])
-#     else:
-#         return render_template('login.html')
+@app.route('/invalidLogin')
+def invalidLogin():
+    return "Invalid"
+
+@app.route('/login', methods=['GET'], ['POST'])
+def login():
+    if request.method == 'POST':
+        user = get_user().get_user_by_username(request.form["username"])
+        if user is None or user.password != request.form['password']:
+            return redirect['/invalidLogin']
+        else:
+            session['username'] = request.form["username"]
+            return redirect("/admin")
+    else:
+        return render_template('login.html')
 
 
 @app.route('/admin')
