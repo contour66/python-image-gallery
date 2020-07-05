@@ -78,10 +78,10 @@ def main():
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
     list = list_objects('au.zt.image-gallery', 'dog')
-    content = list[3]
-
-    for e in content:
-        print(e)
+    for v, info in list.items():
+        print(v)
+        for key in info:
+            print(key + ": " + info[key])
 
 
 if __name__ == '__main__':
