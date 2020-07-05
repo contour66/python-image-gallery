@@ -13,9 +13,9 @@ app.secret_key = get_secret_flask_session()
 
 
 def check_admin():
-    return {'username' in session and session['username'] == 'ztauburn',
-            'username' in session and session['username'] == 'dog'}
-
+    zt = 'username' in session and session['username'] == 'ztauburn'
+    dongji = 'username' in session and session['username'] == 'dog'
+    return [zt, dongji]
 
 
 def requires_admin(view):
@@ -24,6 +24,7 @@ def requires_admin(view):
         if not check_admin():
             return redirect('/login')
         return view(**kwargs)
+
     return decorated
 
 
@@ -33,7 +34,6 @@ def debugSession():
     for key, value in session.items():
         result += key + "->" + str(value) + "<br/>"
     return result
-
 
 
 @app.route('/admin/users')
