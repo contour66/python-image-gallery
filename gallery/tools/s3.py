@@ -50,7 +50,7 @@ def put_object(bucket_name, key, value):
     return True
 
 
-def upload_image(file_name, bucket_name, username):
+def upload_image(bucket_name, file_name, username):
     try:
         s3_client = boto3.client('s3')
         s3_client.upload_image(Bucket=bucket_name, object_name=file_name, username=username)

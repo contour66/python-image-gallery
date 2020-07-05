@@ -1,3 +1,5 @@
+from typing import Any
+
 from flask import Flask
 from flask import session
 from flask import redirect
@@ -19,15 +21,15 @@ def storage():
     # contents = list_files("flaskdrive")
     return render_template('storage.html')
 
-# @app.route("/upload", methods=['POST'])
-# def upload():
-#     if request.method == "POST":
-#         f = request.files['file']
-#         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-#         upload_file(f"uploads/{f.filename}", BUCKET)
-#
-#         return redirect("/storage")
-#
+@app.route("/upload", methods=['POST'])
+def upload():
+    if request.method == "POST":
+        f = request.files['file']
+        f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+        upload_file(BUCKET, f"uploads/{f.filename}", )
+
+        return redirect("/storage")
+
 # @app.route("/download/<filename>", methods=['GET'])
 # def download(filename):
 #     if request.method == 'GET':
@@ -56,11 +58,16 @@ def requires_admin(view):
 
 @app.route('/debugSession')
 def debugSession():
-    result = ""
-    for key, value in session.items():
-        result += key + "->" + str(value) + "<br/>"
-    return result
+    current_user()
+    # for key, value in session.items():
+    #     result += key + "->" + str(value) + "<br/>"
+    # return result
 
+def current_user():
+    result= ""
+    for key, value in session.items():
+         str(value)
+    return result
 
 @app.route('/admin/users')
 @requires_admin
