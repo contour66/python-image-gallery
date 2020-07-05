@@ -12,6 +12,7 @@ app = Flask(__name__)
 def storeStuff():
     session['something'] = 22
     session['other thing'] = 'bob'
+    return ""
 
 @app.route(/debugSession')
 def debugSession():
