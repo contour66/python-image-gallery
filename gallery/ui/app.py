@@ -13,7 +13,7 @@ from .flask_secrets import get_secret_flask_session
 
 app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
-UPLOAD_FOLDER = ".uploads"
+UPLOAD_FOLDER = "./uploads"
 BUCKET = "au.zt.image-gallery"
 
 
@@ -27,8 +27,8 @@ def storage():
 def upload():
     if request.method == "POST":
         f = request.files['file']
-        f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-        upload_file(BUCKET, f"uploads/{f.filename}", current_user())
+        # f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+        upload_file(BUCKET, {f.filename}, current_user())
 
         return redirect("/storage")
 
