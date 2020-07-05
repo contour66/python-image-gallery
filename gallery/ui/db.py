@@ -58,6 +58,7 @@ def print_names():
     finally:
         connection.close()
 
+
 def delete_user_ui(username):
     try:
         connect()
@@ -81,6 +82,27 @@ def username_exists(username):
         cursor = connection.cursor()
         cursor.execute(exists_query, (username,))
         return cursor.fetchone()[0]
+    finally:
+        connection.close()
+
+
+def User(username, password, full_name):
+    username = username
+    password = password
+    full_name = full_name
+
+def get_current_user(name):
+    return
+def get_user_pw(username):
+    try:
+        connect()
+        cursor = connection.cursor()
+        cursor.execute('select username, password, full_name from users where username = %s', (username,))
+        row = cursor.fetchone()
+        if row is None:
+            return None
+        else:
+            return row[1]
     finally:
         connection.close()
 
@@ -113,12 +135,14 @@ def edit_user_ui(username, password, fullname):
     finally:
         connection.close()
 
+
 def main():
     print("name")
 
+
 if __name__ == '__main__':
     main()
-# def get_name(username):
+# def get_name(username):e
 #     res = execute('select from users where username;')
 #     for row in res:
 #         print(row)

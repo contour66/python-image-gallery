@@ -1,6 +1,6 @@
 import psycopg2
 import json
-from .secrets import get_secret_image_gallery
+from secrets import get_secret_image_gallery
 
 connection = None
 
@@ -25,13 +25,17 @@ def get_username(secret):
 def get_full_name(secret):
     return secret['full_name']
 
+
 def get_dbname(secret):
     return secret['dbname']
+
 
 def connect():
     global connection
     secret = get_secret()
-    connection = psycopg2.connect(host=get_host(secret), dbname=get_dbname(secret), user=get_username(secret), password=get_password(secret))
+    connection = psycopg2.connect(host=get_host(secret), dbname=get_dbname(secret), user=get_username(secret),
+                                  password=get_password(secret))
+
 
 def execute(query, args=None):
     global connection
@@ -58,8 +62,6 @@ def print_names():
     res = execute('select * from users;')
     for row in res:
         print(row)
-
-
 
 
 # CHECKS IF USER EXISTS IN TABLE //////
@@ -138,6 +140,8 @@ def main():
                 add_user()
             elif choice == 3:
                 edit_user()
+            elif choice == 6:
+                username_exists("dog")
             elif choice == 4:
                 delete_user()
             elif choice == 5:

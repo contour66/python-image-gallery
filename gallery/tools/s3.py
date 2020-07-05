@@ -3,6 +3,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 
+
 def create_bucket(bucket_name, region=None):
     """Create an S3 bucket in a specified region
 
@@ -27,30 +28,46 @@ def create_bucket(bucket_name, region=None):
     except ClientError as e:
         logging.error(e)
         return False
-    return True		
+    return True
+
 
 def get_object(bucket_name, key):
     try:
-            s3_client = boto3.client('s3')
-            result = s3_client.get_object(Bucket=bucket_name, Key=key)
+        s3_client = boto3.client('s3')
+        result = s3_client.get_object(Bucket=bucket_name, Key=key)
     except ClientError as e:
         logging.error(e)
         return None
     return result
 
+
 def put_object(bucket_name, key, value):
     try:
-            s3_client = boto3.client('s3')
-            s3_client.put_object(Bucket=bucket_name, Key=key, Body=value)
+        s3_client = boto3.client('s3')
+        s3_client.put_object(Bucket=bucket_name, Key=key, Body=value)
     except ClientError as e:
         logging.error(e)
         return False
     return True
 
+
+def upload_file(file_path, bucket_name, file_name, name):
+    try:
+        username = name
+        s3_client = boto3.client('s3')
+        s3_client.upload_file(file_path, bucket_name, file_name, username)
+
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
+
+
 def main():
-#	create_bucket('au.zt.image-gallery', 'us-west-1')
-	put_object('au.zt.image-gallery', 'banana', 'red')
-	print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
+    #	create_bucket('au.zt.image-gallery', 'us-west-1')
+    put_object('au.zt.image-gallery', 'banana', 'red')
+    print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
+
 
 if __name__ == '__main__':
-	main()
+    main()
