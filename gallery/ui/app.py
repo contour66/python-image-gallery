@@ -54,7 +54,7 @@ def upload_file():
             filename = str(secure_filename(file.filename))
             directory = str((current_user() + "/" + filename))
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            upload_file(directory, BUCKET_NAME, filename, current_user())
+            upload_file(BUCKET_NAME, directory,  filename, current_user())
             return redirect(url_for('uploaded_file', filename=filename))
 
 
