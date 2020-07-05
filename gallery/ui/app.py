@@ -16,10 +16,12 @@ app.secret_key = get_secret_flask_session()
 UPLOAD_FOLDER = "uploads"
 BUCKET = "au.zt.image-gallery"
 
+
 @app.route("/storage")
 def storage():
     # contents = list_files("flaskdrive")
     return render_template('storage.html')
+
 
 @app.route("/upload", methods=['POST'])
 def upload():
@@ -29,6 +31,7 @@ def upload():
         upload_file(BUCKET, f"uploads/{f.filename}", current_user())
 
         return redirect("/storage")
+
 
 # @app.route("/download/<filename>", methods=['GET'])
 # def download(filename):
@@ -58,15 +61,16 @@ def requires_admin(view):
 
 @app.route('/debugSession')
 def debugSession():
-    return current_user()
-    # for key, value in session.items():
-    #     result += key + "->" + str(value) + "<br/>"
-    # return result
+    for key, value in session.items():
+        result += key + "->" + str(value) + "<br/>"
+    return result
+
 
 def current_user():
-    result= ""
+    result = ""
     for key, value in session.items():
         return str(value)
+
 
 @app.route('/admin/users')
 @requires_admin
@@ -102,9 +106,11 @@ def login():
     else:
         return render_template('login.html')
 
+
 @app.route('/')
 def main():
     return render_template('main.html')
+
 
 @app.route('/admin')
 @requires_admin
@@ -153,8 +159,6 @@ def edit_user():
     fullname = request.form['fullname']
     edit_user_ui(username, password, fullname)
     return '<h1>User ' + username + ' has been edited. <a href="/admin"> HOME</a></h1> '
-
-
 
 # def list_files(bucket):
 #     """
