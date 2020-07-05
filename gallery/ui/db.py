@@ -52,6 +52,7 @@ def execute(query, args=None):
 
 def print_names():
     try:
+        connect()
         cursor.execute('select username from users;')
         res = cursor.fetchall()
         print(res)
