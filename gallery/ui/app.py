@@ -36,11 +36,11 @@ def storage():
     # contents = list_files("laskdrive")
     return render_template('upload.html')
 
-@app.route("/" + current_user() + "/my-images", methods=['GET'])
+# @app.route("/" + current_user() + "/my-images", methods=['GET'])
 def view_images():
     list_objects(BUCKET_NAME, current_user())
 
-@app.route("/uploaded", methods=['POST'])
+@app.route('/upload', methods=['POST', 'GET'])
 def upload_image():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -59,7 +59,7 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
-            return redirect(view_images())
+            return redirect("uploaded/" + directory)
 
 
 
