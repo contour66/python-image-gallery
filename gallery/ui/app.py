@@ -58,7 +58,7 @@ def requires_admin(view):
 
 @app.route('/debugSession')
 def debugSession():
-    current_user()
+    return current_user()
     # for key, value in session.items():
     #     result += key + "->" + str(value) + "<br/>"
     # return result
@@ -66,8 +66,7 @@ def debugSession():
 def current_user():
     result= ""
     for key, value in session.items():
-         str(value)
-    return result
+        return str(value)
 
 @app.route('/admin/users')
 @requires_admin
