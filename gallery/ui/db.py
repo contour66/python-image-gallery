@@ -108,7 +108,7 @@ def get_user(username):
         if row is None:
             return None
         else:
-            return User(row[0], row[1], row[2])
+            return username_exists(username)
     finally:
         connection.close()
 
