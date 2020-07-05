@@ -14,7 +14,7 @@ app.secret_key = get_secret_flask_session()
 
 def check_admin():
     zt = 'username' in session and session['username'] == 'ztauburn'
-    dongji = 'username' in session and session['username'] == 'dongji'
+    dongji = 'username' in session and session['username'] == 'dog'
     if zt:
         return zt
     else:
