@@ -3,7 +3,8 @@ import json
 from .secrets import get_secret_image_gallery
 
 connection = None
-
+connect()
+cursor = connection.cursor()
 
 def get_secret():
     jsonString = get_secret_image_gallery()
@@ -49,8 +50,8 @@ def execute(query, args=None):
 
 def print_names():
     try:
-        connect()
-        cursor = connection.cursor()
+        # connect()
+        # cursor = connection.cursor()
         cursor.execute('select username from users;')
         res = cursor.fetchall()
         print(res)
@@ -84,6 +85,19 @@ def username_exists(username):
     finally:
         connection.close()
 
+def get_user(self, username):
+    try:
+        user_query = str("select username, password, full_name from users where username = %s")
+        connect()
+        cursor = connection.cursor()
+        cursor.execute(user_query, (username,))
+        if row is None:
+            return None
+        else:
+            return User(row[0], row[1], row[2])
+    finally:
+        connection.close()
+
 
 def add_user_ui(username, password, fullname):
     try:
@@ -112,6 +126,7 @@ def edit_user_ui(username, password, fullname):
             print("\nName updated\n")
     finally:
         connection.close()
+
 
 def main():
     print("name")

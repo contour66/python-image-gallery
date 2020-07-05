@@ -4,7 +4,7 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flask import render_template
-from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists 
+from .db import  print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user
 
 
 
@@ -27,10 +27,12 @@ def inc():
     session['value'] = session['value'] + 1
     return  "<h1>" + str(session['value']) + "</h1>"
 
-@app.route('/login')
+@app.route('/login', methods=['GET'], ['POST'])
 def login():
-    # data = print_names()
-    return render_template('login.html')
+    if request.method = 'POST':
+        user = get_user().get_user_by_username(request.form["username"])
+    else:
+        return render_template('login.html')
 
 
 @app.route('/admin')
