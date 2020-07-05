@@ -55,7 +55,7 @@ def upload_file(file_name, bucket_name, name):
     try:
         username = name
         s3_client = boto3.client('s3')
-        s3_client.upload_file(file_name, bucket_name, username)
+        s3_client.upload_file(file_name, bucket_name, str(username))
 
     except ClientError as e:
         logging.error(e)
