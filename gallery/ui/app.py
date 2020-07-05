@@ -15,7 +15,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = { 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 BUCKET = "au.zt.image-gallery"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -24,11 +24,12 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-  if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+
+# if file and allowed_file(file.filename):
+#     filename = secure_filename(file.filename)
+#     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+#     return redirect(url_for('uploaded_file',filename=filename))
+
 
 @app.route("/storage")
 def storage():
