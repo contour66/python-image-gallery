@@ -74,7 +74,9 @@ def username_exists(username):
     try:
         exists_query = '''
         select exists (
-            select 1,
+            select 0,
+                   1,
+                   2
             from users
             where username = %s
         )'''
@@ -84,7 +86,7 @@ def username_exists(username):
         row = cursor.fetchone()
         for t in row:
             print(t[0], t[1], t[2])
-        return cursor.fetchone()
+        return row
     finally:
         connection.close()
 
@@ -103,9 +105,6 @@ def username_exists(username):
 #             return User(row[0], row[1], row[2])
 #     finally:
 #         connection.close()
-
-
-
 
 
 def add_user_ui(username, password, fullname):
@@ -139,6 +138,7 @@ def edit_user_ui(username, password, fullname):
 
 def main():
     print("name")
+
 
 if __name__ == '__main__':
     main()
