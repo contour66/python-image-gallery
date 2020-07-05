@@ -31,13 +31,13 @@ def allowed_file(filename):
 #     return redirect(url_for('uploaded_file',filename=filename))
 
 
-@app.route("/storage")
+@app.route("/upload")
 def storage():
     # contents = list_files("laskdrive")
-    return render_template('storage.html')
+    return render_template('upload.html')
 
 
-@app.route("/upload", methods=['POST', 'GET'])
+@app.route("/uploaded", methods=['POST', 'GET'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
