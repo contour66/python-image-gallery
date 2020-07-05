@@ -52,9 +52,9 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            directory = current_user() + "/" + filename)
+            directory = (current_user() + "/" + filename)
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            upload_file( directory, BUCKET_NAME, filename, current_user() )
+            upload_file(directory, BUCKET_NAME, filename, current_user())
             return redirect(url_for('uploaded_file', filename=filename))
 
 
