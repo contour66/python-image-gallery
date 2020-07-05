@@ -14,11 +14,11 @@ app.secret_key = get_secret_flask_session()
 UPLOAD_FOLDER = "uploads"
 BUCKET = "au.zt.image-gallery"
 
-# @app.route("/storage")
-# def storage():
-#     contents = list_files("flaskdrive")
-#     return render_template('storage.html', contents=contents)
-#
+@app.route("/storage")
+def storage():
+    contents = list_files("flaskdrive")
+    return render_template('storage.html', contents=contents)
+
 # @app.route("/upload", methods=['POST'])
 # def upload():
 #     if request.method == "POST":
