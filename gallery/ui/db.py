@@ -91,7 +91,8 @@ def User(username, password, full_name):
     password = password
     full_name = full_name
 
-
+def get_current_user(name):
+    return
 def get_user_pw(username):
     try:
         connect()
