@@ -77,8 +77,7 @@ def main():
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
     list = list_objects('au.zt.image-gallery', 'dog')
-    parsed = json.loads(list)
-    print(json.dumps(parsed, indent=4, sort_keys=True))
+    print(list.json())
 
 
 
