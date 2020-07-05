@@ -5,7 +5,7 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from functools import wraps
-from ..tools import upload_image
+from ..tools.s3 import upload_image
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
 
