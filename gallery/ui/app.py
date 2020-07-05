@@ -15,7 +15,10 @@ app.secret_key = get_secret_flask_session()
 def check_admin():
     zt = 'username' in session and session['username'] == 'ztauburn'
     dongji = 'username' in session and session['username'] == 'dog'
-    return [zt, dongji]
+    if zt:
+        return zt
+    else:
+        return dongji
 
 
 def requires_admin(view):
