@@ -40,7 +40,7 @@ def storage():
 @app.route("/upload", methods=['POST'])
 def upload():
     if request.method == 'POST':
-        i
+
         f = request.files['file']
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         upload_file(f"uploads/{f.filename}", BUCKET, current_user())
