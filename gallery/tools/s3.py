@@ -67,20 +67,26 @@ def list_objects(bucket_name, name):
         s3_client = boto3.client('s3')
         username = "x-amz-meta-" + name
         result = s3_client.list_objects(Bucket=bucket_name, Prefix=name, MaxKeys=2)
+        # list = list_objects('au.zt.image-gallery', 'dog')['Contents']
+        list = result['Contents']
+        images = []
+        for e in list:
+         images.append([e['Key'])
     except ClientError as e:
         logging.error(e)
         return None
-    return result
+    return images
 
 
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
-    list = list_objects('au.zt.image-gallery', 'dog')['Contents']
+
+
     # list_objects('au.zt.image-gallery', 'dog')
-    for e in list:
-        print(e['Key'])
+    for e in list_objects('au.zt.image-gallery', 'dog'):
+        print(e)
 
 
 if __name__ == '__main__':
