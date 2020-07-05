@@ -58,6 +58,7 @@ def print_names():
     finally:
         connection.close()
 
+
 def delete_user_ui(username):
     try:
         connect()
@@ -84,6 +85,7 @@ def username_exists(username):
     finally:
         connection.close()
 
+
 def fetch_one():
     try:
         connect()
@@ -94,6 +96,7 @@ def fetch_one():
         return result
     finally:
         connection.close()
+
 
 def get_user(username):
     try:
@@ -141,6 +144,7 @@ def edit_user_ui(username, password, fullname):
 
 def main():
     print("name")
+
 
 if __name__ == '__main__':
     main()
