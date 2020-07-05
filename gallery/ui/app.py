@@ -7,7 +7,7 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from functools import wraps
-from ..tools.s3 import upload_file
+from ..tools.s3 import upload_file, put_object
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
 from werkzeug.utils import secure_filename
@@ -54,7 +54,8 @@ def upload_file():
             filename = str(secure_filename(file.filename))
             directory = str((current_user() + "/" + filename))
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            upload_file(BUCKET_NAME, directory, filename)
+            put_object('au.zt.image-gallery', 'test', 'working')
+            # upload_file(BUCKET_NAME, directory, filename)
             return redirect(url_for('uploaded_file', filename=filename))
 
 
