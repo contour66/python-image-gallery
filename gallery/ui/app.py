@@ -5,6 +5,7 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from functools import wraps
+from ..tools import upload_image
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
 
@@ -13,26 +14,26 @@ app.secret_key = get_secret_flask_session()
 UPLOAD_FOLDER = "uploads"
 BUCKET = "au.zt.image-gallery"
 
-@app.route("/storage")
-def storage():
-    contents = list_files("flaskdrive")
-    return render_template('storage.html', contents=contents)
-
-@app.route("/upload", methods=['POST'])
-def upload():
-    if request.method == "POST":
-        f = request.files['file']
-        f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-        upload_file(f"uploads/{f.filename}", BUCKET)
-
-        return redirect("/storage")
-
-@app.route("/download/<filename>", methods=['GET'])
-def download(filename):
-    if request.method == 'GET':
-        output = download_file(filename, BUCKET)
-
-        return send_file(output, as_attachment=True)
+# @app.route("/storage")
+# def storage():
+#     contents = list_files("flaskdrive")
+#     return render_template('storage.html', contents=contents)
+#
+# @app.route("/upload", methods=['POST'])
+# def upload():
+#     if request.method == "POST":
+#         f = request.files['file']
+#         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+#         upload_file(f"uploads/{f.filename}", BUCKET)
+#
+#         return redirect("/storage")
+#
+# @app.route("/download/<filename>", methods=['GET'])
+# def download(filename):
+#     if request.method == 'GET':
+#         output = download_file(filename, BUCKET)
+#
+#         return send_file(output, as_attachment=True)
 
 def check_admin():
     zt = 'username' in session and session['username'] == 'ztauburn'
@@ -147,23 +148,15 @@ def edit_user():
     edit_user_ui(username, password, fullname)
     return '<h1>User ' + username + ' has been edited. <a href="/admin"> HOME</a></h1> '
 
-def upload_file(file_name, bucket):
-    """
-    Function to upload a file to an S3 bucket
-    """
-    object_name = file_name
-    s3_client = boto3.client('s3')
-    response = s3_client.upload_file(file_name, bucket, object_name)
 
-    return response
 
-def list_files(bucket):
-    """
-    Function to list files in a given S3 bucket
-    """
-    s3 = boto3.client('s3')
-    contents = []
-    for item in s3.list_objects(Bucket=bucket)['Contents']:
-        contents.append(item)
-
-    return contents
+# def list_files(bucket):
+#     """
+#     Function to list files in a given S3 bucket
+#     """
+#     s3 = boto3.client('s3')
+#     contents = []
+#     for item in s3.list_objects(Bucket=bucket)['Contents']:
+#         contents.append(item)
+#
+#     return contents

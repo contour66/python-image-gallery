@@ -27,30 +27,44 @@ def create_bucket(bucket_name, region=None):
     except ClientError as e:
         logging.error(e)
         return False
-    return True		
+    return True
+
 
 def get_object(bucket_name, key):
     try:
-            s3_client = boto3.client('s3')
-            result = s3_client.get_object(Bucket=bucket_name, Key=key)
+        s3_client = boto3.client('s3')
+        result = s3_client.get_object(Bucket=bucket_name, Key=key)
     except ClientError as e:
         logging.error(e)
         return None
     return result
 
+
 def put_object(bucket_name, key, value):
     try:
-            s3_client = boto3.client('s3')
-            s3_client.put_object(Bucket=bucket_name, Key=key, Body=value)
+        s3_client = boto3.client('s3')
+        s3_client.put_object(Bucket=bucket_name, Key=key, Body=value)
     except ClientError as e:
         logging.error(e)
         return False
     return True
 
+
+def upload_image(file_name, bucket_name, username):
+    try:
+        s3_client = boto3.client('s3')
+        s3_client.upload_image(Bucket=bucket_name, object_name=file_name, username=username)
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
+
+
 def main():
-#	create_bucket('au.zt.image-gallery', 'us-west-1')
-	put_object('au.zt.image-gallery', 'banana', 'red')
-	print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
+    #	create_bucket('au.zt.image-gallery', 'us-west-1')
+    put_object('au.zt.image-gallery', 'banana', 'red')
+    print(get_object('au.zt.image-gallery', 'banana')['Body'].read())
+
 
 if __name__ == '__main__':
-	main()
+    main()
