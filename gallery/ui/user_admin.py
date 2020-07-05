@@ -74,6 +74,9 @@ def username_exists(username):
         )'''
     cursor = connection.cursor()
     cursor.execute(exists_query, (username,))
+    row = cursor.fetchone()
+    for r in row:
+        print(r[0], r[1], r[2])
     return cursor.fetchone()[0]
 
 
