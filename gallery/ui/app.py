@@ -30,7 +30,7 @@ def inc():
 @app.route('/login')
 def login():
     # data = print_names()
-    return render_template('login.html', results=data)
+    return render_template('login.html')
 
 
 @app.route('/admin')
