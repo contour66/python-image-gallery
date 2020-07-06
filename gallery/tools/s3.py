@@ -110,7 +110,7 @@ def get_url(bucket_name, object_name):
 
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
-    put_object('au.zt.image-gallery', 'tiff-mom2017.JPG', 'tiff-mom2017.JPG')
+    # put_object('au.zt.image-gallery', 'tiff-mom2017.JPG', 'tiff-mom2017.JPG')
     print(get_object('au.zt.image-gallery', 'tiff-mom2017.JPG'))
     print(create_presigned_url('au.zt.image-gallery', 'tiff-mom2017.JPG'))
     # print(get_url('au.zt.image-gallery.s3.amazonaws.com', 'dog/IMG_0041.JPG'))
