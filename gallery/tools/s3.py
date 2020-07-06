@@ -1,9 +1,6 @@
 import logging
 import boto3
 import json
-from PIL import Image
-from io import BytesIO
-import numpy as np
 from botocore.exceptions import ClientError
 
 
