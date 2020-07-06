@@ -44,12 +44,10 @@ def get_object(bucket_name, key):
     try:
         s3_client = boto3.client('s3')
         result = s3_client.get_object(Bucket=bucket_name, Key=key)
-        file_stream = result['Body']
-        im = Image.open(file_stream)
     except ClientError as e:
         logging.error(e)
         return None
-    return im
+    return result
 
 
 def put_object(bucket_name, key, value):
