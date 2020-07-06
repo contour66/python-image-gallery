@@ -45,14 +45,10 @@ def get_object(bucket_name, key):
     try:
         s3_client = boto3.client('s3')
         result = s3_client.get_object(Bucket=bucket_name, Key=key)
-        a_file = io.BytesIO()
-        result.download_fileobj(a_file)
-        a_file.seek(0)
-
     except ClientError as e:
         logging.error(e)
         return None
-    return send_file(a_file, mimetype=s3_object.content_type)
+    return result
 
 
 def put_object(bucket_name, key, value):
