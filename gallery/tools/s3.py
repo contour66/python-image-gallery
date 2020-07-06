@@ -90,7 +90,7 @@ def list_objects(bucket_name, name):
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
-    print(get_object('au.zt.image-gallery', 'dog'))
+    print(get_object('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
 
 
     # list_objects('au.zt.image-gallery', 'dog')
