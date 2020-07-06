@@ -68,9 +68,10 @@ def list_objects(bucket_name, name):
         result = s3_client.list_objects(Bucket=bucket_name, Prefix=name)
         # list = list_objects('au.zt.image-gallery', 'dog')['Contents']
         list = result['Contents']
+        endpoint = "https://s3-us-west-1.amazonaws.com/au.zt.image-gallery/"
         images = []
         for i in list:
-            images.append(i['Key'])
+            images.append(endpoint + i['Key'])
     except ClientError as e:
         logging.error(e)
         return None
