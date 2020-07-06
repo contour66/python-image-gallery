@@ -44,7 +44,7 @@ def storage():
     return render_template('upload.html')
 
 
-@app.route("/uploaded")
+@app.route("/images")
 def view_images():
     data = get_objects(BUCKET_NAME, current_user())
     # info = data['Contents']['Key']
@@ -53,7 +53,7 @@ def view_images():
     # for e in list_objects(BUCKET_NAME, current_user()):
 
 
-@app.route('/upload', methods=['POST', 'GET'])
+@app.route('/uploaded', methods=['POST', 'GET'])
 def upload_image():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -72,7 +72,7 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
-            return redirect("/uploaded")
+            return redirect("/images")
 
 
 # @app.route("/download/<filename>", methods=['GET'])
