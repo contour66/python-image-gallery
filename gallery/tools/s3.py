@@ -111,8 +111,8 @@ def get_url(bucket_name, object_name):
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
-    print(get_object('arn:aws:s3:us-west-1:384025033813:accesspoint/user-image-gallery-access', 'dog/IMG_0041.JPG'))
-    print(create_presigned_url('arn:aws:s3:us-west-1:384025033813:accesspoint/user-image-gallery-access', 'dog/IMG_0041.JPG'))
+    print(get_object('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
+    print(create_presigned_url('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
     # print(get_url('au.zt.image-gallery.s3.amazonaws.com', 'dog/IMG_0041.JPG'))
     # list_objects('au.zt.image-gallery', 'dog')pip
     # for e in list_objects('au.zt.image-gallery', 'dog'):
