@@ -44,7 +44,7 @@ def storage():
     return render_template('upload.html')
 
 
-@app.route(current_user()+"/uploaded")
+@app.route(current_user()+"/uploaded", ['GET'])
 def view_images():
     data = list_objects(BUCKET_NAME, current_user())
     return render_template('images.html', images=data)
