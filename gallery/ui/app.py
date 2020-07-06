@@ -46,7 +46,7 @@ def storage():
 
 @app.route("/images")
 def view_images():
-    data = get_objects(BUCKET_NAME, current_user())
+    data = get_object(BUCKET_NAME, current_user())
     # info = data['Contents']['Key']
     return render_template('images.html', image=data)
 
