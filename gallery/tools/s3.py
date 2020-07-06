@@ -2,6 +2,7 @@ import logging
 import boto3
 import json
 from botocore.exceptions import ClientError
+import requests
 
 
 def create_bucket(bucket_name, region=None):
@@ -87,13 +88,33 @@ def list_objects(bucket_name, name):
     return images
 
 
+
+def create_presigned_url(bucket_name, object_name, expiration=3600):
+
+    # Generate a presigned URL for the S3 object
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.generate_presigned_url('get_object', Params={'Bucket': bucket_name,
+                                                    'Key': object_name}, ExpiresIn=expiration)
+    except ClientError as e:
+        logging.error(e)
+        return None
+
+    # The response contains the presigned URL
+    return response
+
+def get_url(bucket_name, object_name)
+    url = create_presigned_url(bucket_name, object_name')
+    if url is not None:
+        response = requests.get(url)
+
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
-
-
-    # list_objects('au.zt.image-gallery', 'dog')
+    create_presigned_url('au.zt.image-gallery', 'dog/IMG_0041.JPG')
+    get_url('au.zt.image-gallery', 'dog/IMG_0041.JPG')
+    # list_objects('au.zt.image-gallery', 'dog')pip
     for e in list_objects('au.zt.image-gallery', 'dog'):
         print(e)
 
