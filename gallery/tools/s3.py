@@ -112,11 +112,11 @@ def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
-    create_presigned_url('au.zt.image-gallery', 'dog/IMG_0041.JPG')
-    get_url('au.zt.image-gallery', 'dog/IMG_0041.JPG')
+    print(create_presigned_url('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
+    print(get_url('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
     # list_objects('au.zt.image-gallery', 'dog')pip
-    for e in list_objects('au.zt.image-gallery', 'dog'):
-        print(e)
+    # for e in list_objects('au.zt.image-gallery', 'dog'):
+    #     print(e)
 
 
 if __name__ == '__main__':
