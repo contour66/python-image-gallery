@@ -102,7 +102,7 @@ def create_presigned_url(bucket_name, object_name, expiration=3600):
     return response
 
 
-def get_url(bucket_name, object_name)
+def get_url(bucket_name, object_name):
     url = create_presigned_url(bucket_name, object_name)
     if url is not None:
         response = requests.get(url)
