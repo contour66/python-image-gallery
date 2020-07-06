@@ -17,6 +17,8 @@ app.secret_key = get_secret_flask_session()
 # UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 BUCKET_NAME = "au.zt.image-gallery"
+
+
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -35,10 +37,12 @@ def current_user():
     for key, value in session.items():
         return str(value)
 
+
 @app.route("/upload")
 def storage():
     # contents = list_files("laskdrive")
     return render_template('upload.html')
+
 
 @app.route("/uploaded")
 def view_images():
@@ -68,7 +72,6 @@ def upload_image():
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
             return redirect("/uploaded")
-
 
 
 # @app.route("/download/<filename>", methods=['GET'])
@@ -102,8 +105,6 @@ def debugSession():
     for key, value in session.items():
         result += key + "->" + str(value) + "<br/>"
     return result
-
-
 
 
 @app.route('/admin/users')
