@@ -44,11 +44,11 @@ def storage():
     return render_template('upload.html')
 
 
-@app.route(current_user()+"/uploaded", ['GET'])
+@app.route("/uploaded")
 def view_images():
     data = get_objects(BUCKET_NAME, current_user())
-    info = data['Contents']['Key']
-    return render_template('images.html', image=info)
+    # info = data['Contents']['Key']
+    return render_template('images.html', image=data)
 
     # for e in list_objects(BUCKET_NAME, current_user()):
 
@@ -72,7 +72,7 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
-            return redirect("/upload")
+            return redirect("/uploaded")
 
 
 # @app.route("/download/<filename>", methods=['GET'])
