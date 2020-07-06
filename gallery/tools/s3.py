@@ -31,6 +31,15 @@ def create_bucket(bucket_name, region=None):
     return True
 
 
+# def get_object(bucket_name, key):
+#     try:
+#         s3_client = boto3.client('s3')
+#         result = s3_client.get_object(Bucket=bucket_name, Key=key)
+#     except ClientError as e:
+#         logging.error(e)
+#         return None
+#     return resultdef
+
 def get_object(bucket_name, key):
     try:
         s3_client = boto3.client('s3')
@@ -81,7 +90,7 @@ def list_objects(bucket_name, name):
 def main():
     #	create_bucket('au.zt.image-gallery', 'us-west-1')
     put_object('au.zt.image-gallery', 'banana', 'red')
-    print(get_object('au.zt.image-gallery', 'dog')['Body'].read())
+    print(get_object('au.zt.image-gallery', 'dog'))
 
 
     # list_objects('au.zt.image-gallery', 'dog')
