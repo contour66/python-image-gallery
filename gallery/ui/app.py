@@ -44,7 +44,7 @@ def storage():
     return render_template('upload.html')
 
 
-@app.route("/uploaded")
+@app.route(current_user()+"/uploaded")
 def view_images():
     data = list_objects(BUCKET_NAME, current_user())
     return render_template('images.html', images=data)
@@ -71,7 +71,7 @@ def upload_image():
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # put_object('au.zt.image-gallery', 'test', 'working')
             upload_file(BUCKET_NAME, directory, filename, current_user())
-            return redirect("/uploaded")
+            return redirect("/upload")
 
 
 # @app.route("/download/<filename>", methods=['GET'])
