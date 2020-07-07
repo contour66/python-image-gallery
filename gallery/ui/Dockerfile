@@ -19,7 +19,7 @@ ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
 # apt-get -y install apache2
 #
 RUN apt-get update -y && apt-get install python3 -y
-RUN useradd -m -u cpsc4973 dongji
+RUN useradd -m -u  45434 dongji
 USER dongji
 
 
