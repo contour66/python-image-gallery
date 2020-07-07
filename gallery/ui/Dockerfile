@@ -9,7 +9,7 @@ FROM ubuntu:18.04
 #RUN apt-get update && \
 # apt-get -y install apache2
 #
-RUN apt-get update -y
+RUN apt-get update -y && apt-get install python3 -y
 ## Install apache and write hello world message
 #RUN echo 'Hello World!' > /var/www/html/index.html
 #
