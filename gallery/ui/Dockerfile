@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
-PG_HOST =  ".0.0.0.0"
+#NAME=
+#PG_HOST =  ".0.0.0.0"
 #PG_PORT -- the port number of the PostgreSQL database,
 #IG_DATABASE -- the name of the image gallery PostgreSQL database,
 #IG_USER -- the name of the image gallery PostgreSQL user,
