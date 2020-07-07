@@ -14,7 +14,7 @@ RUN apt-get update -y && apt-get install python3 -y
 COPY createDB.py /app/createDB.py
 
 # Boot Command
-CMD["/usr/bin/python3", "/app/createDB.py"]
+CMD ["/usr/bin/python3", "/app/createDB.py"]
 ## Install apache and write hello world message
 #RUN echo 'Hello World!' > /var/www/html/index.html
 #
