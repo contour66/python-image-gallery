@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-#PG_HOST the IP address of the PostgreSQL database,
+PG_HOST =  ".0.0.0.0"
 #PG_PORT -- the port number of the PostgreSQL database,
 #IG_DATABASE -- the name of the image gallery PostgreSQL database,
 #IG_USER -- the name of the image gallery PostgreSQL user,
@@ -10,6 +10,7 @@ FROM ubuntu:18.04
 # apt-get -y install apache2
 #
 RUN apt-get update -y && apt-get install python3 -y
+COPY createDB.py /app/createDB.py
 ## Install apache and write hello world message
 #RUN echo 'Hello World!' > /var/www/html/index.html
 #
@@ -22,4 +23,6 @@ RUN apt-get update -y && apt-get install python3 -y
 #
 #EXPOSE 80
 
-CMD ["sleep", "30"]
+
+CMD["/usr/bin/python3", "/app/createDB.py"]
+
