@@ -61,6 +61,7 @@ def upload_image():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
@@ -68,9 +69,13 @@ def upload_image():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            ending = filename[-3:].lower()
+            newfile = filename[:filename.index(".")] + ending
+
+
             # directory = (current_user() + "/" + filename)
-            directory = (current_user() + "/" + filename)
-            upload_file(BUCKET_NAME, directory, filename, current_user())
+            directory = (current_user() + "/" + newfile)
+            upload_file(BUCKET_NAME, directory, newfile, current_user())
             return redirect("/images")
 
 
