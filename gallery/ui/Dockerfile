@@ -1,14 +1,15 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 #PG_HOST the IP address of the PostgreSQL database,
 #PG_PORT -- the port number of the PostgreSQL database,
 #IG_DATABASE -- the name of the image gallery PostgreSQL database,
 #IG_USER -- the name of the image gallery PostgreSQL user,
 #IG_PASSWD -- the password for the image gallery PostgreSQL user,
 #IG_PASSWD_FILE -- the full path to a file that contains the image gallery user's password (supersedes IG_PASSWD),
-# Install dependencies
+## Install dependencies
 #RUN apt-get update && \
 # apt-get -y install apache2
 #
+RUN apt-get update -y
 ## Install apache and write hello world message
 #RUN echo 'Hello World!' > /var/www/html/index.html
 #
@@ -21,5 +22,4 @@ FROM ubuntu:latest
 #
 #EXPOSE 80
 
-CMD sleep 30
-
+CMD ["sleep", "30"]
