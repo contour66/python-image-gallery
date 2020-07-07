@@ -1,12 +1,17 @@
-FROM ubuntu:18.04
-#NAME=
-#PG_HOST =  ".0.0.0.0"
-#PG_PORT -- the port number of the PostgreSQL database,
-#IG_DATABASE -- the name of the image gallery PostgreSQL database,
-#IG_USER -- the name of the image gallery PostgreSQL user,
-#IG_PASSWD -- the password for the image gallery PostgreSQL user,
-#IG_PASSWD_FILE -- the full path to a file that contains the image gallery user's password (supersedes IG_PASSWD),
-## Install dependencies
+FROM ubuntu:latest
+#host
+ENV PG_HOST =  ".0.0.0.0"
+#the port number of the PostgreSQL database,
+ENV PG_PORT = "5432"
+#the name of the image gallery PostgreSQL database,
+ENV IG_DATABASE = "image_gallery"
+#the name of the image gallery PostgreSQL user,
+ENV IG_USER = "dog"
+#password
+ENV IG_PASSWD = "cat"
+#the full path to a file that contains the image gallery user's password (supersedes IG_PASSWD),
+ENV IG_PASSWD_FILE = "/some/path/"
+# Install dependencies
 #RUN apt-get update && \
 # apt-get -y install apache2
 #

@@ -2,7 +2,7 @@ import os
 
 
 def main():
-    print("Hello ")
+    print("Hello " + os.getenv("PG_HOST"))
     # +.os.getenv("PG_HOST")
 
 
