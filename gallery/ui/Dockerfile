@@ -12,7 +12,7 @@ FROM ubuntu:18.04
 #
 RUN apt-get update -y && apt-get install python3 -y
 COPY createDB.py /app/createDB.py
-
+WORKDIR app
 # Boot Command
 CMD ["/usr/bin/python3", "/app/createDB.py"]
 ## Install apache and write hello world message
