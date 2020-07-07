@@ -19,7 +19,7 @@ RUN apt-get update -y && apt-get install python3 -y
 RUN useradd -m zamir
 
 
-COPY ---chown=zamir:zamir createDB.py /app/createDB.py
+COPY --chown=zamir:zamir createDB.py /app/createDB.py
 WORKDIR /app
 # Boot Command
 CMD ["/usr/bin/python3", "createDB.py"]
