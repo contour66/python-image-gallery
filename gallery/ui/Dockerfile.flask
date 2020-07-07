@@ -11,6 +11,6 @@ RUN apt-get update -y && apt-get install python3 -y  && apt-get -y install pytho
 COPY  app.py /app/
 WORKDIR /app
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r ../../../requirements.txt
 # Boot Command
 CMD ["flask", "run", "--host", "0.0.0.0"]
