@@ -6,17 +6,21 @@ ENV PG_PORT = "5432"
 #the name of the image gallery PostgreSQL database,
 ENV IG_DATABASE = "image_gallery"
 #the name of the image gallery PostgreSQL user,
-ENV IG_USER = "dog"
+ENV IG_USER = "dongji"
 #password
-ENV IG_PASSWD = "cat"
+ENV IG_PASSWD = "cpsc4973"
 #the full path to a file that contains the image gallery user's password (supersedes IG_PASSWD),
 ENV IG_PASSWD_FILE = "/some/path/"
+#the name of the S3 bucket where images should be stored.  This bucket will exist and
+ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
+
 # Install dependencies
 #RUN apt-get update && \
 # apt-get -y install apache2
 #
 RUN apt-get update -y && apt-get install python3 -y
-RUN useradd -m zamir
+RUN useradd -m -u cpsc4973 dongji
+USER dongji
 
 
 COPY --chown=zamir:zamir createDB.py /app/createDB.py
