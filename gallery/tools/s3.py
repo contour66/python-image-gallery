@@ -114,7 +114,7 @@ def main():
     print(get_object('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
     # # print(create_presigned_url('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
     # print(get_url('au.zt.image-gallery', 'IMG_9934.JPG'))
-    print(get_object('au.zt.image-gallery', 'IMG_9934.JPG'))
+    print(get_object('au.zt.image-gallery', 'dog/IMG_9934.JPG'))
     # list_objects('au.zt.image-gallery', 'dog')pip
     # for e in list_objects('au.zt.image-gallery', 'dog'):
     #     print(e)
