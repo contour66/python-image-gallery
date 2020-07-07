@@ -163,7 +163,7 @@ def adminPage():
 @requires_admin
 def user_form():
     return render_template('adduser.html')
-
+≤
 
 @app.route('/admin/useradded', methods=['POST'])
 @requires_admin
