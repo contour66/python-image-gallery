@@ -69,7 +69,7 @@ def upload_image():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             # directory = (current_user() + "/" + filename)
-            directory = ("/" + filename)
+            directory = ("/" + current_user() + "/")
             upload_file(BUCKET_NAME, directory, filename, current_user())
             return redirect("/images")
 
