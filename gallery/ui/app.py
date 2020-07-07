@@ -70,7 +70,7 @@ def upload_image():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             ending = filename[-3:].lower()
-            newfile = filename[:filename.index(".")] + ending
+            newfile = filename[:filename.index(".")] + '.' + ending
 
 
             # directory = (current_user() + "/" + filename)
