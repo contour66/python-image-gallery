@@ -64,7 +64,7 @@ def put_object(bucket_name, key, value):
 def upload_file(bucket_name, directory, filename, user):
     try:
         s3_client = boto3.client('s3')
-        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename, ACL='authenticated-read', Metadata={user: user})
+        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename,  Metadata={user: user})
 
     except ClientError as e:
         logging.error(e)
