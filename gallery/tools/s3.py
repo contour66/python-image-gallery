@@ -64,7 +64,7 @@ def put_object(bucket_name, key, value):
 def upload_file(bucket_name, directory, filename, user):
     try:
         s3_client = boto3.client('s3')
-        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename,  Metadata={user: user})
+        s3_client.put_object(Bucket=bucket_name, Key=directory, Body=filename, Metadata={user: user})
 
     except ClientError as e:
         logging.error(e)
@@ -113,7 +113,6 @@ def main():
     put_object('au.zt.image-gallery', 'banana', 'red')
     print(get_object('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
     print(create_presigned_url('au.zt.image-gallery', 'dog/IMG_0041.JPG'))
-    upload_file('au.zt.image-gallery', 'dog/', 'CindyP.png', 'dog')
     # print(get_url('au.zt.image-gallery.s3.amazonaws.com', 'dog/IMG_0041.JPG'))
     # list_objects('au.zt.image-gallery', 'dog')pip
     # for e in list_objects('au.zt.image-gallery', 'dog'):
