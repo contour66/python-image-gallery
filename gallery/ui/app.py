@@ -1,5 +1,6 @@
 from typing import Any
 import os
+from skimage import io
 from flask import Flask
 from flask import session
 from flask import redirect
@@ -7,7 +8,7 @@ from flask import url_for
 from flask import request
 from flask import render_template
 from functools import wraps
-from ..tools.s3 import upload_file
+from ..tools.s3 import upload_file, put_object, list_objects, get_object
 from .db import print_names, delete_user_ui, add_user_ui, edit_user_ui, username_exists, get_user_pw
 from .flask_secrets import get_secret_flask_session
 from werkzeug.utils import secure_filename
@@ -16,7 +17,9 @@ app = Flask(__name__)
 app.secret_key = get_secret_flask_session()
 # UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-BUCKET = "au.zt.image-gallery"
+BUCKET_NAME = "au.zt.image-gallery"
+
+
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -30,21 +33,37 @@ def allowed_file(filename):
 #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 #     return redirect(url_for('uploaded_file',filename=filename))
 
+def current_user():
+    result = ""
+    for key, value in session.items():
+        return str(value)
 
-@app.route("/storage")
+
+@app.route("/upload")
 def storage():
     # contents = list_files("laskdrive")
-    return render_template('storage.html')
+    return render_template('upload.html')
 
 
-@app.route("/upload", methods=['POST', 'GET'])
-def upload_file():
+@app.route("/images")
+def view_images():
+    data = get_object(BUCKET_NAME, 'dog/zumfield.jpg')
+    from skimage import io
+    # info = data['Contents']['Key']
+    return render_template('images.html', image=data)
+
+    # for e in list_objects(BUCKET_NAME, current_user()):
+
+
+@app.route('/uploaded', methods=['POST', 'GET'])
+def upload_image():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
@@ -52,10 +71,14 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            directory = (current_user() + "/" + filename)
-            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            upload_file(directory, BUCKET_NAME, filename, current_user())
-            return redirect(url_for('uploaded_file', filename=filename))
+            ending = filename[-3:].lower()
+            newfile = filename[:filename.index(".")] + '.' + ending
+
+
+            # directory = (current_user() + "/" + filename)
+            directory = (current_user() + "/" + newfile)
+            upload_file(BUCKET_NAME, directory, newfile, current_user())
+            return redirect("/images")
 
 
 # @app.route("/download/<filename>", methods=['GET'])
@@ -89,12 +112,6 @@ def debugSession():
     for key, value in session.items():
         result += key + "->" + str(value) + "<br/>"
     return result
-
-
-def current_user():
-    result = ""
-    for key, value in session.items():
-        return str(value)
 
 
 @app.route('/admin/users')
