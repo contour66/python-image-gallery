@@ -1,5 +1,6 @@
 from typing import Any
 import os
+from skimage import io
 from flask import Flask
 from flask import session
 from flask import redirect
@@ -46,7 +47,8 @@ def storage():
 
 @app.route("/images")
 def view_images():
-    data = get_object(BUCKET_NAME, 'dog/ally-pupy.JPG')
+    data = get_object(BUCKET_NAME, 'dog/zumfield.jpg')
+    from skimage import io
     # info = data['Contents']['Key']
     return render_template('images.html', image=data)
 
