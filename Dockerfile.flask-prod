@@ -4,7 +4,7 @@ ENV PG_HOST =  ".0.0.0.0"
 #the port number of the PostgreSQL database,
 ENV PG_PORT = "5432"
 #the name of the image gallery PostgreSQL database,
-ENV IG_DATABASE = "imagegallery"
+ENV IG_DATABASE = "image_gallery"
 #the name of the image gallery PostgreSQL user,
 ENV IG_USER = "dongji"
 #password
@@ -17,16 +17,17 @@ ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
 # Install dependencies
 
 RUN apt-get update -y && apt-get install -y python3 python3-pip libpcre3
-RUN useradd -m dongji
+#RUN useradd -m zum
 
 
 EXPOSE 8888
 
-USER dongji
+#USER zum
 
 
 COPY   gallery /python-image-gallery/gallery
 COPY   __init__.py /python-image-gallery/
+COPY  createDB.sh /python-image-gallery
 COPY requirements.txt /python-image-gallery/
 WORKDIR /python-image-gallery
 RUN pip3 install -r requirements.txt
