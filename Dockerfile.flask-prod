@@ -14,7 +14,7 @@ ENV IG_PASSWD_FILE = "/some/path/"
 #the name of the S3 bucket where images should be stored.  This bucket will exist and
 ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
 
-# Install dependencies
+# Install dependencie
 
 RUN apt-get update -y && apt-get install -y python3 python3-pip libpcre3
 #RUN useradd -m zum
