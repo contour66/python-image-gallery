@@ -18,15 +18,33 @@ ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
 #RUN apt-get update && \
 # apt-get -y install apache2
 #
-RUN apt-get update -y && apt-get install python3 -y
-RUN useradd -m -u  45434 dongji
-USER dongji
+RUN apt-get update -y && apt-get install -y python3 python3-pip
+#RUN useradd -m -u  45434 dongji
+#USER dongji
 
 
-COPY --chown=zamir:zamir createDB.py /app/createDB.py
-WORKDIR /app
+
+# Install dependencies
+#RUN apt-get update &&
+
+
+COPY  gallery /python-image-gallery/gallery
+COPY  requirements.txt /python-image-gallery/gallery
+WORKDIR /gallery
+RUN pip3 install -r requirements.txt
+
+ENV FLASK_APP=/ui/app.py
+ENV FLASK_ENV=development
+
+EXPOSE 8888
 # Boot Command
-CMD ["/usr/bin/python3", "createDB.py"]
+CMD ["uwsgi", "--http", "8888", "--module", "ui:app "]
+
+
+#COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
+#WORKDIR /app
+# Boot Command
+#CMD ["/usr/bin/python3", "app.py"]
 ## Install apache and write hello world message
 #RUN echo 'Hello World!' > /var/www/html/index.html
 #
