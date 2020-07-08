@@ -15,24 +15,18 @@ ENV IG_PASSWD_FILE = "/some/path/"
 ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
 
 # Install dependencies
-#RUN apt-get update && \
-# apt-get -y install apache2
-#
+
 RUN apt-get update -y && apt-get install -y python3 python3-pip libpcre3
-#RUN useradd -m -u  45434 dongji
-#USER dongji
+RUN useradd -m dongji
 
 
-#good commit
-# Install dependencies
-#RUN apt-get update &&
+EXPOSE 8888
+
+USER dongji
 
 
 COPY   gallery /python-image-gallery/gallery
 COPY   __init__.py /python-image-gallery/
-#COPY   tools /python-image-gallery/tools
-
-#COPY   __init__.py /python-image-gallery
 COPY requirements.txt /python-image-gallery/
 WORKDIR /python-image-gallery
 RUN pip3 install -r requirements.txt
@@ -40,9 +34,8 @@ RUN pip3 install -r requirements.txt
 ENV FLASK_APP=ui/app.py
 ENV FLASK_ENV=development
 
-EXPOSE 8888
 # Boot Command
-CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
+CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
 
 
 #COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
