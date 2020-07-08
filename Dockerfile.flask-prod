@@ -31,7 +31,7 @@ RUN apt-get update -y && apt-get install -y python3 python3-pip
 COPY   gallery /python-image-gallery/gallery
 #COPY   tools /python-image-gallery/tools
 
-COPY   __init__.py /python-image-gallery
+#COPY   __init__.py /python-image-gallery
 COPY requirements.txt /python-image-gallery/
 WORKDIR /python-image-gallery
 RUN pip3 install -r requirements.txt
@@ -41,7 +41,7 @@ ENV FLASK_ENV=development
 
 EXPOSE 8888
 # Boot Command
-CMD ["uwsgi", "--http", ":8888", "--module", "python-image-gallery.gallery.ui.app:app "]
+CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app "]
 
 
 #COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
