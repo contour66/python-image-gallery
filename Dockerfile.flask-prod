@@ -41,7 +41,7 @@ ENV FLASK_ENV=development
 
 EXPOSE 8888
 # Boot Command
-CMD ["uwsgi", "--http", ":8888", "--module", " ui.app:ui "]
+CMD ["uwsgi", "--http", ":8888", "--module", " ui.app "]
 
 
 #COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
