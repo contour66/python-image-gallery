@@ -2,7 +2,7 @@ import logging
 import boto3
 import json
 from botocore.exceptions import ClientError
-import requests
+# import requests
 
 
 def create_bucket(bucket_name, region=None):

@@ -1,5 +1,3 @@
-import gallery.ui.user_admin
+from WORKDIR import gallery
 
-
-
-gallery.ui.user_admin.main()
+WORKDIR.gallery.ui.user_admin.main()

@@ -1,0 +1,65 @@
+FROM ubuntu:latest
+#host
+ENV PG_HOST =  ".0.0.0.0"
+#the port number of the PostgreSQL database,
+ENV PG_PORT = "5432"
+#the name of the image gallery PostgreSQL database,
+ENV IG_DATABASE = "image_gallery"
+#the name of the image gallery PostgreSQL user,
+ENV IG_USER = "dongji"
+#password
+ENV IG_PASSWD = "cpsc4973"
+#the full path to a file that contains the image gallery user's password (supersedes IG_PASSWD),
+ENV IG_PASSWD_FILE = "/some/path/"
+#the name of the S3 bucket where images should be stored.  This bucket will exist and
+ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
+
+# Install dependencies
+#RUN apt-get update && \
+# apt-get -y install apache2
+#
+RUN apt-get update -y && apt-get install -y python3 python3-pip
+#RUN useradd -m -u  45434 dongji
+#USER dongji
+
+
+#good commit
+# Install dependencies
+#RUN apt-get update &&
+
+
+COPY   gallery /python-image-gallery/gallery
+#COPY   tools /python-image-gallery/tools
+
+#COPY   __init__.py /python-image-gallery
+COPY requirements.txt /python-image-gallery/
+WORKDIR /python-image-gallery
+RUN pip3 install -r requirements.txt
+
+ENV FLASK_APP=/ui/app.py
+ENV FLASK_ENV=development
+
+EXPOSE 8888
+# Boot Command
+CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app "]
+
+
+#COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
+#WORKDIR /app
+# Boot Command
+#CMD ["/usr/bin/python3", "app.py"]
+## Install apache and write hello world message
+#RUN echo 'Hello World!' > /var/www/html/index.html
+#
+## Configure apache
+#RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
+# echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
+# echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \
+# echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \
+# chmod 755 /root/run_apache.sh
+#
+#EXPOSE 80
+
+
+
+
