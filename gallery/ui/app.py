@@ -1,6 +1,6 @@
 from typing import Any
 import os
-from skimage import io
+
 from flask import Flask
 from flask import session
 from flask import redirect
