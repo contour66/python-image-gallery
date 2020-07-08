@@ -90,7 +90,7 @@ def upload_image():
 
 def check_admin():
     zt = 'username' in session and session['username'] == 'ztauburn'
-    dongji = 'username' in session and session['username'] == 'dog'
+    dongji = 'username' in session and session['username'] == 'dongji'
     if zt:
         return zt
     else:

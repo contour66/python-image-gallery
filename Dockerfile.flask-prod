@@ -17,16 +17,17 @@ ENV S3_IMAGE_BUCKET = "au.zt.image-gallery"
 # Install dependencies
 
 RUN apt-get update -y && apt-get install -y python3 python3-pip libpcre3
-RUN useradd -m dongji
+#RUN useradd -m zum
 
 
 EXPOSE 8888
 
-USER dongji
+#USER zum
 
 
 COPY   gallery /python-image-gallery/gallery
 COPY   __init__.py /python-image-gallery/
+COPY  createDB /python-image-gallery
 COPY requirements.txt /python-image-gallery/
 WORKDIR /python-image-gallery
 RUN pip3 install -r requirements.txt
@@ -38,21 +39,7 @@ ENV FLASK_ENV=development
 CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
 
 
-#COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
-#WORKDIR /app
-# Boot Command
-#CMD ["/usr/bin/python3", "app.py"]
-## Install apache and write hello world message
-#RUN echo 'Hello World!' > /var/www/html/index.html
-#
-## Configure apache
-#RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
-# echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
-# echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \
-# echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \
-# chmod 755 /root/run_apache.sh
-#
-#EXPOSE 80
+
 
 
 
