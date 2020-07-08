@@ -28,7 +28,7 @@ RUN apt-get update -y && apt-get install -y python3 python3-pip
 #RUN apt-get update &&
 
 
-COPY  /pig-app/ /pig-app/
+COPY  /gallery/ /pig-app/
 COPY requirements.txt /pig-app/
 WORKDIR /gallery
 RUN pip3 install -r requirements.txt
