@@ -20,4 +20,4 @@ ENV FLASK_ENV=development
 
 EXPOSE 8888
 # Boot Command
-CMD ["uwsgi", "--http", "--host", "0.0.0.0"]
+CMD ["flask", "run", "--host", "0.0.0.0"]
