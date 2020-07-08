@@ -1,3 +1,8 @@
+
+
+#DOCKER HUB
+#https://hub.docker.com/repository/docker/zthind/python-image-gallery
+
 FROM ubuntu:latest
 #host
 ENV PG_HOST =  ".0.0.0.0"
@@ -37,9 +42,6 @@ ENV FLASK_ENV=development
 
 # Boot Command
 CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
-
-
-
 
 
 
