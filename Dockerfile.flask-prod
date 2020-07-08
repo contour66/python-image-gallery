@@ -35,7 +35,7 @@ ENV FLASK_APP=ui/app.py
 ENV FLASK_ENV=development
 
 # Boot Command
-CMD ["uwsgi", "--http", ":5555", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
+CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
 
 
 #COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
