@@ -28,8 +28,8 @@ RUN apt-get update -y && apt-get install -y python3 python3-pip
 #RUN apt-get update &&
 
 
-COPY  gallery /app/gallery
-COPY requirements.txt /app/
+COPY  WORKDIR/gallery /app/gallery
+COPY WORKDIR/requirements.txt /app/
 WORKDIR /app
 RUN pip3 install -r requirements.txt
 
