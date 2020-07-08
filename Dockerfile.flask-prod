@@ -33,12 +33,12 @@ COPY requirements.txt /python-image-gallery/
 WORKDIR /python-image-gallery
 RUN pip3 install -r requirements.txt
 
-ENV FLASK_APP=gallery/ui/app.py
+ENV FLASK_APP=/ui/app.py
 ENV FLASK_ENV=development
 
 EXPOSE 8888
 # Boot Command
-CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui:app "]
+CMD ["uwsgi", "--http", ":8888", "--module", "ui:app "]
 
 
 #COPY --chown=zamir:zamir ui/createDB.py /app/createDB.py
