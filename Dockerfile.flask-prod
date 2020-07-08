@@ -28,8 +28,8 @@ RUN apt-get update -y && apt-get install -y python3 python3-pip
 #RUN apt-get update &&
 
 
-COPY  pig-app/ /python-image-gallery/pig-app
-COPY pig-app/requirements.txt /pig-app/
+COPY  pig-app/ /pig-app/
+#COPY requirements.txt /pig-app/
 WORKDIR /pig-app
 RUN pip3 install -r requirements.txt
 
