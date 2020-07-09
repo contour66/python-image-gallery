@@ -1,3 +1,4 @@
 #!/usr/bin/bash
 
-psql -d postgresql://dongji:dc3ejm7u@imagegallery.cfxeylolmgaa.us-west-1.rds.amazonaws.com:5432/image_gallery -f create_tables.psql
+# shellcheck disable=SC2086
+psql -d postgresql://$IG_USER:$IG_PASSWD@$PG_HOST:$PG_PORT/$IG_DATABASE -f create_tables.psql

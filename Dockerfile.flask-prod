@@ -14,7 +14,7 @@ ENV IG_DATABASE = "image_gallery"
 #the name of the image gallery PostgreSQL user,
 ENV IG_USER = "dongji"
 #password
-ENV IG_PASSWD = "cpsc4973"
+ENV IG_PASSWD = ""
 #the full path to a file that contains the image gallery user's password (supersedes IG_PASSWD),
 ENV IG_PASSWD_FILE = "/some/path/"
 #the name of the S3 bucket where images should be stored.  This bucket will exist and
