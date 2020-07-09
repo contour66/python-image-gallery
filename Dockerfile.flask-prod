@@ -1,6 +1,11 @@
+
+
+#DOCKER HUB
+#https://hub.docker.com/repository/docker/zthind/python-image-gallery
+
 FROM ubuntu:latest
 #host
-ENV PG_HOST =  ".0.0.0.0"
+ENV PG_HOST =  "imagegallery.cfxeylolmgaa.us-west-1.rds.amazonaws.com"
 #the port number of the PostgreSQL database,
 ENV PG_PORT = "5432"
 #the name of the image gallery PostgreSQL database,
@@ -27,7 +32,7 @@ EXPOSE 8888
 
 COPY   gallery /python-image-gallery/gallery
 COPY   __init__.py /python-image-gallery/
-COPY  createDB /python-image-gallery/
+#COPY  createDB /python-image-gallery/
 COPY requirements.txt /python-image-gallery/
 WORKDIR /python-image-gallery
 RUN pip3 install -r requirements.txt
@@ -35,11 +40,9 @@ RUN pip3 install -r requirements.txt
 ENV FLASK_APP=ui/app.py
 ENV FLASK_ENV=development
 
+
 # Boot Command
 CMD ["uwsgi", "--http", ":8888", "--module", "gallery.ui.app:app", "--master", "--processes", "4", "--threads", "2"]
-
-
-
 
 
 

@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 #host
 ENV PG_HOST =  ".0.0.0.0"
-#the port number of the PostgreSQL database,
+#the port number of the PostgreSQL database,æ
 ENV PG_PORT = "5432"
 #the name of the image gallery PostgreSQL database,
 ENV IG_DATABASE = "image_gallery"
