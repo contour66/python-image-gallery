@@ -2,6 +2,7 @@
 
 #DOCKER HUB
 #https://hub.docker.com/repository/docker/zthind/python-image-gallery
+#docker pull zthind/python-image-gallery:1.3
 
 FROM ubuntu:latest
 #host
