@@ -3,7 +3,7 @@ version: "3"
 
 services:
   database:
-    image: "postgres"
+    image: "postgres:11"
     environment:
       PG_PASSWORD: "xF8l6v0CxwI"
       PG_USER: postgres
@@ -16,4 +16,4 @@ services:
         constraints:
           - node.labels.postgres_server==yes
     volumes:
-      - "/home/ec2-user/python-image-gallery:/var/lib/postgresql/data"
+      - "/mnt/efs/postgres-data:/var/lib/postgresql/data"
