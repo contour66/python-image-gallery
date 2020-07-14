@@ -32,3 +32,6 @@ services:
     volumes:
       - "/mnt/efs/postgres-data:/var/lib/postgresql/data"
 
+volumes:
+  database:
+      external: true
