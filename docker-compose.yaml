@@ -30,7 +30,7 @@ services:
         constraints:
           - node.labels.postgres_server==yes
     volumes:
-      - "/mnt/efs/postgres-data:/var/lib/postgresql/data"
+      - "/mnt/efs/:/var/lib/postgresql/data"
 
 volumes:
   database:
