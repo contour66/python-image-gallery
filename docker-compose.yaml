@@ -17,8 +17,8 @@ services:
         constraints:
           - node.labels.postgres_server==yes
     volumes:
-      - "/home/ec2-user/mnt/efs:/var/lib/postgresql/data"
+      - "/mnt/efs:/var/lib/postgresql/data"
 
 volumes:
   database:
-      external: true
+    external: true
