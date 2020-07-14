@@ -6,15 +6,16 @@ services:
   database:
     image: "postgres"
     user: "32767"
-    volumes:
-      - "/home/ec2-user/ /mnt/efs/postgres-data"
-      - "postgres:/var/lib/postgresql/data"
+#    volumes:
+#      - "/home/ec2-user/ /mnt/efs/postgres-data"
+#      -  /mnt/efs/postgres-datapostgres:/var/lib/postgresql/data"
     environment:
-      PG_HOST: "db"
+#      PG_HOST: "db"
       #      PG_PORT: "5432"
-      PG_USER: "postgres"
-      PG_PASSWORD: "xF8l6v0CxwI"
-      PG_DATABASE: "postgres"
+
+      PG_PASSWORD: xF8l6v0CxwI
+      PG_USER: postgres
+      PG_DATABASE: postgres
       PG_DATA: /var/lib/postgresql/data/pgdata
       deploy:
         mode: "replicated"
