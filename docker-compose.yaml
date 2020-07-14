@@ -34,3 +34,4 @@ services:
 
   volumes:
     postgres:
+      external: true
