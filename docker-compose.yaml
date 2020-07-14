@@ -15,7 +15,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.labels.postgres_server==yes
+          - node.labels.database==yes
     volumes:
       - "/mnt/efs:/var/lib/postgresql/data"
 
