@@ -1,0 +1,33 @@
+---
+version: "3"
+
+services:
+
+  db:
+    image: demo-postegres
+    user: "32767"
+    volumes:
+      - "/home/ec2-user/secrets:/mnt/secrets"
+      - "demo-postgres:/var/lib/postgresql/data"
+
+
+  web:
+    image: image_gallery
+    user: "32767"
+    environment:
+      PG_HOST: "db"
+      PG_PORT: "5432"
+      IG_USER: "postgres"
+      IG_PASSWD_FILE: "/mnt/secrets/postgres_passwd"
+      IG_DATABASE: "postgres"
+    ports:
+      - "5000:8888"
+    volumes:
+      "/home/ec2-user/secrets:/mnt/secrets"
+    depends_on:
+      - "db"
+
+  volumes:
+    demo-postgres:
+      external: true
+

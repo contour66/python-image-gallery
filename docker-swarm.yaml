@@ -1,0 +1,84 @@
+---
+version: "3.8"
+
+services:
+  registry:
+    image: registry:latest
+    ports:
+      -"5000:5000"
+    deploy:
+      replicas: 1
+      placement:
+        constraint:
+          - node.role==manager
+    environment:
+      REGISTERY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /mnt/registry
+    volumes:
+      -"registery:/mnt/gallery"
+#  pinger:
+#    image: "localhost:5000/net"
+#    command: ["ping", "google.com"]
+#    deploy:
+#      mode: global
+#    depends_on:
+#      - "registry"
+  db:
+    image: "postgres"
+    environment:
+      PG_HOST: "db"
+#      PG_PORT: "5432"
+      IG_USER: "postgres"
+      IG_PASSWD_FILE: "/mnt/secrets/postgres_passwd"
+      IG_DATABASE: "postgres"
+      PG_DATA: /var/lib/postgresql/data/pgdata
+    deploy:
+      mode: "replicated"
+      replicase: 1
+      placement:
+        constraints:
+          - node.labels.postgres_server==yes
+#    ports:
+#      - "5000:8888"
+    volumes:
+      "/home/ec2-user/image-gallery-postgres:/var/lib/postgresql/data"
+    depends_on:
+      - "db"
+  flask:
+    image: "localhost:5000/flask"
+    deploy:
+      mode: "replicated"
+      replicas: 2
+      placement:
+        constraints:
+          - node.labels.flask_server==yes
+    config:
+      - source: flask_config
+        target: /etc/flask.config
+        mode: 044
+    ports:
+      - "8888:5000"
+      - target: 5000
+        published: 8888
+        mode: host
+        protocol: tcp
+    secrets:
+          - image_gallery_password
+    depends_on:
+      - "registry"
+
+
+
+  volumes:
+    registery:
+
+
+  secrets:
+    image_gallery_password:
+      external: true
+
+  configs:
+    flask_config:
+      file: flask.config
+
+
+
