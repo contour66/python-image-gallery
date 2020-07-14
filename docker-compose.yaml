@@ -2,8 +2,22 @@
 version: "3"
 
 services:
+
+#  registry:
+#    image: registry:latest
+#    ports:
+#      -"5000:5000"
+#    deploy:
+#      replicas: 1
+#      placement:
+#        constraint:
+#          - node.role==manager
+#    environment:
+#      REGISTERY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /mnt/registry
+#    volumes:
+#      -"registery:/mnt/gallery"
   database:
-    image: "postgres:11"
+    image: "postgres:11"sudo
     environment:
       PG_PASSWORD: "xF8l6v0CxwI"
       PG_USER: postgres
@@ -17,3 +31,6 @@ services:
           - node.labels.postgres_server==yes
     volumes:
       - "/mnt/efs/postgres-data:/var/lib/postgresql/data"
+
+  volumes:
+    postgres:
