@@ -82,3 +82,23 @@ services:
 
 
 
+  registry:
+#    image: registry:latest
+#    ports:
+#      -"5000:5000"
+#    deploy:
+#      replicas: 1
+#      placement:
+#        constraint:
+#          - node.role==manager
+#    environment:
+#      REGISTERY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /mnt/registry
+#    volumes:
+#      -"registery:/mnt/gallery"
+##  pinger:
+##    image: "localhost:5000/net"
+##    command: ["ping", "google.com"]
+##    deploy:
+##      mode: global
+##    depends_on:
+##      - "registry"

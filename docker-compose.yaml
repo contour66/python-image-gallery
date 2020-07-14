@@ -3,14 +3,29 @@ version: "3"
 
 services:
 
-#  db:
-#    image: demo-postegres
-#    user: "32767"
-#    volumes:
-#      - "/home/ec2-user/secrets:/mnt/secrets"
-#      - "demo-postgres:/var/lib/postgresql/data"
-#
-#
+  database:
+    image: "postgres"
+    user: "32767"
+    volumes:
+      - "/home/ec2-user/ /mnt/efs/postgres-data"
+      - "postgres:/var/lib/postgresql/data"
+    environment:
+      PG_HOST: "db"
+      #      PG_PORT: "5432"
+      PG_USER: "postgres"
+      PG_PASSWORD: "xF8l6v0CxwI"
+      PG_DATABASE: "postgres"
+      PG_DATA: /var/lib/postgresql/data/pgdata
+      deploy:
+        mode: "replicated"
+        replicas: 1
+        placement:
+          constraints:
+            - node.labels.postgres_server==yes
+      volumes:
+        "/home/ec2-user/image-gallery-postgres:/var/lib/postgresql/data"
+      depends_on:
+        - "database"
 #  web:
 #    image: image_gallery
 #    user: "32767"
@@ -26,51 +41,32 @@ services:
 #      "/home/ec2-user/secrets:/mnt/secrets"
 #    depends_on:
 #      - "db"
-#
-#  volumes:
-#    demo-postgres:
-#      external: true
-#
+
+  volumes:
+    postgres:
+      external: true
 
 
----
-version: "3.8"
 
-services:
-  registry:
-    image: registry:latest
-    ports:
-      -"5000:5000"
-    deploy:
-      replicas: 1
-      placement:
-        constraint:
-          - node.role==manager
-    environment:
-      REGISTERY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /mnt/registry
-    volumes:
-      -"registery:/mnt/gallery"
-#  pinger:
-#    image: "localhost:5000/net"
-#    command: ["ping", "google.com"]
+#---
+#version: "3.8"
+
+#services:
+##
+#  db:
+#    image: "postgres"
+#    environment:
+#      PG_HOST: "db"
+##      PG_PORT: "5432"
+#      IG_USER: "postgres"
+#      IG_PASSWD_FILE: "/mnt/secrets/postgres_passwd"
+#      IG_DATABASE: "postgres"
+#      PG_DATA: /var/lib/postgresql/data/pgdata
 #    deploy:
-#      mode: global
-#    depends_on:
-#      - "registry"
-  db:
-    image: "postgres"
-    environment:
-      PG_HOST: "db"
-#      PG_PORT: "5432"
-      IG_USER: "postgres"
-      IG_PASSWD_FILE: "/mnt/secrets/postgres_passwd"
-      IG_DATABASE: "postgres"
-      PG_DATA: /var/lib/postgresql/data/pgdata
-    deploy:
-      mode: "replicated"
-      replicase: 1
-      placement:
-        constraints:
-          - node.labels.postgres_server==yes
+#      mode: "replicated"
+#      replicase: 1
+#      placement:
+#        constraints:
+#          - node.labels.postgres_server==yes
 
 
