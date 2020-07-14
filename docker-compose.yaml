@@ -17,7 +17,7 @@ services:
 #    volumes:
 #      -"registery:/mnt/gallery"
   database:
-    image: "postgres:11"sudo
+    image: "postgres:11"
     environment:
       PG_PASSWORD: "xF8l6v0CxwI"
       PG_USER: postgres
