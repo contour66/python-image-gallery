@@ -24,8 +24,8 @@ services:
             - node.labels.postgres_server==yes
       volumes:
         "/home/ec2-user/python-image-gallery:/var/lib/postgresql/data"
-      depends_on:
-        - "database"
+#      depends_on:
+#        - "database"
 #  web:
 #    image: image_gallery
 #    user: "32767"
