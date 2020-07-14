@@ -16,4 +16,4 @@ services:
         constraints:
           - node.labels.postgres_server==yes
     volumes:
-      "/home/ec2-user/python-image-gallery:/var/lib/postgresql/data"
+      - "/home/ec2-user/python-image-gallery:/var/lib/postgresql/data"
