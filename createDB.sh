@@ -1,4 +1,10 @@
 #!/usr/bin/bash
 
-# shellcheck disable=SC2086
-psql -d postgresql://$IG_USER:$IG_PASSWD@$PG_HOST:$PG_PORT/$IG_DATABASE -f create_tables.psql
+set -e
+echo "Creating DB"
+psql <<- EOSQL
+    CREATE USER image_gallery WITH PASSWORD ig_password;
+    CREATE DATABASE image_gallery;
+    GRANT ALL PRIVILEGES ON DATABASE image_gallery TO image_gallery;
+EOSQL
+echo "Done Creating DB"

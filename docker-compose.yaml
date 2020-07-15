@@ -6,10 +6,10 @@ services:
   database:
     image: "postgres:11"
     environment:
-      POSTGRES_PASSWORD: "xF8l6v0CxwI"
-      POSTGRES_USER: image_gallery
-      POSTGRES_DATABASE: image_gallery
-      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DATABASE: database
+#      PGDATA: /var/lib/postgresql/data/pgdata
     deploy:
       mode: "replicated"
       replicas: 1
@@ -17,7 +17,9 @@ services:
         constraints:
           - node.labels.database==yes
     secrets:
-      - ig_password
+        source: ig_password
+        target: "/docker-entrypoint-initdb.d/create_db.sh"
+        uid: "0"
     volumes:
       - "/mnt/efs:/var/lib/postgresql/data"
 #      - "/run/secrets
