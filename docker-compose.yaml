@@ -17,7 +17,7 @@ services:
         constraints:
           - node.labels.database==yes
     secrets:
-        - source: ig_password
+        - source: "ig_password"
         - target: "/docker-entrypoint-initdb.d/create_db.sh"
         - uid: "0"
     volumes:
