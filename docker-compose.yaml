@@ -24,24 +24,24 @@ services:
 
   image_gallery:
     image: "postgres:11"
-      environment:
-        IG_PASSWORD: ig_password
-        IG_USER: image_gallery
-        POSTGRES_DATABASE: image_gallery
-        PGDATA: /var/lib/postgresql/data/pgdata
-      deploy:
-        mode: "replicated"
-        replicas: 0
-      secrets:
-        - ig_password
-      volumes:
-        - "/app/creat_db.sh"
-      ports:
-        - "8888:5000"
-        - target: 5000
-          published: 8888
-          mode: host
-          protocol: tcp
+    environment:
+      IG_PASSWORD: ig_password
+      IG_USER: image_gallery
+      POSTGRES_DATABASE: image_gallery
+      PGDATA: /var/lib/postgresql/data/pgdata
+    deploy:
+      mode: "replicated"
+      replicas: 0
+    secrets:
+      - ig_password
+    volumes:
+      - "/app/creat_db.sh"
+    ports:
+      - "8888:5000"
+      - target: 5000
+        published: 8888
+        mode: host
+        protocol: tcp
   flask:
     image: "localhost:5000/flask"
     deploy:
