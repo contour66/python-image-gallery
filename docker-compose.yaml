@@ -36,7 +36,6 @@ services:
     volumes:
       - "/app/creat_db.sh"
     ports:
-      - "8888:5000"
       - target: 5000
         published: 8888
         mode: host
@@ -45,8 +44,6 @@ services:
   flask:
     image: "localhost:5000/flask"
     deploy:
-      mode: "replicated"
-      replicas: 2
       placement:
         constraints:
           - node.labels.flask_server==yes
