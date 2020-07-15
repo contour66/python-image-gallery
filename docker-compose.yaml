@@ -50,11 +50,6 @@ services:
       placement:
         constraints:
           - node.labels.flask_server==yes
-    config:
-      - source: flask_config
-        target: /etc/flask.config
-        mode: 044
-
     secrets:
       - ig_password
 
