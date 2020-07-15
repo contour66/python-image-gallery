@@ -20,7 +20,7 @@ services:
       - ig_password
     volumes:
       - "/mnt/efs:/var/lib/postgresql/data"
-      - "/run/secrets
+#      - "/run/secrets
 #     - /create_tables.sql:/docker-entrypoint-initdb.d
 
 
