@@ -20,7 +20,8 @@ services:
       - ig_password
     volumes:
       - "/mnt/efs:/var/lib/postgresql/data"
-#      - "/create_tables.sql:/docker-entrypoint-initdb.d
+      - "/run/secrets
+#     - /create_tables.sql:/docker-entrypoint-initdb.d
 
 
 
@@ -29,5 +30,5 @@ volumes:
     external: true
 
 secrets:
-  image_gallery_password:
+  ig_password:
     external: true
