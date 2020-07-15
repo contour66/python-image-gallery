@@ -23,7 +23,7 @@ services:
     volumes:
       - "/mnt/efs:/var/lib/postgresql/data"
 #      - "/run/secrets
-#     - /create_tables.sql:/docker-entrypoint-initdb.d
+#     - "/create_db.sql:/docker-entrypoint-initdb.d
 
 
 
@@ -33,4 +33,4 @@ volumes:
 
 secrets:
   ig_password:
-    external: true
+    file: create_db.sh
