@@ -80,7 +80,7 @@ services:
     flask_config:
       file: flask.config
 
-
+3rwjo5pjtl4dfsk
 
   registry:
 #    image: registry:latest

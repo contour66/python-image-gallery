@@ -1,5 +1,6 @@
 import psycopg2
 import json
+import os
 from .secrets import get_secret_image_gallery
 
 connection = None
@@ -11,22 +12,32 @@ def get_secret():
 
 
 def get_password(secret):
+    if secret:
+        os.environ["IG_PASSWORD"] = secret
     return secret['password']
 
 
 def get_host(secret):
+    if secret:
+        os.environ["IG_HOST"] = secret
     return secret['host']
 
 
 def get_username(secret):
+    if secret:
+        os.environ["IG_USERNAME"] = secret
     return secret['username']
 
 
 def get_full_name(secret):
+    if secret:
+        os.environ["IG_FULL_NAME"] = secret
     return secret['full_name']
 
 
 def get_dbname(secret):
+    if secret:
+        os.environ["IG_DATABASE"] = secret
     return secret['dbname']
 
 
@@ -91,8 +102,11 @@ def User(username, password, full_name):
     password = password
     full_name = full_name
 
+
 def get_current_user(name):
     return
+
+
 def get_user_pw(username):
     try:
         connect()
